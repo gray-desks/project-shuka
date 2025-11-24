@@ -1274,21 +1274,21 @@ a:focus {
   /* アクティブ状態の影 */
 }
 
-/* Allボタンのアクティブ状態 - より明るいグレー系で強調 */
+/* Allボタンのアクティブ状態 - ヘッダーナビゲーションと調和する控えめなスタイル */
 .season-option[data-season="all"].active {
-  background: linear-gradient(135deg, #e5e7eb, #d1d5db);
-  color: #1f2937;
-  border-color: #9ca3af;
-  border-width: 2px;
-  box-shadow:
-    0 0 12px rgba(229, 231, 235, 0.6),
-    0 4px 12px rgba(0, 0, 0, 0.2);
-  font-weight: 600;
+  background: var(--neutral-800);
+  color: var(--primary);
+  border-color: var(--neutral-600);
+  border-width: 1px;
+  box-shadow: none;
+  font-weight: 500;
+  text-shadow: none;
 }
 
 .season-option[data-season="all"]:hover {
-  background: rgba(156, 163, 175, 0.15);
-  border-color: #9ca3af;
+  background: var(--neutral-800);
+  color: var(--primary);
+  border-color: var(--neutral-600);
 }
 
 /* その他ボタンのアクティブ状態 - より明るいスレート系で強調 */
@@ -1956,6 +1956,12 @@ a:focus {
   color: var(--text);
 }
 
+@media (max-width: 767px) {
+  .about-intro {
+    text-align: center;
+  }
+}
+
 /* 
  * フィーチャー一覧コンテナ - Vibe Cordingの特徴と価値提案
  * 
@@ -2100,6 +2106,13 @@ a:focus {
 
   /* ドラマティックなドロップシャドウ - アーティストの存在感と重要性を視覚的に強調 */
   box-shadow: 0 10px 30px var(--shadow-lg);
+}
+
+/* モバイル端末ではAbout画像を表示しない（ヒーロー画像との重複回避） */
+@media (max-width: 767px) {
+  .about-visual {
+    display: none;
+  }
 }
 
 /* ===== ギャラリーセクション - 作品展示エリア ===== */
