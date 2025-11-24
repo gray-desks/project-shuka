@@ -23,142 +23,21 @@ window.ShukaApp = window.ShukaApp || {
 };
 
 /**
- * 季節データ設定
- * 四季ごとの楽曲・動画・画像データを一元管理するオブジェクト
- *
- * 目的:
- * - 四季ごとの表示情報（アイコン/名称/説明/ポスター/動画/音源）を一元管理
- * - UI生成ロジック（ギャラリーやナビ）から定数参照で扱いやすくする
- *
- * パフォーマンス配慮:
- * - 画像/動画ファイルはここでパスを定義するのみ。実ロードは必要時に行う（遅延ロード）
- * - 動画は `<source data-src>` を使い、可視化/操作時にのみ `src` をセットする設計（ネットワーク競合を抑制）
- * 
- * データ構造:
- * - icon: 季節を表すアイコン
- * - name: 季節の名前
- * - title: 季節のタイトル
- * - description: 季節の説明
- * - poster: 季節のポスター画像
- * - video: 季節の動画ファイル
- * - tracks: その季節に属する楽曲の配列
+ * 季節データ設定（MVフィルタ用ラベル）
+ * - アイコン/表示名/アクセントカラーのみ保持
  */
-ShukaApp.data.SEASON_DATA = {
-  spring: {
-    icon: '🌸',
-    name: '春',
-    title: '春の調べ',
-    description: '桜咲く季節の温かな希望と新しい始まりを表現した楽曲集',
-    poster: './assets/images/portraits/秀歌-About-春.webp',
-    video: {
-      webm: null,
-      mp4: './assets/videos/光のほうへ.mp4'
-    },
-    tracks: [
-      {
-        title: '芽吹きの朝',
-        description: '柔らかな光に包まれる春の朝',
-        src: './assets/audio/芽吹きの朝.mp3'
-      },
-      {
-        title: '花影の道',
-        description: '舞い散る桜と灯籠の明かりが導く春の参道',
-        src: './assets/audio/花影の道.mp3'
-      }
-    ]
-  },
-  tsuyu: {
-    icon: '☔️',
-    name: '梅雨',
-    title: '梅雨の音色',
-    description: '雨の季節の静けさと潤いを感じる楽曲集',
-    poster: './assets/images/portraits/秀歌-梅雨.webp',
-    video: {
-      webm: null,
-      mp4: './assets/videos/夏庭園の歌.mp4'
-    },
-    tracks: [
-      {
-        title: '花影の道',
-        description: '舞い散る桜と灯籠の明かりが導く春の参道',
-        src: './assets/audio/花影の道.mp3'
-      },
-      {
-        title: '涼風（すずかぜ）',
-        description: '青葉を渡り水辺を駆け抜ける夏の風',
-        src: './assets/audio/涼風（すずかぜ）.mp3'
-      }
-    ]
-  },
-  summer: {
-    icon: '🌻',
-    name: '夏',
-    title: '夏の響き',
-    description: '緑豊かな季節の生命力と情熱を込めた楽曲集',
-    poster: './assets/images/portraits/秀歌-About-夏.webp',
-    video: {
-      webm: null,
-      mp4: './assets/videos/夏庭園の歌.mp4'
-    },
-    tracks: [
-      {
-        title: '蝉時雨',
-        description: '降りしきる蝉の声を夏の鼓動',
-        src: './assets/audio/蝉時雨.mp3'
-      },
-      {
-        title: '涼風（すずかぜ）',
-        description: '青葉を渡り水辺を駆け抜ける夏の風',
-        src: './assets/audio/涼風（すずかぜ）.mp3'
-      }
-    ]
-  },
-  autumn: {
-    icon: '🍁',
-    name: '秋',
-    title: '秋の詩',
-    description: '色づく季節の深い情感と静寂を表現した楽曲集',
-    poster: './assets/images/posters/秋灯りの道.webp',
-    video: {
-      webm: null,
-      mp4: './assets/videos/秋灯りの道.mp4'
-    },
-    tracks: [
-      {
-        title: '観月祭',
-        description: '灯籠と満月が照らす秋夜の幻想',
-        src: './assets/audio/観月祭.mp3'
-      },
-      {
-        title: '秋深し',
-        description: '静かな夜に、季節の深まりと心の余韻を映す',
-        src: './assets/audio/秋深し.mp3'
-      }
-    ]
-  },
-  winter: {
-    icon: '❄️',
-    name: '冬',
-    title: '冬の静寂',
-    description: '雪景色の中の静けさと内省を込めた楽曲集',
-    poster: './assets/images/portraits/秀歌-About-冬.webp',
-    video: {
-      webm: null,
-      mp4: './assets/videos/白のなかで.mp4'
-    },
-    tracks: [
-      {
-        title: '白のなかで',
-        description: '雪に包まれた世界の静寂',
-        src: './assets/audio/白のなかで.mp3'
-      },
-      {
-        title: '雪の参道',
-        description: '雪に包まれた参道を歩む情景',
-        src: './assets/audio/雪の参道.mp3'
-      }
-    ]
-  }
+
+/**
+ * 季節ラベル定義
+ * - MVフィルタ用の表示名と配色
+ */
+ShukaApp.data.SEASON_LABELS = {
+  all:   { icon: '★', name: 'All',    color: '#e5e7eb', thumb: './assets/images/portraits/秀歌.webp' },
+  spring:{ icon: '🌸', name: '春',     color: '#f472b6' },
+  summer:{ icon: '🌿', name: '夏',     color: '#22d3ee' },
+  autumn:{ icon: '🍁', name: '秋',     color: '#fb923c' },
+  winter:{ icon: '❄️', name: '冬',     color: '#a5b4fc' },
+  none:  { icon: '◎', name: 'その他', color: '#94a3b8', thumb: './assets/images/portraits/秀歌-About-その他.webp' }
 };
 
 /**
@@ -199,6 +78,10 @@ class Navigation {
     this.navMenu = document.getElementById('nav-menu'); // メニュー要素
     this.navLinks = document.querySelectorAll('.nav-menu a[href^="#"]'); // アンカーリンク群
     this.header = document.getElementById('header'); // ヘッダー要素
+    this.menuToggle = document.getElementById('menu-toggle'); // モバイル用トグル
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.handleResize = this.handleResize.bind(this);
     
     // 初期化処理の実行
     this.init();
@@ -228,13 +111,36 @@ class Navigation {
       link.addEventListener('click', (e) => this.handleSmoothScroll(e));
     });
     
+    if (this.menuToggle) {
+      this.menuToggle.addEventListener('click', this.toggleMenu);
+    }
+
+    if (this.navMenu) {
+      this.navMenu.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="#"]');
+        if (link && this.isMobileNav()) {
+          this.closeMenu();
+        }
+      });
+    }
+
+    window.addEventListener('resize', this.handleResize);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeMenu();
+      }
+    });
+    
     
     // スクロール時のヘッダースタイル変更
     window.addEventListener('scroll', () => this.handleScroll());
     
   }
   
-  
+  isMobileNav() {
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
   
   
   /**
@@ -250,6 +156,8 @@ class Navigation {
     const targetId = e.target.getAttribute('href').substring(1); // #を除いたIDを取得
     const targetElement = document.getElementById(targetId);
     
+    this.closeMenu();
+
     if (targetElement) {
       
       // 固定ヘッダーの高さを考慮したオフセット計算
@@ -290,6 +198,37 @@ class Navigation {
         link.removeAttribute('aria-current');
       }
     });
+  }
+  
+  toggleMenu() {
+    if (!this.navMenu) return;
+    const willOpen = !this.navMenu.classList.contains('active');
+    if (willOpen) {
+      this.navMenu.classList.add('active');
+      document.body.classList.add('menu-open');
+      if (this.menuToggle) {
+        this.menuToggle.classList.add('active');
+        this.menuToggle.setAttribute('aria-expanded', 'true');
+      }
+    } else {
+      this.closeMenu();
+    }
+  }
+
+  closeMenu() {
+    if (!this.navMenu) return;
+    this.navMenu.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    if (this.menuToggle) {
+      this.menuToggle.classList.remove('active');
+      this.menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  handleResize() {
+    if (!this.isMobileNav()) {
+      this.closeMenu();
+    }
   }
   
   
@@ -368,857 +307,314 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 /**
  * 季節モジュール
- * 季節ごとのギャラリー切替、アニメーション、アクセシビリティ対応を処理
- * 
- * 主な機能:
- * - 季節ギャラリーの動的生成と切替
- * - 動画・音楽ファイルの遅延読み込み
- * - リソース管理による同時再生防止
- * - バリアフリー対応（キーボード操作、スクリーンリーダー支援）
+ * - YouTubeのMVを季節フィルタで表示する軽量ギャラリー
+ * - クリック時にiframeを生成するライト埋め込みでパフォーマンス最適化
  */
-
-// 冬の季節ギャラリー動画を「白のなかで」に設定
-// 冬の動画ファイルパスを「白のなかで」に上書き設定
-ShukaApp.data.SEASON_DATA.winter.video.mp4 = './assets/videos/白のなかで.mp4';
 
 /**
  * SeasonsGallery
  *
  * 役割:
- * - 季節ナビ/パネルの動的生成、切替、アクセシビリティ対応。
- * - 動画/音声の遅延ロードとリソース解放（同時再生防止）。
- *
- * パフォーマンス配慮:
- * - `<video>` は `preload="none"` + `loading="lazy"`、`width/height` 指定でCLS低減。
- * - `<source>` には `data-src` を使い、可視化/再生要求時にのみ実URLを充当。
- * - 和紙背景は `requestIdleCallback` + `Save-Data` 尊重でアイドル時にプリロード。
+ * - 季節ナビ/パネルの生成と切替
+ * - YouTube埋め込みの遅延ロード
+ * - 背景テーマ・ARIAの同期更新
  */
 class SeasonsGallery {
-  /**
-   * コンストラクタ - 季節ギャラリーの初期化
-   * DOM要素の取得と初期状態の設定
-   */
-  constructor() {
-    // DOM要素の取得
-    this.seasonButtons = document.querySelectorAll('.season-btn'); // 季節選択ボタン群
-    this.seasonPanels = document.querySelectorAll('.season-panel'); // 季節パネル群
-    this.currentSeason = 'tsuyu'; // 現在の季節（初期値は梅雨）
-    this.audioElements = []; // 音楽プレーヤー要素の配列
-    this.videoElements = []; // 動画要素の配列
-    
-    // 初期化処理の実行
-    this.init();
-  }
-  
-  /**
-   * 初期化処理
-   * - イベントバインディング
-   * - オーディオ・ビデオ要素の設定
-   * - 和紙背景のプリロード
-   * - 初期季節の設定
-   */
-  init() {
+  constructor(videos = []) {
+    this.videos = Array.isArray(videos) ? videos : [];
+    this.seasonNav = document.getElementById('season-nav');
+    this.seasonContent = document.getElementById('season-content');
+    this.navOrder = ['all', 'spring', 'summer', 'autumn', 'winter', 'none'];
+    this.currentSeason = 'all';
+    this.availableSeasons = this.getAvailableSeasons();
+    this.render();
     this.bindEvents();
-    this.setupAudioElements();
-    this.preloadWashiBackgrounds(); // 和紙背景をプリロード
-    this.loadInitialSeason();
+    this.updateSeasonBackground('tsuyu', 'all');
+    this.updateAboutImage(this.currentSeason);
   }
-  
-  /**
-   * イベントリスナーのバインディング
-   * - 季節ボタンのクリック・キーボード操作
-   * - オーディオ・ビデオの再生制御
-   * - イベントデリゲーションによる動的要素の処理
-   */
+
+  getAvailableSeasons() {
+    const seasons = new Set(['all']);
+    this.videos.forEach(video => seasons.add(video.season || 'none'));
+    return this.navOrder.filter(season => seasons.has(season));
+  }
+
+  render() {
+    if (!this.seasonNav || !this.seasonContent) return;
+    const navHTML = this.availableSeasons.map((season, index) => {
+      const meta = ShukaApp.data.SEASON_LABELS[season] || ShukaApp.data.SEASON_LABELS.none;
+      const bg = meta.thumb
+        ? `style="background-image:url('${meta.thumb}'); background-size: cover; background-position: center top; background-repeat: no-repeat;"`
+        : '';
+      return `
+        <button class="season-btn ${index === 0 ? 'active' : ''}"
+                id="${season}-tab"
+                data-season="${season}"
+                role="tab"
+                aria-selected="${index === 0 ? 'true' : 'false'}"
+                aria-controls="${season}-panel"
+                ${bg}>
+          <span class="season-icon" aria-hidden="true">${meta.icon}</span>
+          <span class="season-name">${meta.name}</span>
+        </button>
+      `;
+    }).join('');
+
+    const panels = this.availableSeasons.map((season, index) => `
+      <div class="season-panel ${index === 0 ? 'active' : ''}"
+           id="${season}-panel"
+           role="tabpanel"
+           aria-labelledby="${season}-tab"
+           aria-hidden="${index === 0 ? 'false' : 'true'}"
+           data-season="${season}">
+        <div class="mv-grid">
+          ${this.getVideosForSeason(season).map(video => this.buildCard(video)).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    this.seasonNav.innerHTML = navHTML;
+    this.seasonContent.innerHTML = panels;
+    this.seasonButtons = this.seasonNav.querySelectorAll('.season-btn');
+    this.seasonPanels = this.seasonContent.querySelectorAll('.season-panel');
+  }
+
   bindEvents() {
-    // 季節ボタンのイベント設定
-    this.seasonButtons.forEach(button => {
-      button.addEventListener('click', (e) => this.handleSeasonChange(e));
+    if (!this.seasonNav || !this.seasonContent) return;
+    this.seasonNav.addEventListener('click', (e) => {
+      const button = e.target.closest('.season-btn');
+      if (!button) return;
+      this.switchToSeason(button.getAttribute('data-season'));
     });
-    
-    // オーディオイベントの処理（UX向上のため）
-    document.addEventListener('play', (e) => this.handleAudioPlay(e), true);
-    document.addEventListener('pause', (e) => this.handleAudioPause(e), true);
-    
-    // 動的生成された動画要素のイベントデリゲーション
-    document.addEventListener('click', (e) => {
-      // 動画への直接クリック
-      if (e.target.classList.contains('season-video')) {
-        e.preventDefault();
-        this.handleVideoClick(e);
-        return;
+
+    this.seasonContent.addEventListener('click', (e) => {
+      const thumb = e.target.closest('.mv-thumb');
+      if (!thumb) return;
+      e.preventDefault();
+      this.embedVideo(thumb);
+    });
+  }
+
+  getVideosForSeason(season) {
+    if (season === 'all') return this.videos;
+    if (season === 'none') return this.videos.filter(v => (v.season || 'none') === 'none');
+    return this.videos.filter(v => v.season === season);
+  }
+
+  buildCard(video) {
+    const meta = ShukaApp.data.SEASON_LABELS[video.season] || ShukaApp.data.SEASON_LABELS.none;
+    const dateText = this.formatDate(video.publishedAt);
+    const thumb = video.thumbnail || `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
+    return `
+      <article class="mv-card" data-season="${video.season || 'none'}">
+        <div class="mv-thumb" data-video-id="${video.id}" aria-label="${video.title} を再生">
+          <img src="${thumb}" alt="${video.title}" loading="lazy" decoding="async">
+          ${video.duration ? `<span class="mv-duration">${video.duration}</span>` : ''}
+          <button type="button" aria-label="${video.title} を再生">▶</button>
+        </div>
+        <div class="mv-meta">
+          <span class="mv-chip">
+            <span class="dot" style="background:${meta.color};"></span>
+            ${meta.name}
+          </span>
+          <h3 class="mv-title">${video.title}</h3>
+          ${dateText ? `<p class="mv-date">${dateText}</p>` : ''}
+        </div>
+      </article>
+    `;
+  }
+
+  embedVideo(thumb) {
+    if (!thumb || thumb.dataset.playing === 'true') return;
+    const videoId = thumb.dataset.videoId;
+    if (!videoId) return;
+    this.stopOtherVideos(thumb);
+    thumb.dataset.playing = 'true';
+    thumb.innerHTML = `
+      <iframe class="mv-iframe"
+              src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1"
+              title="YouTube video player"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+    `;
+  }
+
+  stopOtherVideos(currentThumb) {
+    const scope = this.seasonContent || document;
+    const iframes = scope.querySelectorAll('.mv-iframe');
+    const stopMessage = JSON.stringify({ event: 'command', func: 'stopVideo', args: [] });
+    iframes.forEach(iframe => {
+      if (currentThumb && currentThumb.contains(iframe)) return;
+      try {
+        iframe.contentWindow?.postMessage(stopMessage, '*');
+      } catch (e) {
+        // noop
       }
-      
-      // コンテナクリック（ポスター画像含む）
-      const visualContainer = e.target.closest('.season-visual');
-      if (visualContainer) {
-        const video = visualContainer.querySelector('.season-video');
-        if (video && e.target !== video) {
-          e.preventDefault();
-          // 一貫した処理のための合成イベント作成
-          const syntheticEvent = { target: video, preventDefault: () => {} };
-          this.handleVideoClick(syntheticEvent);
+      const src = iframe.getAttribute('src');
+      if (src && src.includes('autoplay=1')) {
+        try {
+          const url = new URL(src);
+          url.searchParams.set('autoplay', '0');
+          iframe.setAttribute('src', url.toString());
+        } catch (e) {
+          // noop
         }
       }
-    });
-    
-  }
-  
-  /**
-   * オーディオ・ビデオ要素の設定
-   * - 初期音量の設定
-   * - プリロードの無効化（パフォーマンス向上）
-   * - アクセシビリティ属性の追加
-   */
-  setupAudioElements() {
-    this.audioElements = Array.from(document.querySelectorAll('audio')); // 音楽要素を配列化
-    this.videoElements = Array.from(document.querySelectorAll('.season-video')); // 動画要素を配列化
-    
-    // 音楽要素の設定
-    this.audioElements.forEach(audio => {
-      audio.volume = 0.5; // デフォルト音量を50%に設定
-      audio.preload = 'none'; // パフォーマンス向上のためプリロード無効
-      
-      // アクセシビリティ属性の追加
-      const trackTitleEl = audio.parentElement.querySelector('.track-title');
-      const trackTitle = trackTitleEl ? trackTitleEl.textContent : 'Track';
-      audio.setAttribute('aria-label', `${trackTitle}の音楽プレーヤー`);
-    });
-
-    // 動画要素の設定
-    this.videoElements.forEach(video => {
-      video.volume = 0.5; // デフォルト音量を50%に設定
-      video.preload = 'none'; // 再生まで動画データをロードしない
-      video.muted = false; // 音声付きで再生可能
-
-      // イベントハンドラーはbindEvents()でイベントデリゲーションによって管理
-
-      // アクセシビリティ属性の追加
-      const seasonPanel = video.closest('.season-panel');
-      const seasonTitleEl = seasonPanel ? seasonPanel.querySelector('.season-title') : null;
-      const seasonTitle = seasonTitleEl ? seasonTitleEl.textContent : 'Video';
-      video.setAttribute('aria-label', `${seasonTitle}のデモ動画`);
-    });
-  }
-  
-  /**
-   * DOM要素の再取得とイベントの再バインド
-   * - 動的生成後のDOM要素を再取得
-   * - イベントリスナーの再設定
-   */
-  refresh() {
-    // 動的生成後のDOM要素を再取得
-    this.seasonButtons = document.querySelectorAll('.season-btn');
-    this.seasonPanels = document.querySelectorAll('.season-panel');
-    
-    // イベントの再バインド
-    this.bindEvents();
-    this.setupAudioElements();
-  }
-
-  preloadWashiBackgrounds() {
-    // 和紙背景のアイドル時プリロード
-    // - LCP競合を避けるため初期レンダリング直後は取得しない
-    // - Data Saver有効時はスキップ
-    const run = () => {
-      try {
-        const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-        if (conn && conn.saveData) return; // データ節約モードを尊重
-      } catch (e) {}
-
-      const washiImages = [
-        './assets/images/backgrounds/背景_春模様.webp',
-        './assets/images/backgrounds/背景_夏模様.webp',
-        './assets/images/backgrounds/背景_秋模様.webp',
-        './assets/images/backgrounds/背景_冬模様.webp',
-        './assets/images/backgrounds/和紙-梅雨.webp'
-      ];
-
-      // 画像は非同期デコード指定でメインスレッド負荷を軽減
-      washiImages.forEach(src => {
-        const img = new Image();
-        img.decoding = 'async';
-        img.loading = 'eager';
-        img.src = src;
-      });
-    };
-
-    // アイドルコールバックが利用可能な場合は優先して使用
-    // ブラウザがアイドル状態の時に実行してパフォーマンスへの影響を最小化
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(run, { timeout: 8000 }); // 8秒以内に必ず実行
-    } else {
-      setTimeout(run, 5000); // フォールバック: 5秒後に実行
-    }
-  }
-  
-  /**
-   * 初期季節の読み込み処理
-   * - デフォルトで梅雨季節のスタイリングを適用
-   * - パネルは非選択状態でユーザーの選択を待機
-   * - 適切な季節エフェクトを有効化
-   */
-  loadInitialSeason() {
-    // 梅雨季節のスタイリングを適用するが、パネルは選択しない
-    this.currentSeason = '';
-
-    // URLを梅雨季節を反映して更新
-    this.updateURL('tsuyu');
-
-    // スタイリングと背景を更新
-    this.updateSeasonBackground('tsuyu');
-
-    // 梅雨季節の雨エフェクトを有効化
-    if (typeof window.enableRain === 'function') {
-      window.enableRain();
-    }
-    // 桃の花エフェクトが無効化されていることを確認
-    if (typeof window.disableSakura === 'function') {
-      window.disableSakura();
-    }
-
-    // 春季節の桃の花エフェクトを有効化（春が選択されている場合のみ）
-    if (typeof window.enableSakura === 'function' && this.currentSeason === 'spring') {
-      window.enableSakura();
-    }
-
-    // デフォルト季節のボタンをアクティブにし、パネルは非表示のまま
-    this.updateSeasonButtons(this.currentSeason);
-    this.updateSeasonPanels('', false);
-  }
-  
-  /**
-   * URLパラメータから季節を取得
-   * - URLクエリパラメータ「season」の値を確認
-   * - 有効な季節名の場合のみ返却
-   */
-  // getSeasonFromURL は未使用のため削除しました
-
-  /**
-   * ローカルストレージから最後に選択された季節を取得
-   * - 前回のユーザー選択を記憶
-   * - ストレージアクセスエラー時も安全に処理
-   */
-  // getSeasonFromStorage は未使用のため削除しました
-  
-  
-  /**
-   * 季節変更イベントの処理
-   * - ボタンクリック時の季節切り替え
-   * - 現在の季節と異なる場合のみ処理
-   */
-  handleSeasonChange(e) {
-    e.preventDefault(); // デフォルトのボタン動作を無効化
-    
-    const button = e.currentTarget;
-    const season = button.getAttribute('data-season'); // data-season属性から季節を取得
-    
-    // 有効な季節で現在の季節と異なる場合のみ切り替え
-    if (season && season !== this.currentSeason) {
-      this.switchToSeason(season);
-    }
-  }
-  
-  
-  /**
-   * 季節の切り替え処理
-   * 
-   * 機能:
-   * - 指定された季節への切り替えと関連する全ての要素の更新
-   * - 音楽・動画の停止、UI状態の更新、季節演出の制御
-   * - アクセシビリティ対応とブラウザ履歴の管理
-   * 
-   * @param {string} season - 切り替え先の季節 ('spring', 'summer', 'autumn', 'winter', 'tsuyu')
-   * @param {boolean} animate - アニメーション有無 (デフォルト: true)
-   */
-  switchToSeason(season, animate = true) {
-    // 季節の有効性をチェック
-    if (!['spring', 'summer', 'autumn', 'winter', 'tsuyu'].includes(season)) {
-      return;
-    }
-    
-    // 再生中の全ての音楽・動画を停止
-    this.stopAllAudio();
-    
-    // 季節ボタンの状態を更新
-    this.updateSeasonButtons(season);
-    
-    // 季節パネルの表示状態をアニメーション付きで更新
-    this.updateSeasonPanels(season, animate);
-
-    // 現在の季節を更新
-    this.currentSeason = season;
-
-    // ユーザーの選択をローカルストレージに保存
-    try {
-      localStorage.setItem('lastSeason', season);
-    } catch (e) {
-      // ストレージアクセスエラーは無視
-    }
-    
-    // ページリロードなしでURLを更新（ブックマーク対応）
-    this.updateURL(season);
-    
-    // ユーザーの季節ボタン操作時にアバウト画像を更新
-    if (animate) {
-      this.updateAboutImage(season);
-    }
-
-    // 背景スタイル（和紙背景含む）を季節に合わせて更新
-    this.updateSeasonBackground(season);
-
-    // 季節に応じた視覚効果の切り替え
-    if (season === 'spring') {
-      // 春：桜エフェクトを有効化
-      if (typeof window.enableSakura === 'function') {
-        window.enableSakura(); // シンプルな桜エフェクト有効化
+      const thumb = iframe.closest('.mv-thumb');
+      if (thumb) {
+        thumb.dataset.playing = 'false';
       }
-      // 他の季節演出を全て無効化
-      if (typeof window.disableRain === 'function') window.disableRain();
-      if (typeof window.disableSnow === 'function') window.disableSnow();
-      if (typeof window.disableAutumnLeaves === 'function') window.disableAutumnLeaves();
-      if (typeof window.disableSummerWillow === 'function') window.disableSummerWillow();
-    } else if (season === 'tsuyu') {
-      // 梅雨：雨滴演出を有効化
-      if (typeof window.enableRain === 'function') window.enableRain();
-      if (typeof window.disableSakura === 'function') window.disableSakura();
-      if (typeof window.disableSnow === 'function') window.disableSnow();
-    } else if (season === 'winter') {
-      // 冬：雪花演出を有効化
-      if (typeof window.enableSnow === 'function') window.enableSnow();
-      if (typeof window.disableRain === 'function') window.disableRain();
-      if (typeof window.disableSakura === 'function') window.disableSakura();
-      if (typeof window.disableAutumnLeaves === 'function') window.disableAutumnLeaves();
-    } else if (season === 'autumn') {
-      // 秋：紅葉演出を有効化
-      if (typeof window.enableAutumnLeaves === 'function') window.enableAutumnLeaves();
-      if (typeof window.disableRain === 'function') window.disableRain();
-      if (typeof window.disableSakura === 'function') window.disableSakura();
-      if (typeof window.disableSnow === 'function') window.disableSnow();
-      if (typeof window.disableSummerWillow === 'function') window.disableSummerWillow();
-    } else if (season === 'summer') {
-      // 夏：柳の葉演出を有効化
-      if (typeof window.enableSummerWillow === 'function') window.enableSummerWillow();
-      if (typeof window.disableRain === 'function') window.disableRain();
-      if (typeof window.disableSakura === 'function') window.disableSakura();
-      if (typeof window.disableSnow === 'function') window.disableSnow();
-      if (typeof window.disableAutumnLeaves === 'function') window.disableAutumnLeaves();
-    } else {
-      // その他：全ての季節演出を無効化
-      if (typeof window.disableRain === 'function') window.disableRain();
-      if (typeof window.disableSakura === 'function') window.disableSakura();
-      if (typeof window.disableSnow === 'function') window.disableSnow();
-      if (typeof window.disableAutumnLeaves === 'function') window.disableAutumnLeaves();
-      if (typeof window.disableSummerWillow === 'function') window.disableSummerWillow();
-    }
-    
-    // スクリーンリーダー用に季節変更を音声通知
+    });
+  }
+
+  switchToSeason(season) {
+    if (!this.availableSeasons.includes(season)) season = 'all';
+    this.currentSeason = season;
+    this.updateSeasonButtons();
+    this.updateSeasonPanels();
+    this.updateURL(season);
+    const backgroundSeason = season === 'all' || season === 'none' ? 'tsuyu' : season;
+    this.updateSeasonBackground(backgroundSeason, season);
+    this.updateAboutImage(season);
     this.announceSeasonChange(season);
   }
-  
-  /**
-   * 季節ボタンの状態更新
-   * 
-   * 機能:
-   * - アクティブな季節ボタンの視覚的状態とARIA属性を更新
-   * - キーボードナビゲーション用のtabindex管理
-   * - アクセシビリティ対応のaria-selected属性設定
-   */
-  updateSeasonButtons(activeSeason) {
+
+  updateSeasonButtons() {
+    if (!this.seasonButtons) return;
     this.seasonButtons.forEach(button => {
-      const buttonSeason = button.getAttribute('data-season');
-      const isActive = buttonSeason === activeSeason;
-      
-      // 視覚的状態の更新: CSSスタイリング用のアクティブクラスを切り替え
+      const season = button.getAttribute('data-season');
+      const isActive = season === this.currentSeason;
       button.classList.toggle('active', isActive);
-      // アクセシビリティ: スクリーンリーダーに選択状態を通知
-      // aria-selected: タブリストや選択可能要素での選択状態を示すARIA属性
-      // "true"/"false"文字列で設定する必要がある（ブール値ではなく）
-      button.setAttribute('aria-selected', isActive.toString());
-      
-      // キーボードナビゲーション用のtabindex設定
-      if (isActive) {
-        button.setAttribute('tabindex', '0'); // アクティブなボタンのみキーボードフォーカス可能
-      } else {
-        button.setAttribute('tabindex', '-1'); // 非アクティブボタンはTabキーでスキップ（プログラム的フォーカスのみ）
-      }
+      button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      button.setAttribute('tabindex', isActive ? '0' : '-1');
     });
   }
-  
-  /**
-   * 季節パネルの表示状態更新
-   * 
-   * 機能:
-   * - アクティブな季節に対応するパネルの表示・非表示を制御
-   * - アニメーション付きでの滑らかな切り替え
-   */
-  updateSeasonPanels(activeSeason, animate) {
+
+  updateSeasonPanels() {
+    if (!this.seasonPanels) return;
     this.seasonPanels.forEach(panel => {
-      const panelSeason = panel.getAttribute('data-season');
-      const isActive = panelSeason === activeSeason;
-      
-      // アクティブな季節のパネルを表示、その他を非表示
-      if (isActive) {
-        this.showPanel(panel, animate);
-      } else {
-        this.hidePanel(panel, animate);
-      }
+      const season = panel.getAttribute('data-season');
+      const isActive = season === this.currentSeason;
+      panel.classList.toggle('active', isActive);
+      panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
     });
   }
-  
-  /**
-   * パネルの表示処理
-   * 
-   * 機能:
-   * - 季節パネルをアニメーション付きで表示
-   * - 子要素のアニメーション制御
-   * - 動画の遅延読み込み（パフォーマンス向上）
-   * - アクセシビリティ属性の更新
-   */
-  showPanel(panel, animate) {
-    // パフォーマンス向上のため動画読み込みはユーザー操作まで遅延
-    panel.style.display = 'grid';
-    panel.classList.add('active');
 
-    // アニメーション付きで表示
-    if (animate) {
-      panel.style.opacity = '0';
-      panel.style.transform = 'scale(0.97)';
-      panel.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      requestAnimationFrame(() => {
-        panel.style.opacity = '1';
-        panel.style.transform = 'scale(1)';
-      });
-      // アニメーション完了後にスタイルをリセット
-      setTimeout(() => {
-        panel.style.transition = '';
-        panel.style.opacity = '';
-        panel.style.transform = '';
-      }, 400);
-
-    }
-
-    // スクリーンリーダー用の表示状態を更新
-    panel.setAttribute('aria-hidden', 'false');
-
-    // 子要素の段階的アニメーション実行
-    if (animate) {
-      this.animatePanelChildren(panel, true);
-    }
-
-    // パネル表示時に動画ソースを読み込み（プレーヤー準備）
-    this.loadVideoForPanel(panel, false);
-  }
-  
-  /**
-   * パネルの非表示処理
-   * 
-   * 機能:
-   * - 季節パネルをアニメーション付きで非表示
-   * - 子要素の退場アニメーション制御
-   * - アクセシビリティ属性の更新
-   */
-  hidePanel(panel, animate) {
-    // 子要素の退場アニメーション実行
-    this.animatePanelChildren(panel, false);
-
-    if (animate) {
-      panel.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      panel.style.opacity = '0';
-      panel.style.transform = 'scale(0.97)';
-
-      // アニメーション完了後にパネルを完全に非表示
-      setTimeout(() => {
-        panel.style.transition = '';
-        panel.style.display = 'none';
-        panel.classList.remove('active');
-        panel.style.opacity = '';
-        panel.style.transform = '';
-      }, 300);
-    } else {
-      // アニメーションなしで即座に非表示
-      panel.style.display = 'none';
-      panel.classList.remove('active');
-    }
-
-    // スクリーンリーダー用の非表示状態を更新
-    panel.setAttribute('aria-hidden', 'true');
-  }
-
-  /**
-   * パネル子要素のアニメーション制御
-   * 
-   * 機能:
-   * - 季節パネル内の各要素（動画、タイトル、説明、楽曲リスト）の登場・退場アニメーション
-   * - 時間差アニメーションによる美しい演出効果
-   * - cubic-bezierイージングによる滑らかな動き
-   * 
-   * @param {HTMLElement} panel - アニメーション対象のパネル要素
-   * @param {boolean} isEntering - true: 登場アニメーション, false: 退場アニメーション
-   */
-  animatePanelChildren(panel, isEntering) {
-    if (!isEntering) {
-      // 退場時は即座にアニメーションクラスを削除
-      const elements = panel.querySelectorAll('.season-tracks, .season-visual');
-      elements.forEach(el => {
-        el.classList.remove('animate-slide-in-left', 'animate-slide-in-right');
-        el.style.opacity = '';
-      });
-      return;
-    }
-
-    // 登場アニメーション: 左から楽曲リスト、右から画像・動画
-    const tracksList = panel.querySelector('.season-tracks');
-    const visualContainer = panel.querySelector('.season-visual');
-
-    // 初期状態を透明にセット
-    [tracksList, visualContainer].forEach(el => {
-      if (el) {
-        el.style.opacity = '0';
-        el.classList.remove('animate-slide-in-left', 'animate-slide-in-right');
-      }
-    });
-
-    // 段階的アニメーション実行
-    setTimeout(() => {
-      if (tracksList) {
-        tracksList.classList.add('animate-slide-in-left');
-      }
-    }, 100); // パネルアニメーション後に開始
-
-    setTimeout(() => {
-      if (visualContainer) {
-        visualContainer.classList.add('animate-slide-in-right');
-      }
-    }, 200); // 楽曲リストの後に続く
-  }
-  /**
-   * パネル内動画の遅延読み込み処理
-   * 
-   * 機能:
-   * - パフォーマンス向上のための動画ソース遅延設定
-   * - data-src属性からsrc属性への変換
-   * - 読み込み状態の管理と視覚的フィードバック
-   * - 自動再生オプション対応
-   * 
-   * @param {HTMLElement} panel - 対象パネル要素
-   * @param {boolean} autoPlay - 読み込み完了後に自動再生するかどうか
-   */
-  loadVideoForPanel(panel, autoPlay = false) {
-    const video = panel.querySelector('.season-video');
-    if (!video || video.dataset.loaded === 'true') {
-      // 既に読み込み済みで自動再生が要求されている場合は即座に再生
-      if (autoPlay && video && video.paused) {
-        video.play().catch(() => {
-        });
-      }
-      return;
-    }
-
-    // 読み込み中の視覚的フィードバック（透明度を下げる）
-    video.style.opacity = '0.7';
-
-    // data-src属性からsrc属性に変換して動画読み込みを開始
-    const sources = video.querySelectorAll('source[data-src]');
-    sources.forEach(source => {
-      const src = source.getAttribute('data-src');
-      if (src) source.src = src;
-    });
-
-    // 動画ファイルの読み込み実行
-    video.load();
-    video.dataset.loaded = 'true'; // 読み込み完了マーク
-    video.style.opacity = '1'; // 透明度を元に戻す
-
-    // 自動再生が要求されている場合は再生開始
-    if (autoPlay) {
-      video.play().catch(error => {
-      });
-    }
-  }
-  
-  /**
-   * URLクエリパラメータの更新
-   * 
-   * 機能:
-   * - 現在の季節をURLクエリパラメータ「season」に反映
-   * - ページのリロードなしでURLを更新（ブックマーク・共有対応）
-   * - ブラウザ履歴の管理
-   */
   updateURL(season) {
-    const url = new URL(window.location);
+    const url = new URL(window.location.href);
     url.searchParams.set('season', season);
-    
-    // ナビゲーションを発生させずにURLを更新
-    history.replaceState(null, '', url.toString());
+    window.history.replaceState({}, '', url.toString());
   }
 
-  /**
-   * 季節背景の更新処理
-   * 
-   * 機能:
-   * - 季節に対応する和紙背景画像のプリロード
-   * - body要素とheader要素にdata-season属性を設定
-   * - CSS背景変更のスムーズな切り替え
-   * - 季節セレクタの状態同期
-   */
-  updateSeasonBackground(season) {
-    // スムーズな切り替えのため和紙背景をプリロード
+  updateSeasonBackground(backgroundSeason, originalSeason) {
     const washiImages = {
       spring: './assets/images/backgrounds/背景_春模様.webp',
-      summer: './assets/images/backgrounds/背景_夏模様.webp', 
+      summer: './assets/images/backgrounds/背景_夏模様.webp',
       autumn: './assets/images/backgrounds/背景_秋模様.webp',
       winter: './assets/images/backgrounds/背景_冬模様.webp',
-      tsuyu: './assets/images/backgrounds/和紙-梅雨.webp'
+      tsuyu:  './assets/images/backgrounds/和紙-梅雨.webp'
     };
-
-    const imageUrl = washiImages[season];
+    const imageUrl = washiImages[backgroundSeason];
     if (imageUrl) {
-      // 和紙画像をプリロード
-      const img = new Image();
-      img.onload = () => {
-        // CSSスタイリング用のボディ季節属性を更新
-        document.body.setAttribute('data-season', season);
-        const header = document.getElementById('header');
-        if (header)
-          header.setAttribute('data-season', season);
-        const selector = document.getElementById('season-selector');
-        if (selector && typeof selector.updateActive === 'function')
-          selector.updateActive(season);
-      };
-      img.src = imageUrl;
-    } else {
-      // フォールバック：直接更新
-      document.body.setAttribute('data-season', season);
       const header = document.getElementById('header');
-      if (header)
-        header.setAttribute('data-season', season);
-      const selector = document.getElementById('season-selector');
-      if (selector && typeof selector.updateActive === 'function')
-        selector.updateActive(season);
+      if (header) header.style.setProperty('--washi-bg', `url('${imageUrl}')`);
+      if (document.body) document.body.style.setProperty('--washi-bg', `url('${imageUrl}')`);
+    }
+    // data-season属性には実際に選択された季節を設定
+    const actualSeason = originalSeason || backgroundSeason;
+    document.body.setAttribute('data-season', actualSeason);
+
+    const selector = document.getElementById('season-selector');
+    if (selector && typeof selector.updateActive === 'function') {
+      selector.updateActive(actualSeason);
     }
 
-  }
+    // 降下物エフェクトのリセット
+    if (typeof window.disableSakura === 'function') window.disableSakura();
+    if (typeof window.disableRain === 'function') window.disableRain();
+    if (typeof window.disableSnow === 'function') window.disableSnow();
+    if (typeof window.disableAutumnLeaves === 'function') window.disableAutumnLeaves();
+    if (typeof window.disableSummerWillow === 'function') window.disableSummerWillow();
 
-  
-  updateAboutImage(season) {
-    const aboutImage = document.querySelector('.about-image');
-    if (!aboutImage) return;
-    
-    const seasonImages = {
-      spring: './assets/images/portraits/秀歌-About-春.webp',
-      summer: './assets/images/portraits/秀歌-About-夏.webp',
-      autumn: './assets/images/portraits/秀歌-About-秋.webp',
-      winter: './assets/images/portraits/秀歌-About-冬.webp',
-      tsuyu: './assets/images/portraits/秀歌-梅雨.webp'
-    };
-    
-    const imageUrl = seasonImages[season];
-    if (imageUrl) {
-      // 変更前に画像をプリロード
-      const img = new Image();
-      img.onload = () => {
-        aboutImage.src = imageUrl;
-        aboutImage.srcset = imageUrl;
-        
-        // picture要素のソースも更新
-        const pictureSource = aboutImage.parentElement.querySelector('source');
-        if (pictureSource) {
-          pictureSource.srcset = imageUrl;
-        }
-      };
-      img.src = imageUrl;
+    // 季節に応じたエフェクト有効化（実際に選択された季節に基づく）
+    if (actualSeason === 'spring') {
+      if (typeof window.enableSakura === 'function') window.enableSakura();
+    } else if (actualSeason === 'summer') {
+      if (typeof window.enableSummerWillow === 'function') window.enableSummerWillow();
+    } else if (actualSeason === 'autumn') {
+      if (typeof window.enableAutumnLeaves === 'function') window.enableAutumnLeaves();
+    } else if (actualSeason === 'winter') {
+      if (typeof window.enableSnow === 'function') window.enableSnow();
+    } else {
+      // tsuyu / all / none
+      if (typeof window.enableRain === 'function') window.enableRain();
     }
   }
-  
+
   announceSeasonChange(season) {
     const seasonNames = {
+      all: '全て',
       spring: '春',
       summer: '夏',
       autumn: '秋',
       winter: '冬',
-      tsuyu: '梅雨'
+      tsuyu: '梅雨',
+      none: 'その他'
     };
-    
-    const announcement = `${seasonNames[season]}の楽曲に切り替わりました`;
-    
-    // スクリーンリーダー用のライブリージョンを作成または更新
+    const announcement = `${seasonNames[season] || season}のMVを表示しています`;
     let liveRegion = document.getElementById('season-announcer');
-    
+    if (!liveRegion) {
+      liveRegion = document.createElement('div');
+      liveRegion.id = 'season-announcer';
+      liveRegion.setAttribute('aria-live', 'polite');
+      liveRegion.setAttribute('aria-atomic', 'true');
+      liveRegion.classList.add('sr-only');
+      document.body.appendChild(liveRegion);
+    }
     liveRegion.textContent = announcement;
   }
-  
-  /**
-   * 音楽・動画再生開始イベントの処理
-   * 
-   * 機能:
-   * - 複数メディアの同時再生を防止
-   * - 音楽再生時は全ての動画を停止
-   * - 動画再生時は全ての音楽と他の動画を停止
-   * - 再生状態のUI表示管理
-   */
-  handleAudioPlay(e) {
-    // 他の音楽・動画要素を停止して同時再生を防止
-    if (e.target.tagName === 'AUDIO') {
-      // 他の音楽を停止
-      this.audioElements.forEach(audio => {
-        if (audio !== e.target && !audio.paused) {
-          audio.pause();
-        }
-      });
-      
-      // 音楽再生開始時は全ての動画を停止
-      this.videoElements.forEach(video => {
-        if (!video.paused) {
-          video.pause();
-        }
-      });
-      
-      // 再生状態のクラスを追加（UI表示用）
-      const trackEl = e.target.closest('.track');
-      if (trackEl) trackEl.classList.add('playing');
-    }
-    
-    // 動画再生イベントの処理
-    if (e.target.tagName === 'VIDEO') {
-      // 動画再生開始時は全ての音楽を停止
-      this.audioElements.forEach(audio => {
-        if (!audio.paused) {
-          audio.pause();
-        }
-      });
-      
-      // 他の動画を停止
-      this.videoElements.forEach(video => {
-        if (video !== e.target && !video.paused) {
-          video.pause();
-        }
-      });
-      
-      // 再生状態のクラスを追加（UI表示用）
-      const panelEl = e.target.closest('.season-panel');
-      if (panelEl) panelEl.classList.add('video-playing');
-    }
-  }
-  
-  /**
-   * 音楽・動画一時停止イベントの処理
-   * 
-   * 機能:
-   * - 再生停止時のUI状態リセット
-   * - 再生状態を示すCSSクラスの削除
-   */
-  handleAudioPause(e) {
-    if (e.target.tagName === 'AUDIO') {
-      // 再生状態クラスを削除
-      const trackEl = e.target.closest('.track');
-      if (trackEl) trackEl.classList.remove('playing');
-    }
-    
-    if (e.target.tagName === 'VIDEO') {
-      // 再生状態クラスを削除
-      const panelEl = e.target.closest('.season-panel');
-      if (panelEl) panelEl.classList.remove('video-playing');
-    }
-  }
-  
-  /**
-   * 動画クリックイベントの処理
-   * 
-   * 機能:
-   * - 動画の再生/一時停止の切り替え
-   * - 初回クリック時の動画遅延読み込み
-   * - エラーハンドリング
-   */
-  handleVideoClick(e) {
-    const video = e.target;
-    
-    // 有効な動画要素かどうかを確認
-    if (!video || !video.tagName || video.tagName.toLowerCase() !== 'video') {
-      return;
-    }
-    
-    // 初回操作時の動画遅延読み込み
-    if (video.dataset.loaded !== 'true') {
-      const panel = video.closest('.season-panel');
-      if (panel) {
-        // 動画を読み込みつつ自動再生
-        this.loadVideoForPanel(panel, true);
-      }
-    } else {
-      // 読み込み済み動画の再生/一時停止切り替え
-      if (video.paused) {
-        // 動画再生開始
-        video.play().catch(() => {
-        });
-      } else {
-        // 動画一時停止
-        video.pause();
-      }
-    }
-    
-    // ブラウザのデフォルト動作を防止
-    if (e.preventDefault) {
-      e.preventDefault();
-    }
-  }
-  
 
-
-
-
-
-  /**
-   * 全オーディオ・ビデオの停止処理
-   * 
-   * 機能:
-   * - 再生中の全ての音楽を一時停止
-   * - 再生中の全ての動画を一時停止
-   * - 季節切り替え時の重複再生防止
-   */
-  stopAllAudio() {
-    // 全ての音楽要素を停止
-    this.audioElements.forEach(audio => {
-      if (!audio.paused) {
-        audio.pause();
-      }
-    });
-    
-    // 全ての動画要素も停止
-    this.videoElements.forEach(video => {
-      if (!video.paused) {
-        video.pause();
-      }
-    });
-  }
-  
-  /**
-   * 外部アクセス用のパブリックメソッド
-   */
-  
-  /**
-   * 現在の季節を取得
-   * 
-   * @returns {string} 現在の季節識別子
-   */
   getCurrentSeason() {
     return this.currentSeason;
   }
-  
-  /**
-   * 利用可能な季節一覧を取得
-   * 
-   * 機能:
-   * - 梅雨シーズンはギャラリーのナビゲーションには表示しない
-   * - UI生成で使用される季節リスト
-   * 
-   * @returns {string[]} 利用可能な季節の配列
-   */
-  getAvailableSeasons() {
-    // 梅雨シーズンはギャラリーのナビゲーションには表示しない
-    return ['spring', 'summer', 'autumn', 'winter'];
+
+  updateAboutImage(season) {
+    const aboutImage = document.querySelector('.about-image');
+    if (!aboutImage) return;
+    const seasonImages = {
+      all: './assets/images/portraits/秀歌.webp',
+      spring: './assets/images/portraits/秀歌-About-春.webp',
+      summer: './assets/images/portraits/秀歌-About-夏.webp',
+      autumn: './assets/images/portraits/秀歌-About-秋.webp',
+      winter: './assets/images/portraits/秀歌-About-冬.webp',
+      tsuyu: './assets/images/portraits/秀歌-梅雨.webp',
+      none: './assets/images/portraits/秀歌-About-その他.webp'
+    };
+    const imageUrl = seasonImages[season] || seasonImages.tsuyu;
+    aboutImage.src = imageUrl;
+    aboutImage.srcset = `${imageUrl} 1x`;
+    aboutImage.setAttribute('data-season', season);
+    const picture = aboutImage.closest('picture');
+    if (picture) {
+      // Ensure browsers honoring <source> pick up the new seasonal image
+      picture.querySelectorAll('source').forEach(source => {
+        source.srcset = `${imageUrl} 1x`;
+      });
+    }
+  }
+
+  formatDate(value) {
+    if (!value) return '';
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return value;
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}.${mm}.${dd}`;
   }
 }
+
 
 // 外部使用用のグローバル関数（例：フッターリンク）
 /**
@@ -1274,6 +670,11 @@ ShukaApp.utils.initSeasonSelector = function() {
     const season = button.getAttribute('data-season');
     if (typeof window.switchSeason === 'function')
       window.switchSeason(season);
+
+    // ハンバーガーメニューを閉じる
+    if (ShukaApp.navigation && typeof ShukaApp.navigation.closeMenu === 'function') {
+      ShukaApp.navigation.closeMenu();
+    }
   });
 }
 // 後方互換性のための従来のグローバル参照を維持
@@ -2608,25 +2009,24 @@ document.addEventListener('DOMContentLoaded', () => {
     ShukaApp.navigation = new Navigation();
   }
   
-  // 動的コンテンツの生成（必ずDOM生成が先）
-  generateSeasonGallery(); // 季節別ギャラリーのHTML生成
-  
-  const deferredInit = () => {
+  // MVデータの取得とギャラリー初期化
+  const deferredInit = async () => {
     // 画像読み込みエラーのハンドリング設定
     setupImageErrorHandling();
-  
-    // DOM要素生成完了後に季節ギャラリークラスを初期化
-    // 季節ギャラリーインスタンスをネームスペースに追加
-    ShukaApp.gallery = new SeasonsGallery();
-    // 後方互換性のための従来のグローバル参照を維持
+
+    const mvData = await generateSeasonGallery();
+    ShukaApp.gallery = new SeasonsGallery(mvData);
     window.seasonsGallery = ShukaApp.gallery;
+
+    // URLパラメータから季節を読み込んで適用
+    const urlParams = new URLSearchParams(window.location.search);
+    const seasonFromURL = urlParams.get('season');
+    if (seasonFromURL && ShukaApp.gallery.availableSeasons.includes(seasonFromURL)) {
+      ShukaApp.gallery.switchToSeason(seasonFromURL);
+    }
+
     if (typeof initSeasonSelector === 'function')
       initSeasonSelector(); // 季節セレクターコンポーネントの初期化
-    
-    // 動的生成された要素に対するイベントの再バインド
-    if (window.seasonsGallery && typeof window.seasonsGallery.refresh === 'function') {
-      window.seasonsGallery.refresh();
-    }
   };
 
   if ('requestIdleCallback' in window) {
@@ -2658,109 +2058,19 @@ function initScrollButtons() {
 }
 
 /**
- * 季節ギャラリーナビゲーションとコンテンツの動的生成
- * 
- * 機能:
- * - ShukaApp.data.SEASON_DATAから季節別ナビゲーションボタンを動的生成
- * - 季節別コンテンツパネル（動画・音声・説明）を動的生成
- * - アクセシビリティ属性の適切な設定
- * - 遅延読み込みやフォールバック処理の統合
- * - 梅雨シーズンの適切な除外処理
- * 
- * 注意:
- * - 梅雨（tsuyu）シーズンはボタンやコンテンツを生成しない
- * - 動的生成後に音声・動画要素の再設定が必要
+ * MVデータを取得
+ * - 静的JSON（assets/data/mv.json）からYouTube動画メタデータを読み込む
  */
-function generateSeasonGallery() {
-  const seasonNav = document.getElementById('season-nav');
-  const seasonContent = document.getElementById('season-content');
-  
-  // 必要なコンテナ要素が存在しない場合は処理を終了
-  if (!seasonNav || !seasonContent) return;
-  
-  // HTML文字列とフラグの初期化
-  let navHTML = '';
-  let contentHTML = '';
-  let isFirst = true; // 最初のアイテムをアクティブ状態にするためのフラグ
-
-  // ShukaApp.data.SEASON_DATA内の各季節データをループ処理
-  for (const [key, season] of Object.entries(ShukaApp.data.SEASON_DATA)) {
-    if (key === 'tsuyu') {
-      // 梅雨シーズンはボタンとコンテンツを生成しない
-      continue;
-    }
-    
-    // 季節ナビゲーションボタンのHTML生成
-    navHTML += `
-      <button class="season-btn ${isFirst ? 'active' : ''}" 
-              data-season="${key}" 
-              role="tab" 
-              aria-controls="${key}-content" 
-              aria-selected="${isFirst ? 'true' : 'false'}" 
-              aria-label="${season.name}の楽曲を再生">
-        <span class="season-icon" aria-hidden="true">${season.icon}</span>
-        <span class="season-name">${season.name}</span>
-      </button>
-    `;
-    
-    // 季節コンテンツパネルのHTML生成
-    contentHTML += `
-      <div class="season-panel ${isFirst ? 'active' : ''}" 
-           id="${key}-content" 
-           role="tabpanel" 
-           aria-labelledby="${key}-tab" 
-           data-season="${key}">
-        <div class="season-visual">
-          <!-- 季節テーマ動画の設定 -->
-          <video class="season-video"
-                 controls
-                 preload="none"
-                 loading="lazy"
-                 poster="${season.poster}"
-                 width="1280" height="720"
-                 playsinline>
-           <!-- WebM動画ソースが存在する場合のみ追加 -->
-           ${season.video.webm ? `<source data-src="${season.video.webm}" type="video/webm">` : ''}
-           <!-- MP4動画ソースをフォールバックとして追加 -->
-           <source data-src="${season.video.mp4}" type="video/mp4">
-           <!-- ブラウザが動画再生に対応していない場合のエラーメッセージ -->
-           お使いのブラウザは動画再生に対応していません。
-          </video>
-        </div>
-        <!-- 季節トラックと説明のコンテナ -->
-        <div class="season-tracks">
-          <!-- 季節タイトルの表示 -->
-          <h3 class="season-title">${season.title}</h3>
-          <!-- 季節説明の表示 -->
-          <p class="season-description">${season.description}</p>
-          <div class="track-list">
-            ${season.tracks.map(track => `
-              <div class="track">
-                <audio controls preload="none">
-                  <source src="${track.src}" type="audio/mpeg">
-                  お使いのブラウザは音声再生に対応していません。
-                </audio>
-                <div class="track-info">
-                  <h4 class="track-title">${track.title}</h4>
-                  <p class="track-description">${track.description}</p>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      </div>
-    `;
-    
-    isFirst = false; // 最初のアイテム処理後はフラグをオフ
-  }
-  
-  // 生成したHTMLをDOMに挿入
-  seasonNav.innerHTML = navHTML;
-  seasonContent.innerHTML = contentHTML;
-  
-  // 動的生成後に音声・動画要素の再設定
-  if (window.seasonsGallery && typeof window.seasonsGallery.setupAudioElements === 'function') {
-    window.seasonsGallery.setupAudioElements();
+async function generateSeasonGallery() {
+  try {
+    const res = await fetch('./assets/data/mv.json', { cache: 'no-store' });
+    const data = await res.json();
+    if (!Array.isArray(data))
+      return [];
+    return data.sort((a, b) => (b.publishedAt || '').localeCompare(a.publishedAt || ''));
+  } catch (e) {
+    console.error('Failed to load mv.json', e);
+    return [];
   }
 }
 
