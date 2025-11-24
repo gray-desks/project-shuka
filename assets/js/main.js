@@ -11,13 +11,13 @@ window.ShukaApp = window.ShukaApp || {
   gallery: null,
   navigation: null,
   effects: null,
-  
+
   // ユーティリティ関数
   utils: {},
-  
+
   // 設定とデータ
   data: {},
-  
+
   // イベントハンドラー
   handlers: {}
 };
@@ -32,12 +32,12 @@ window.ShukaApp = window.ShukaApp || {
  * - MVフィルタ用の表示名と配色
  */
 ShukaApp.data.SEASON_LABELS = {
-  all:   { icon: '★', name: 'All',    color: '#e5e7eb', thumb: './assets/images/portraits/秀歌.webp' },
-  spring:{ icon: '🌸', name: '春',     color: '#f472b6' },
-  summer:{ icon: '🌿', name: '夏',     color: '#22d3ee' },
-  autumn:{ icon: '🍁', name: '秋',     color: '#fb923c' },
-  winter:{ icon: '❄️', name: '冬',     color: '#a5b4fc' },
-  none:  { icon: '◎', name: 'その他', color: '#94a3b8', thumb: './assets/images/portraits/秀歌-About-その他.webp' }
+  all: { icon: '★', name: 'All', color: '#e5e7eb', thumb: './assets/images/portraits/秀歌.webp' },
+  spring: { icon: '🌸', name: '春', color: '#f472b6' },
+  summer: { icon: '🌿', name: '夏', color: '#22d3ee' },
+  autumn: { icon: '🍁', name: '秋', color: '#fb923c' },
+  winter: { icon: '❄️', name: '冬', color: '#a5b4fc' },
+  none: { icon: '◎', name: 'その他', color: '#94a3b8', thumb: './assets/images/portraits/秀歌-About-その他.webp' }
 };
 
 /**
@@ -51,7 +51,7 @@ function initAccessibilityFeatures() {
   // マウス使用状況の追跡（フォーカス管理のため）
   // マウスクリック時は視覚的なフォーカス表示を無効化
   document.addEventListener('mousedown', () => document.body.classList.add('using-mouse'));
-  
+
 }
 
 
@@ -82,11 +82,11 @@ class Navigation {
     this.toggleMenu = this.toggleMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.handleResize = this.handleResize.bind(this);
-    
+
     // 初期化処理の実行
     this.init();
   }
-  
+
   /**
    * 初期化処理
    * - イベントバインディング
@@ -96,7 +96,7 @@ class Navigation {
     this.bindEvents();
     this.handleScroll();
   }
-  
+
   /**
    * イベントリスナーのバインディング
    * - スムーズスクロール
@@ -105,12 +105,12 @@ class Navigation {
    * - キーボード操作
    */
   bindEvents() {
-    
+
     // アンカーリンクでのスムーズスクロール
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => this.handleSmoothScroll(e));
     });
-    
+
     if (this.menuToggle) {
       this.menuToggle.addEventListener('click', this.toggleMenu);
     }
@@ -131,18 +131,18 @@ class Navigation {
         this.closeMenu();
       }
     });
-    
-    
+
+
     // スクロール時のヘッダースタイル変更
     window.addEventListener('scroll', () => this.handleScroll());
-    
+
   }
-  
+
   isMobileNav() {
     return window.matchMedia('(max-width: 767px)').matches;
   }
-  
-  
+
+
   /**
    * スムーズスクロール処理
    * アンカーリンククリック時の処理
@@ -152,36 +152,36 @@ class Navigation {
    */
   handleSmoothScroll(e) {
     e.preventDefault(); // デフォルトのリンク動作を無効化
-    
+
     const targetId = e.target.getAttribute('href').substring(1); // #を除いたIDを取得
     const targetElement = document.getElementById(targetId);
-    
+
     this.closeMenu();
 
     if (targetElement) {
-      
+
       // 固定ヘッダーの高さを考慮したオフセット計算
       const headerHeight = this.header.offsetHeight;
       const targetPosition = targetElement.offsetTop - headerHeight;
-      
+
       // ネイティブのスムーズスクロール（遅延最小化）
       window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-      
+
       // スクロールをトリガーせずにURLを更新
       history.pushState(null, null, `#${targetId}`);
-      
+
       // アクティブなナビゲーションリンクを更新
       this.updateActiveNavLink(targetId);
     }
   }
-  
+
   /**
    * カスタムスムーズスクロール（イージング付き）
    * - より細かなアニメーション制御が必要な場合に使用
    * - ease-in-out-cubic イージング関数を使用
    */
   // smoothScrollTo は未使用のため削除しました（ネイティブの window.scrollTo を使用）
-  
+
   /**
    * アクティブナビゲーションリンクの更新
    * - 現在のセクションに対応するナビゲーションリンクにアクティブクラスを付与
@@ -199,7 +199,7 @@ class Navigation {
       }
     });
   }
-  
+
   toggleMenu() {
     if (!this.navMenu) return;
     const willOpen = !this.navMenu.classList.contains('active');
@@ -230,9 +230,9 @@ class Navigation {
       this.closeMenu();
     }
   }
-  
-  
-  
+
+
+
   /**
    * スクロールイベント処理
    * - ヘッダーのスタイル変更（スクロール時の背景変更など）
@@ -241,18 +241,18 @@ class Navigation {
   handleScroll() {
     const scrolled = window.pageYOffset; // 現在のスクロール位置
     const threshold = 100; // ヘッダースタイル変更の閾値
-    
+
     // 閾値を超えたらヘッダーにスクロールクラスを追加
     if (scrolled > threshold) {
       this.header.classList.add('scrolled');
     } else {
       this.header.classList.remove('scrolled');
     }
-    
+
     // スクロール位置に基づくアクティブナビゲーションの更新
     this.updateActiveNavOnScroll();
   }
-  
+
   /**
    * スクロール位置に基づくアクティブナビゲーションの更新
    * - 現在表示されているセクションを判定
@@ -262,9 +262,9 @@ class Navigation {
     const sections = ['home', 'about', 'gallery', 'contact']; // チェック対象のセクションID
     const headerHeight = this.header.offsetHeight; // ヘッダーの高さ
     const scrollPosition = window.pageYOffset + headerHeight + 100; // 判定位置（オフセット付き）
-    
+
     let activeSection = 'home'; // デフォルトはホームセクション
-    
+
     // 各セクションの位置をチェックして現在のセクションを特定
     for (const sectionId of sections) {
       const section = document.getElementById(sectionId);
@@ -272,7 +272,7 @@ class Navigation {
         activeSection = sectionId;
       }
     }
-    
+
     // アクティブナビゲーションリンクを更新
     this.updateActiveNavLink(activeSection);
   }
@@ -283,14 +283,14 @@ class Navigation {
  * - 外部からセクションにスクロールする際に使用
  * - ヘッダーの高さを考慮したスムーズスクロール
  */
-ShukaApp.utils.scrollToSection = function(sectionId) {
+ShukaApp.utils.scrollToSection = function (sectionId) {
   const targetElement = document.getElementById(sectionId);
   const header = document.getElementById('header');
-  
+
   if (targetElement && header) {
     const headerHeight = header.offsetHeight; // ヘッダー高さ取得
     const targetPosition = targetElement.offsetTop - headerHeight; // オフセット計算
-    
+
     // スムーズスクロールでターゲット位置に移動
     window.scrollTo({
       top: targetPosition,
@@ -432,9 +432,8 @@ class SeasonsGallery {
     thumb.dataset.playing = 'true';
     thumb.innerHTML = `
       <iframe class="mv-iframe"
-              src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1"
+              src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&playsinline=1"
               title="YouTube video player"
-              loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen></iframe>
     `;
@@ -513,7 +512,7 @@ class SeasonsGallery {
       summer: './assets/images/backgrounds/背景_夏模様.webp',
       autumn: './assets/images/backgrounds/背景_秋模様.webp',
       winter: './assets/images/backgrounds/背景_冬模様.webp',
-      tsuyu:  './assets/images/backgrounds/和紙-梅雨.webp'
+      tsuyu: './assets/images/backgrounds/和紙-梅雨.webp'
     };
     const imageUrl = washiImages[backgroundSeason];
     if (imageUrl) {
@@ -626,7 +625,7 @@ class SeasonsGallery {
  * 
  * @param {string} season - 切り替え先の季節
  */
-ShukaApp.handlers.switchSeason = function(season) {
+ShukaApp.handlers.switchSeason = function (season) {
   if (window.seasonsGallery && typeof window.seasonsGallery.switchToSeason === 'function') {
     window.seasonsGallery.switchToSeason(season);
   }
@@ -642,13 +641,13 @@ window.switchSeason = ShukaApp.handlers.switchSeason;
  * - アクティブ状態の更新メソッド追加
  * - アクセシビリティ対応（aria-checked）
  */
-ShukaApp.utils.initSeasonSelector = function() {
+ShukaApp.utils.initSeasonSelector = function () {
   const selector = document.getElementById('season-selector');
   if (!selector)
     return;
-    
+
   const buttons = selector.querySelectorAll('button[data-season]');
-  
+
   // アクティブ状態更新メソッドを追加
   selector.updateActive = (season) => {
     buttons.forEach(btn => {
@@ -657,11 +656,11 @@ ShukaApp.utils.initSeasonSelector = function() {
       btn.setAttribute('aria-checked', isActive); // アクセシビリティ対応
     });
   };
-  
+
   // デフォルト季節（梅雨）で初期状態を設定
   if (window.seasonsGallery && typeof window.seasonsGallery.getCurrentSeason === 'function')
     selector.updateActive(window.seasonsGallery.getCurrentSeason());
-    
+
   // クリックイベントの設定
   selector.addEventListener('click', (e) => {
     const button = e.target.closest('button[data-season]');
@@ -720,7 +719,7 @@ class ShūkaApp {
     this.observers = new Map(); // 監視オブザーバーの管理マップ
     this.init();
   }
-  
+
   /**
    * アプリケーション初期化処理
    * - DOMの読み込み状況に応じて適切なタイミングでsetup実行
@@ -733,7 +732,7 @@ class ShūkaApp {
       this.onDOMReady();
     }
   }
-  
+
   /**
    * DOM読み込み完了時の処理
    * - 各種機能モジュールの初期化を順次実行
@@ -743,18 +742,18 @@ class ShūkaApp {
     this.setupPerformanceOptimizations(); // パフォーマンス最適化
     this.setupAccessibilityEnhancements(); // アクセシビリティ機能強化
     this.setupErrorHandling(); // エラーハンドリング設定
-    
+
     // メインコンテンツへの自動スクロール
     const main = document.getElementById('main-content');
     if (main) {
       main.scrollIntoView({ behavior: 'auto' });
     }
     this.isLoaded = true; // アプリケーション読み込み完了フラグ
-    
+
     // 他のモジュール用にアプリケーション準備完了カスタムイベントを発行
     document.dispatchEvent(new CustomEvent('shukaAppReady'));
   }
-  
+
   /**
    * 交差監視オブザーバーの設定
    * 
@@ -763,7 +762,7 @@ class ShūkaApp {
    * - パフォーマンスを考慮した閾値設定
    * - 複数要素の効率的な監視管理
    */
-  
+
   /**
    * 要素のアニメーション実行処理
    * 
@@ -774,8 +773,8 @@ class ShūkaApp {
    * 
    * @param {HTMLElement} element - アニメーション対象要素
    */
-  
-  
+
+
   /**
    * パフォーマンス最適化機能の初期化
    * 
@@ -802,21 +801,21 @@ class ShūkaApp {
           }
         });
       });
-      
+
       // data-src属性を持つ全画像を監視対象に追加
       const lazyImages = document.querySelectorAll('img[data-src]');
       lazyImages.forEach(img => imageObserver.observe(img));
-      
+
       // 後でクリーンアップできるようにオブザーバーを保存
       this.observers.set('images', imageObserver);
     }
-    
+
     // ユーザーインタラクション時の重要リソースプリロード
     document.addEventListener('mouseover', this.preloadOnHover, { once: true });
     // タッチデバイス対応：適切なthisコンテキストでのプリロード実行
     document.addEventListener('touchstart', () => this.preloadOnTouch(), { once: true });
   }
-  
+
   /**
    * マウスホバー時の画像プリロード
    * 
@@ -833,7 +832,7 @@ class ShūkaApp {
       './assets/images/portraits/秀歌-About-秋.webp',
       './assets/images/portraits/秀歌-About-冬.webp'
     ];
-    
+
     // 各季節画像をprefetchで先読み
     seasonImages.forEach(src => {
       const link = document.createElement('link');
@@ -842,7 +841,7 @@ class ShūkaApp {
       document.head.appendChild(link);
     });
   }
-  
+
   /**
    * タッチ操作時の画像プリロード
    * 
@@ -854,7 +853,7 @@ class ShūkaApp {
     // タッチデバイス向けもホバー時と同様の処理を実行
     this.preloadOnHover();
   }
-  
+
   /**
    * アクセシビリティ機能の拡張設定
    * 
@@ -866,13 +865,13 @@ class ShūkaApp {
    */
   setupAccessibilityEnhancements() {
     // スキップリンクは未採用のため、関連バインドは削除済み
-    
+
     // スクリーンリーダー向けのページ変更アナウンス設定
     this.setupRouteAnnouncements();
   }
-  
-  
-  
+
+
+
   /**
    * ルート変更時のスクリーンリーダー向けアナウンス設定
    * 
@@ -898,7 +897,7 @@ class ShūkaApp {
       }
     });
   }
-  
+
   /**
    * スクリーンリーダー向けメッセージアナウンス
    * 
@@ -918,11 +917,11 @@ class ShūkaApp {
       announcer.className = 'sr-only'; // 視覚的に隠蔽（既存ユーティリティクラス）
       document.body.appendChild(announcer);
     }
-    
+
     // メッセージを設定してスクリーンリーダーに通知
     announcer.textContent = message;
   }
-  
+
   /**
    * グローバルエラーハンドリングの設定
    * 
@@ -938,18 +937,18 @@ class ShūkaApp {
       // エラートラッキングサービスに送信可能
       // 本格運用時にはログ収集システムとの連携を追加
     });
-    
+
     // 未処理のプロミス拒否エラーハンドラー
     window.addEventListener('unhandledrejection', () => {
       // エラートラッキングサービスに送信可能
       // 非同期処理のエラーを適切に監視・報告
     });
   }
-  
+
   /**
    * パブリックユーティリティメソッド群
    */
-  
+
   /**
    * デバウンス関数 - 連続実行の制御
    * 
@@ -983,7 +982,7 @@ class ShūkaApp {
       timeout = setTimeout(later, wait); // waitミリ秒後に実行する新タイマーを設定
     };
   }
-  
+
   /**
    * スロットル関数 - 実行頻度の制限
    * 
@@ -1009,7 +1008,7 @@ class ShūkaApp {
    */
   throttle(func, limit) {
     let inThrottle;  // スロットル中かどうかを表すフラグ
-    return function() {
+    return function () {
       const args = arguments;        // 引数を保持
       const context = this;          // thisコンテキストを保持
       if (!inThrottle) {             // スロットル中でない場合のみ実行
@@ -1021,7 +1020,7 @@ class ShūkaApp {
       // inThrottleがtrueの場合は何もしない（呼び出しを無視）
     };
   }
-  
+
   /**
    * クリーンアップメソッド - リソースの適切な解放
    * 
@@ -1056,7 +1055,7 @@ ShukaApp.instance = new ShūkaApp();
  * - ボディ要素にdata-season属性を設定
  */
 // 季節カラーモジュール開始
-(function setDefaultSeason(){
+(function setDefaultSeason() {
   // デフォルトは梅雨（tsuyu）
   document.body.dataset.season = "tsuyu";
 })();
@@ -1084,10 +1083,10 @@ class WaterRippleEffect {
     this.petalLimit = 100; // 最大アクティブ花びら数
     this.frameTime = 0; // フレーム時間管理
     this.performanceOptimized = false; // パフォーマンス最適化フラグ
-    
+
     this.init();
   }
-  
+
   /**
    * 初期化処理
    * - コンテナの存在確認
@@ -1098,11 +1097,11 @@ class WaterRippleEffect {
     if (!this.container) {
       return; // コンテナが存在しない場合は終了
     }
-    
+
     this.checkUserPreferences();
     this.bindEvents();
   }
-  
+
   /**
    * ユーザー設定の確認
    * - アニメーション削減設定の尊重
@@ -1125,14 +1124,14 @@ class WaterRippleEffect {
       this.container.style.display = 'none';
       return;
     }
-    
+
     // 低スペック端末の判定 - 静寂感を保ちつつパフォーマンスを最適化
     if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
       this.throttleDelay = 600; // より低い頻度で生成
       this.maxRipples = 8; // 最大波紋数を削減
     }
   }
-  
+
   /**
    * イベントリスナーの設定
    * 
@@ -1143,19 +1142,19 @@ class WaterRippleEffect {
    */
   bindEvents() {
     if (!this.isActive) return;
-    
+
     // マウス移動イベント: カーソルの軌跡に沿った波紋生成（スロットル処理付き）
     // スロットルで程よく制限し、パフォーマンスと静寂感をバランスよく保つ
     document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-    
+
     // クリックイベント: ユーザーアクション時の即座波紋生成
     // マウス移動と異なりスロットルなしで直ちに反応、ユーザーフィードバックを重視
     document.addEventListener('click', (e) => this.handleClick(e));
-    
+
     // タッチイベント: スマートフォン・タブレットでの波紋生成
     // passive: trueでスクロールパフォーマンスを最適化（preventDefault()を呼ばないことを保証）
     document.addEventListener('touchstart', (e) => this.handleTouch(e), { passive: true });
-    
+
     // ユーザーのアニメーション設定変更を監視
     window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
       if (e.matches) {
@@ -1174,14 +1173,14 @@ class WaterRippleEffect {
         this.enable(); // 大画面復帰時は有効化
       }
     });
-    
+
     // 定期的な古い波紋のクリーンアップ（2秒間隔）
     setInterval(() => this.cleanupRipples(), 2000);
-    
+
     // パフォーマンスモニタリングと動的調整
     this.monitorPerformance();
   }
-  
+
   /**
    * マウス移動イベントハンドラー - 静謐な水面の波紋エフェクト
    * 鯉の泳ぐ日本庭園の池をイメージした優雅な波紋を生成
@@ -1191,12 +1190,12 @@ class WaterRippleEffect {
    */
   handleMouseMove(e) {
     if (!this.isActive || !this.shouldCreateRipple()) return;
-    
+
     // 静謐な鯉の池の波紋を最小限の重複で生成
     this.createTranquilRipples(e.clientX, e.clientY);
     this.lastRippleTime = Date.now();
   }
-  
+
   /**
    * クリックイベントハンドラー - 豪華な和風クリックエフェクト
    * クリック位置に特別な日本風の豪華な波紋エフェクトを生成
@@ -1211,7 +1210,7 @@ class WaterRippleEffect {
     // 豪華な日本風クリックエフェクトを生成
     this.createLuxuriousClickEffect(x, y);
   }
-  
+
   /**
    * タッチイベントハンドラー - モバイル端末での波紋生成
    * タッチ操作に応じて中程度の波紋エフェクトを作成
@@ -1221,11 +1220,11 @@ class WaterRippleEffect {
    */
   handleTouch(e) {
     if (!this.isActive || !e.touches[0]) return;
-    
+
     const touch = e.touches[0];
     this.createRipple(touch.clientX, touch.clientY, 'medium');
   }
-  
+
   /**
    * 波紋生成の可否判定 - パフォーマンス最適化のスロットリング制御
    * 前回の波紋生成から十分な時間が経過しているかを確認
@@ -1237,7 +1236,7 @@ class WaterRippleEffect {
     const now = Date.now();
     return (now - this.lastRippleTime) > this.throttleDelay; // 穏やかで静謐なタイミング制御
   }
-  
+
   /**
    * 波紋エレメントの生成 - 和風の水面エフェクトのコア機能
    * 指定された位置、サイズ、色で美しい波紋を作成し、DOMに追加
@@ -1251,10 +1250,10 @@ class WaterRippleEffect {
    */
   createRipple(x, y, size = 'medium', color = 'default') {
     if (!this.isActive || this.ripples.length >= this.maxRipples) return;
-    
+
     const ripple = document.createElement('div');
     ripple.className = `ripple ${size} ${color}`;
-    
+
     // タイプに基づく波紋サイズの確率的計算
     // Math.random()で各範囲内のランダム値を生成し、自然なバリエーションを実現
     // 公式: baseSize + Math.random() * variationRange
@@ -1264,22 +1263,22 @@ class WaterRippleEffect {
       large: Math.random() * 300 + 200,    // 200-500px: 200 + (0-300)の範囲
       huge: Math.random() * 400 + 300      // 300-700px: 300 + (0-400)の範囲
     };
-    
+
     const rippleSize = sizeMap[size] || sizeMap.medium;
-    
+
     // 波紋の配置 - 中心座標を基準とした正確な位置決め
     // 円形要素の中心をクリック地点に合わせるため、半径分を減算
     ripple.style.width = `${rippleSize}px`;                    // 波紋の幅
     ripple.style.height = `${rippleSize}px`;                   // 波紋の高さ
     ripple.style.left = `${x - rippleSize / 2}px`;             // X座標: 中心 - 半径
     ripple.style.top = `${y - rippleSize / 2}px`;              // Y座標: 中心 - 半径
-    
+
     // 回転と初期スケールの設定
     // 0°-360°のランダム回転で自然な動きを演出
     // 初期スケール0から開始して後のCSSアニメーションで拡大
     const rotation = Math.random() * 360;                       // 0-360度のランダム回転角
     ripple.style.transform = `scale(0) rotate(${rotation}deg)`;  // 初期状態: 非表示 + 回転設定
-    
+
     // 色彩効果の動的生成 - HSL色空間を利用した鮮やかなグラデーション
     if (color === 'rainbow') {
       // 虹色モード: HSLでランダムな色相と補色を組み合わせたグラデーション
@@ -1291,21 +1290,21 @@ class WaterRippleEffect {
       // RGB値: (255,215,0)金 → (255,165,0)オレンジ金 → (255,140,0)濃いオレンジ金
       ripple.style.background = 'radial-gradient(circle, rgba(255, 215, 0, 0.9) 0%, rgba(255, 165, 0, 0.6) 30%, rgba(255, 140, 0, 0.3) 60%, transparent 90%)';
     }
-    
+
     // コンテナへの追加と追跡配列への登録
     this.container.appendChild(ripple);
     this.ripples.push({
       element: ripple,
       createdAt: Date.now()
     });
-    
+
     // アニメーション完了後の自動削除 - メモリリーク防止
     const animationDuration = size === 'huge' ? 3500 : size === 'large' ? 2800 : size === 'small' ? 1200 : 1800;
     setTimeout(() => {
       this.removeRipple(ripple);
     }, animationDuration);
   }
-  
+
   /**
    * 波紋エレメントの削除 - メモリとDOM要素の適切な管理
    * 指定された波紋要素をDOMから削除し、追跡配列からも除去
@@ -1317,11 +1316,11 @@ class WaterRippleEffect {
     if (rippleElement && rippleElement.parentNode) {
       rippleElement.parentNode.removeChild(rippleElement);
     }
-    
+
     // 追跡配列からも除去
     this.ripples = this.ripples.filter(ripple => ripple.element !== rippleElement);
   }
-  
+
   /**
    * 波紋のクリーンアップ処理 - 古い波紋の自動削除
    * 一定時間経過した波紋を自動的に検出・削除し、メモリを最適化
@@ -1333,7 +1332,7 @@ class WaterRippleEffect {
     const oldRipples = this.ripples.filter(ripple => {
       return (now - ripple.createdAt) > 3000; // 3秒以上経過した波紋を削除
     });
-    
+
     oldRipples.forEach(ripple => {
       this.removeRipple(ripple.element);
     });
@@ -1350,7 +1349,7 @@ class WaterRippleEffect {
   createTranquilRipples(x, y) {
     // 主要な穏やかな波紋 - 静水に石を落としたような美しさ
     this.createRipple(x, y, 'small', 'elegant');
-    
+
     // 時折発生する第二波紋 - 墨絵の滿ち効果を再現
     if (Math.random() < 0.12) { // 静寂さを増すため、発生頻度を低めに設定
       setTimeout(() => {
@@ -1359,7 +1358,7 @@ class WaterRippleEffect {
         this.createRipple(x + offsetX, y + offsetY, 'small', 'subtle');
       }, Math.random() * 500 + 200); // 自然な感覺のための遺延時間
     }
-    
+
     // 非常に稀な大きな波紋 - 水面の深みを表現するバリエーション
     if (Math.random() < 0.05) {
       setTimeout(() => {
@@ -1613,29 +1612,29 @@ class WaterRippleEffect {
   createGoldFoilEffect(x, y) {
     // メイン中央スパークル - より大きく強烈に
     this.createGoldSparkle(x, y, 60);
-    
+
     // 瞬間爆発エフェクト
     this.createGoldBurst(x, y, 20);
-    
+
     // 金箔粒子の舞い散り - より多く
     this.createGoldParticles(x, y, 18);
-    
+
     // 金箔のかけら
     setTimeout(() => {
       this.createGoldFlakes(x, y, 15);
     }, 50);
-    
+
     // 背景シマー - より強烈に
     setTimeout(() => {
       this.createGoldShimmer(x, y, 120);
     }, 80);
-    
+
     // セカンドウェーブ
     setTimeout(() => {
       this.createGoldSparkle(x, y, 35);
       this.createGoldParticles(x, y, 10);
     }, 150);
-    
+
     // サードウェーブ - 余韻
     setTimeout(() => {
       this.createGoldFlakes(x, y, 8);
@@ -1647,14 +1646,14 @@ class WaterRippleEffect {
    */
   createGoldSparkle(x, y, size) {
     if (!this.container) return;
-    
+
     const sparkle = document.createElement('div');
     sparkle.className = 'gold-sparkle';
     sparkle.style.width = `${size}px`;
     sparkle.style.height = `${size}px`;
     sparkle.style.left = `${x - size / 2}px`;
     sparkle.style.top = `${y - size / 2}px`;
-    
+
     this.container.appendChild(sparkle);
     setTimeout(() => sparkle.remove(), 600);
   }
@@ -1664,33 +1663,33 @@ class WaterRippleEffect {
    */
   createGoldParticles(x, y, count) {
     if (!this.container) return;
-    
+
     for (let i = 0; i < count; i++) {
       const particle = document.createElement('div');
       particle.className = 'gold-particle';
-      
+
       // より大きな粒子でキラキラ感アップ
       const size = Math.random() * 6 + 4; // 4-10px
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
       particle.style.left = `${x - size / 2}px`;
       particle.style.top = `${y - size / 2}px`;
-      
+
       // より広範囲に散る
       const angle = (360 / count) * i + (Math.random() * 90 - 45);
       const distance = 80 + Math.random() * 120; // より遠くまで飛ぶ
       const dx = Math.cos(angle * Math.PI / 180) * distance;
       const dy = Math.sin(angle * Math.PI / 180) * distance;
       const duration = (Math.random() * 0.6 + 1.2).toFixed(2); // 1.2-1.8秒
-      
+
       particle.style.setProperty('--dx', `${dx}px`);
       particle.style.setProperty('--dy', `${dy}px`);
       particle.style.animationDuration = `${duration}s`;
-      
+
       // ランダムなグラデーション角度
       const gradientAngle = Math.random() * 360;
       particle.style.setProperty('--particle-angle', `${gradientAngle}deg`);
-      
+
       this.container.appendChild(particle);
       setTimeout(() => particle.remove(), duration * 1000);
     }
@@ -1701,14 +1700,14 @@ class WaterRippleEffect {
    */
   createGoldShimmer(x, y, size) {
     if (!this.container) return;
-    
+
     const shimmer = document.createElement('div');
     shimmer.className = 'gold-shimmer';
     shimmer.style.width = `${size}px`;
     shimmer.style.height = `${size}px`;
     shimmer.style.left = `${x - size / 2}px`;
     shimmer.style.top = `${y - size / 2}px`;
-    
+
     this.container.appendChild(shimmer);
     setTimeout(() => shimmer.remove(), 1000);
   }
@@ -1718,11 +1717,11 @@ class WaterRippleEffect {
    */
   createGoldFlakes(x, y, count) {
     if (!this.container) return;
-    
+
     for (let i = 0; i < count; i++) {
       const flake = document.createElement('div');
       flake.className = 'gold-flake';
-      
+
       // 不規則なサイズの金箔
       const width = Math.random() * 8 + 3; // 3-11px
       const height = Math.random() * 6 + 2; // 2-8px
@@ -1730,22 +1729,22 @@ class WaterRippleEffect {
       flake.style.height = `${height}px`;
       flake.style.left = `${x - width / 2}px`;
       flake.style.top = `${y - height / 2}px`;
-      
+
       // ゆっくりと舞い散る
       const angle = Math.random() * 360;
       const distance = 60 + Math.random() * 100;
       const dx = Math.cos(angle * Math.PI / 180) * distance;
       const dy = Math.sin(angle * Math.PI / 180) * distance;
       const duration = (Math.random() * 1 + 1.5).toFixed(2); // 1.5-2.5秒
-      
+
       flake.style.setProperty('--dx', `${dx}px`);
       flake.style.setProperty('--dy', `${dy}px`);
       flake.style.animationDuration = `${duration}s`;
-      
+
       // ランダムなグラデーション角度
       const flakeAngle = Math.random() * 360;
       flake.style.setProperty('--flake-angle', `${flakeAngle}deg`);
-      
+
       this.container.appendChild(flake);
       setTimeout(() => flake.remove(), duration * 1000);
     }
@@ -1756,24 +1755,24 @@ class WaterRippleEffect {
    */
   createGoldBurst(x, y, count) {
     if (!this.container) return;
-    
+
     for (let i = 0; i < count; i++) {
       const burst = document.createElement('div');
       burst.className = 'gold-burst';
       burst.style.left = `${x - 2}px`;
       burst.style.top = `${y - 2}px`;
-      
+
       // 放射状に爆発
       const angle = (360 / count) * i;
       const distance = 40 + Math.random() * 60;
       const dx = Math.cos(angle * Math.PI / 180) * distance;
       const dy = Math.sin(angle * Math.PI / 180) * distance;
       const duration = (Math.random() * 0.3 + 0.4).toFixed(2); // 0.4-0.7秒
-      
+
       burst.style.setProperty('--dx', `${dx}px`);
       burst.style.setProperty('--dy', `${dy}px`);
       burst.style.animationDuration = `${duration}s`;
-      
+
       this.container.appendChild(burst);
       setTimeout(() => burst.remove(), duration * 1000);
     }
@@ -1802,7 +1801,7 @@ class WaterRippleEffect {
       const dx = Math.cos(angle * Math.PI / 180) * distance;
       const dy = Math.sin(angle * Math.PI / 180) * distance;
       const dur = (Math.random() * 1.2 + 2).toFixed(2); // 2-3.2s - very slow and graceful
-      
+
       particle.style.setProperty('--dx', `${dx}px`);
       particle.style.setProperty('--dy', `${dy}px`);
       particle.style.animationDuration = `${dur}s`;
@@ -1824,17 +1823,17 @@ class WaterRippleEffect {
   /**
    * Creates a brief radial flash at click location
    */
-  createClickFlash(x, y){
-    if(!this.container) return;
-    const flash=document.createElement('div');
-    flash.className='click-flash';
-    const size=20;
-    flash.style.width=`${size}px`;
-    flash.style.height=`${size}px`;
-    flash.style.left=`${x-size/2}px`;
-    flash.style.top=`${y-size/2}px`;
+  createClickFlash(x, y) {
+    if (!this.container) return;
+    const flash = document.createElement('div');
+    flash.className = 'click-flash';
+    const size = 20;
+    flash.style.width = `${size}px`;
+    flash.style.height = `${size}px`;
+    flash.style.left = `${x - size / 2}px`;
+    flash.style.top = `${y - size / 2}px`;
     this.container.appendChild(flash);
-    setTimeout(()=>flash.remove(),600);
+    setTimeout(() => flash.remove(), 600);
   }
 
   enable() {
@@ -1843,19 +1842,19 @@ class WaterRippleEffect {
       this.container.style.display = 'block';
     }
   }
-  
+
   disable() {
     this.isActive = false;
     if (this.container) {
       this.container.style.display = 'none';
     }
-    
+
     // 既存の全ての波紋をクリア
     this.ripples.forEach(ripple => {
       this.removeRipple(ripple.element);
     });
   }
-  
+
   // 外部制御用のパブリックメソッド
   toggle() {
     if (this.isActive) {
@@ -1864,10 +1863,10 @@ class WaterRippleEffect {
       this.enable();
     }
   }
-  
+
   createCustomRipple(x, y, color, size = 200) {
     if (!this.isActive) return;
-    
+
     const ripple = document.createElement('div');
     ripple.className = 'ripple';
     ripple.style.background = `radial-gradient(circle, ${color}40 0%, ${color}20 20%, ${color}10 40%, transparent 80%)`;
@@ -1875,42 +1874,42 @@ class WaterRippleEffect {
     ripple.style.height = `${size}px`;
     ripple.style.left = `${x - size / 2}px`;
     ripple.style.top = `${y - size / 2}px`;
-    
+
     this.container.appendChild(ripple);
-    
+
     setTimeout(() => {
       this.removeRipple(ripple);
     }, 1500);
   }
-  
+
   /**
    * Monitor performance and dynamically optimize for 60fps
    */
   monitorPerformance() {
     let frameCount = 0;
     let lastTime = performance.now();
-    
+
     const checkPerformance = (currentTime) => {
       frameCount++;
-      
+
       if (currentTime - lastTime >= 1000) { // Check every second
         const fps = Math.round((frameCount * 1000) / (currentTime - lastTime));
-        
+
         // FPSが50を下回った場合は最適化を実行
         if (fps < 50 && !this.performanceOptimized) {
           this.optimizeForPerformance();
         }
-        
+
         frameCount = 0;
         lastTime = currentTime;
       }
-      
+
       requestAnimationFrame(checkPerformance);
     };
-    
+
     requestAnimationFrame(checkPerformance);
   }
-  
+
   /**
    * Optimize settings for better performance
    */
@@ -1918,7 +1917,7 @@ class WaterRippleEffect {
     this.performanceOptimized = true;
     this.throttleDelay = Math.max(this.throttleDelay * 1.5, 600); // Slower ripples
     this.maxRipples = Math.max(this.maxRipples - 3, 6); // Fewer ripples
-    
+
     // 既存の波紋数を削減
     while (this.ripples.length > this.maxRipples) {
       const oldestRipple = this.ripples.shift();
@@ -1956,7 +1955,7 @@ if ('requestIdleCallback' in window) {
 /**
  * 水面波紋エフェクトのオン/オフを切り替え
  */
-ShukaApp.utils.toggleRipples = function() {
+ShukaApp.utils.toggleRipples = function () {
   if (window.waterRipples) {
     window.waterRipples.toggle();
   }
@@ -1970,7 +1969,7 @@ ShukaApp.utils.toggleRipples = function() {
  * @param {string} color - 波紋の色（CSSカラー形式）
  * @param {number} size - 波紋のサイズ（ピクセル）
  */
-ShukaApp.utils.createCustomRipple = function(x, y, color, size) {
+ShukaApp.utils.createCustomRipple = function (x, y, color, size) {
   if (window.waterRipples) {
     window.waterRipples.createCustomRipple(x, y, color, size);
   }
@@ -1995,10 +1994,10 @@ ShukaApp.utils.createCustomRipple = function(x, y, color, size) {
 document.addEventListener('DOMContentLoaded', () => {
   // ページ読み込み完了状態をマーク（CSSトランジションを有効化）
   document.body.classList.add('loaded');
-  
+
   // アクセシビリティ機能の初期化（スキップリンク、フォーカス管理など）
   initAccessibilityFeatures();
-  
+
 
   // スクロールボタンイベントハンドラーの初期化
   initScrollButtons();
@@ -2008,7 +2007,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ナビゲーションインスタンスをネームスペースに追加
     ShukaApp.navigation = new Navigation();
   }
-  
+
   // MVデータの取得とギャラリー初期化
   const deferredInit = async () => {
     // 画像読み込みエラーのハンドリング設定
@@ -2091,7 +2090,7 @@ function handleImageError(img) {
   // 重複エラーハンドリングを防止（同じ画像に対して一度だけ処理）
   if (!img.dataset.errorHandled) {
     img.dataset.errorHandled = 'true'; // 処理済みフラグを設定
-    
+
     // フォールバック処理：特定クラスの要素は完全に非表示
     if (img.classList.contains('about-image') || img.classList.contains('creator-avatar')) {
       img.style.display = 'none'; // レイアウトを崩さないように非表示
