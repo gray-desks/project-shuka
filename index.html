@@ -70,6 +70,7 @@
             visibility: visible;
         }
 
+
         /* スマホ版ローディング画像 - 縦長画面に最適化 */
         @media (max-width: 767px) {
             #loader {
@@ -91,8 +92,7 @@
     <!-- Preload critical resources: 初回描画に必要なアセットを先読みしてLCPを短縮 -->
     <link rel="preload" href="./assets/images/portraits/秀歌-メインビジュアル.webp" as="image" media="(min-width: 768px)">
     <link rel="preload" href="./assets/images/portraits/秀歌-メインビジュアル-スマホ版.webp" as="image" media="(max-width: 767px)">
-    <link rel="preload" href="./assets/images/ui/ローディング.webp" as="image" media="(min-width: 768px)">
-    <link rel="preload" href="./assets/images/ui/ローディング-スマホ版.webp" as="image" media="(max-width: 767px)">
+    <link rel="preload" href="./assets/images/ui/ローディング.webp" as="image">
     <!-- CSS変数とベーススタイルの読み込み -->
     <link rel="preload" href="./assets/css/variables.css" as="style">
     <link rel="stylesheet" href="./assets/css/variables.css">
