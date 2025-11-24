@@ -1467,6 +1467,20 @@ a:focus {
     /* スマホ版メインビジュアル - 縦長画面に最適化された画像 */
     background-image: linear-gradient(rgba(0, 0, 0, 0.4),
         rgba(0, 0, 0, 0.4)), url('../images/portraits/秀歌-メインビジュアル-スマホ版.webp');
+
+    /* コンテンツを下部に配置 - キャラクターの頭の下にテキストが来るように */
+    justify-content: flex-end !important;
+  }
+
+  /* スマホではコンテンツを下部に配置 */
+  .hero-content {
+    padding-top: 0 !important;
+    padding-bottom: var(--space-8) !important;
+  }
+
+  /* スマホではボタンを非表示 - スクロールが簡単なため不要、キャラクターが美しく表示される */
+  .hero-actions {
+    display: none !important;
   }
 }
 
@@ -5446,6 +5460,19 @@ body {
     /* スマホ版メインビジュアル - 縦長画面に最適化された画像 */
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/portraits/秀歌-メインビジュアル-スマホ版.webp');
     height: 100dvh;
+    /* コンテンツを下部に配置 - キャラクターの頭の下にテキストが来るように */
+    justify-content: flex-end !important;
+  }
+
+  /* スマホではコンテンツを下部に配置 */
+  .hero-content {
+    padding-top: 0 !important;
+    padding-bottom: var(--space-8) !important;
+  }
+
+  /* スマホではボタンを非表示 - スクロールが簡単なため不要、キャラクターが美しく表示される */
+  .hero-actions {
+    display: none !important;
   }
 }
 
