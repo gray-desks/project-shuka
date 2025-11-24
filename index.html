@@ -88,6 +88,8 @@
     
     <!-- DNS prefetch for external resources if any -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://i.ytimg.com">
     <!-- WINDSURF_START Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,6 +128,11 @@
                         </a>
                     </h1>
                 </div>
+                <button class="menu-toggle" id="menu-toggle" type="button" aria-label="メニューを開閉" aria-controls="nav-menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
 
                 <ul class="nav-menu" id="nav-menu" role="menubar">
                     <li role="none"><a href="#home" role="menuitem">Home</a></li>
@@ -134,6 +141,10 @@
                     <li role="none" class="season-select">
                         <span id="season-selector-label" class="sr-only">季節選択</span>
                         <div id="season-selector" class="season-selector-buttons" role="radiogroup" aria-labelledby="season-selector-label">
+                            <button type="button" class="season-option" data-season="all">
+                                <span class="season-icon">★</span>
+                                <span class="season-text">All</span>
+                            </button>
                             <button type="button" class="season-option" data-season="spring">
                                 <span class="season-icon">🌸</span>
                                 <span class="season-text">春</span>
@@ -149,6 +160,10 @@
                             <button type="button" class="season-option" data-season="winter">
                                 <span class="season-icon">❄️</span>
                                 <span class="season-text">冬</span>
+                            </button>
+                            <button type="button" class="season-option" data-season="none">
+                                <span class="season-icon">◎</span>
+                                <span class="season-text">その他</span>
                             </button>
                         </div>
                     </li>
@@ -184,24 +199,24 @@
                     <div class="about-text">
                         <h2 id="about-title" class="section-title">About Shūka</h2>
                         <p class="about-intro">
-                            秀歌 - Shūka は、現代技術と日本の伝統美を重ね合わせ、四季のうつろいを音楽と映像で描くアーティストです。
+                            秀歌 - Shūka は、和楽器の息づかいとエレクトロニックの粒立ちを重ね、YouTubeで四季を旅するMVを届けるアーティストです。
                         </p>
                         <p>
-                            和楽器と現代のサウンドが溶け合う楽曲は、日本の四季の情景を描き、静けさや余白までも音楽として紡ぎます。
+                            音は景色を描き、映像は温度を運び、余白までも演出に取り込む——YouTubeチャンネルで紡がれるシネマティックな世界観を、日常にそっと持ち帰れるようなシグネチャーサウンドに仕立てています。
                         </p>
                         
                         <div class="features">
                             <div class="feature">
-                                <h3 class="feature-title">デジタル × 和楽器</h3>
-                                <p>最先端のデジタル技術と伝統的な和の音色を融合。</p>
+                                <h3 class="feature-title">和楽器 × Electronic</h3>
+                                <p>琴・篠笛・太鼓にシンセとフィールドレコーディングを重ね、懐かしさと新しさを同居させるハイブリッドサウンド。</p>
                             </div>
                             <div class="feature">
-                                <h3 class="feature-title">四季の表現</h3>
-                                <p>春夏秋冬それぞれの情緒を音楽と映像で描写。</p>
+                                <h3 class="feature-title">四季のシネマトグラフ</h3>
+                                <p>音に呼応する映像演出で、温度・湿度・光の粒感まで感じるシネマティックなMVを制作。</p>
                             </div>
                             <div class="feature">
-                                <h3 class="feature-title">現代と伝統の調和</h3>
-                                <p>新しいのに懐かしい、唯一無二の音楽体験を届けます。</p>
+                                <h3 class="feature-title">静と動のデザイン</h3>
+                                <p>余白と間を活かしたミニマルな編曲と、ライブでの有機的な揺らぎを両立。耳と目で味わう立体的な体験を提案。</p>
                             </div>
                         </div>
                     </div>
@@ -210,7 +225,7 @@
                             <!-- WebP format for modern browsers -->
                             <source srcset="./assets/images/portraits/秀歌.webp" type="image/webp">
                             <!-- Fallback to original format -->
-                            <img src="./assets/images/portraits/秀歌.webp" alt="shuka – 秀歌のアーティスト画像" loading="lazy" decoding="async" fetchpriority="low" width="600" height="600" class="about-image">
+                            <img src="./assets/images/portraits/秀歌.webp" alt="shuka – 秀歌のアーティスト画像" loading="lazy" decoding="async" fetchpriority="low" width="600" height="600" class="about-image" data-season="all" srcset="./assets/images/portraits/秀歌.webp 1x">
                         </picture>
                     </div>
                 </div>
@@ -220,8 +235,8 @@
         <!-- Season Gallery Section -->
         <section class="gallery" id="gallery" aria-labelledby="gallery-title">
             <div class="container">
-                <h2 id="gallery-title" class="section-title">Season Gallery</h2>
-                <p class="section-subtitle">四季それぞれの美しさを音楽と映像で体験してください</p>
+                <h2 id="gallery-title" class="section-title">Music Video Gallery</h2>
+                <p class="section-subtitle">YouTubeで公開中のMVを季節とともにお楽しみください</p>
                 
                 <!-- Season Navigation -->
                 <div class="season-nav" role="tablist" aria-label="季節選択" id="season-nav">
