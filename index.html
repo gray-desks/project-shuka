@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <!-- Favicon -->
@@ -14,19 +15,20 @@
     <meta name="theme-color" content="#6366f1">
     <!-- theme-color: モバイルのアドレスバー等の色ヒント。PWA無効化後も有効 -->
     <meta name="format-detection" content="telephone=no">
-    
+
     <!-- Base URL for relative paths -->
     <base href="./">
     <!-- base: すべての相対URLの起点を ./ に固定（CDN等で別パス配信する場合は要注意） -->
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://project-shuka.com/">
     <!-- canonical: 検索エンジンへ正規URLを提示し、重複評価を回避 -->
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content="秀歌 - Shūka | 音楽アーティスト 公式サイト">
     <meta property="og:description" content="四季をテーマにした和楽器サウンドで新しい音楽体験を">
-    <meta property="og:image" content="https://project-shuka.com/assets/images/portraits/%E7%A7%80%E6%AD%8C.webp?v=20250811-02">
+    <meta property="og:image"
+        content="https://project-shuka.com/assets/images/portraits/%E7%A7%80%E6%AD%8C.webp?v=20250811-02">
     <meta property="og:image:type" content="image/webp">
     <meta property="og:image:width" content="1024">
     <meta property="og:image:height" content="1024">
@@ -36,7 +38,7 @@
     <meta property="og:site_name" content="秀歌 - Shūka">
     <meta property="og:locale" content="ja_JP">
     <!-- OG: SNSシェア時の見出し/説明/画像を指定（Twitter/Xは一部OGを流用） -->
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="秀歌 - Shūka | 音楽アーティスト">
@@ -44,38 +46,53 @@
     <meta name="twitter:creator" content="@shuka_artist">
     <meta name="twitter:site" content="@shuka_artist">
     <!-- Twitter: 旧Twitter向けのメタ。画像はOGの指定を流用 -->
-    
+
     <!-- Google Fonts for Source Serif -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"
+        rel="stylesheet">
+
     <!-- Critical inline CSS: Show loader image from the very first paint to avoid white flash -->
     <style id="critical-loader-css">
-      /* Minimal styles so #loader appears immediately even before external CSS loads */
-      #loader {
-        position: fixed;
-        inset: 0;
-        z-index: 100000;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* Same background as assets/css/loader.css but inlined for first paint */
-        background: #fdfaf5 url('./assets/images/ui/ローディング.webp') center / cover no-repeat;
-        overflow: hidden;
-        visibility: visible;
-      }
-      /* Keep the ink node non-intrusive until full CSS arrives */
-      #loader .ink {
-        position: absolute;
-        width: 1px; height: 1px; /* tiny placeholder to avoid layout shift */
-        opacity: 0;               /* real animation defined in loader.css */
-      }
+        /* Minimal styles so #loader appears immediately even before external CSS loads */
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Same background as assets/css/loader.css but inlined for first paint */
+            background: #fdfaf5 url('./assets/images/ui/ローディング.webp') center / cover no-repeat;
+            overflow: hidden;
+            visibility: visible;
+        }
+
+        /* スマホ版ローディング画像 - 縦長画面に最適化 */
+        @media (max-width: 767px) {
+            #loader {
+                background-image: url('./assets/images/ui/ローディング-スマホ版.webp');
+            }
+        }
+
+        /* Keep the ink node non-intrusive until full CSS arrives */
+        #loader .ink {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            /* tiny placeholder to avoid layout shift */
+            opacity: 0;
+            /* real animation defined in loader.css */
+        }
     </style>
-    
+
     <!-- Preload critical resources: 初回描画に必要なアセットを先読みしてLCPを短縮 -->
-    <link rel="preload" href="./assets/images/portraits/秀歌-メインビジュアル.webp" as="image">
-    <link rel="preload" href="./assets/images/ui/ローディング.webp" as="image">
+    <link rel="preload" href="./assets/images/portraits/秀歌-メインビジュアル.webp" as="image" media="(min-width: 768px)">
+    <link rel="preload" href="./assets/images/portraits/秀歌-メインビジュアル-スマホ版.webp" as="image" media="(max-width: 767px)">
+    <link rel="preload" href="./assets/images/ui/ローディング.webp" as="image" media="(min-width: 768px)">
+    <link rel="preload" href="./assets/images/ui/ローディング-スマホ版.webp" as="image" media="(max-width: 767px)">
     <!-- CSS変数とベーススタイルの読み込み -->
     <link rel="preload" href="./assets/css/variables.css" as="style">
     <link rel="stylesheet" href="./assets/css/variables.css">
@@ -85,7 +102,7 @@
     <link rel="stylesheet" href="./assets/css/loader.css">
     <!-- main.js は後段で defer で読み込み（初期描画を優先するためプリロード無し） -->
 
-    
+
     <!-- DNS prefetch for external resources if any -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="preconnect" href="https://www.youtube.com">
@@ -93,30 +110,34 @@
     <!-- WINDSURF_START Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Yuji+Syuku&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Yuji+Syuku&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Yuji+Syuku&display=swap">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Yuji+Syuku&display=swap">
     </noscript>
     <!-- WINDSURF_END Fonts -->
-    
+
     <!-- Resource hints for seasonal images -->
     <link rel="prefetch" href="./assets/images/portraits/秀歌-About-春.webp" as="image">
     <link rel="prefetch" href="./assets/images/portraits/秀歌-About-夏.webp" as="image">
     <link rel="prefetch" href="./assets/images/portraits/秀歌-About-秋.webp" as="image">
     <link rel="prefetch" href="./assets/images/portraits/秀歌-About-冬.webp" as="image">
-    <title>秀歌 - Shūka | 音楽アーティスト 公式サイト</title>    
+    <title>秀歌 - Shūka | 音楽アーティスト 公式サイト</title>
 
 </head>
+
 <body>
     <!-- Impressionistic Loader -->
     <div id="loader" role="status" aria-label="ページを読み込み中">
-      <div class="ink"></div>
-      
+        <div class="ink"></div>
+
     </div>
-    
+
     <!-- Ripple Effect Container -->
     <div class="ripple-container" id="ripple-container" aria-hidden="true"></div>
-    
+
     <!-- Header -->
     <header class="header" id="header">
         <nav class="navbar" role="navigation" aria-label="メインナビゲーション">
@@ -128,7 +149,8 @@
                         </a>
                     </h1>
                 </div>
-                <button class="menu-toggle" id="menu-toggle" type="button" aria-label="メニューを開閉" aria-controls="nav-menu" aria-expanded="false">
+                <button class="menu-toggle" id="menu-toggle" type="button" aria-label="メニューを開閉" aria-controls="nav-menu"
+                    aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -140,7 +162,8 @@
                     <li role="none"><a href="#gallery" role="menuitem">Gallery</a></li>
                     <li role="none" class="season-select">
                         <span id="season-selector-label" class="sr-only">季節選択</span>
-                        <div id="season-selector" class="season-selector-buttons" role="radiogroup" aria-labelledby="season-selector-label">
+                        <div id="season-selector" class="season-selector-buttons" role="radiogroup"
+                            aria-labelledby="season-selector-label">
                             <button type="button" class="season-option" data-season="all">
                                 <span class="season-icon">★</span>
                                 <span class="season-text">All</span>
@@ -204,7 +227,7 @@
                         <p>
                             音は景色を描き、映像は温度を運び、余白までも演出に取り込む——YouTubeチャンネルで紡がれるシネマティックな世界観を、日常にそっと持ち帰れるようなシグネチャーサウンドに仕立てています。
                         </p>
-                        
+
                         <div class="features">
                             <div class="feature">
                                 <h3 class="feature-title">和楽器 × Electronic</h3>
@@ -225,7 +248,9 @@
                             <!-- WebP format for modern browsers -->
                             <source srcset="./assets/images/portraits/秀歌.webp" type="image/webp">
                             <!-- Fallback to original format -->
-                            <img src="./assets/images/portraits/秀歌.webp" alt="shuka – 秀歌のアーティスト画像" loading="lazy" decoding="async" fetchpriority="low" width="600" height="600" class="about-image" data-season="all" srcset="./assets/images/portraits/秀歌.webp 1x">
+                            <img src="./assets/images/portraits/秀歌.webp" alt="shuka – 秀歌のアーティスト画像" loading="lazy"
+                                decoding="async" fetchpriority="low" width="600" height="600" class="about-image"
+                                data-season="all" srcset="./assets/images/portraits/秀歌.webp 1x">
                         </picture>
                     </div>
                 </div>
@@ -237,12 +262,12 @@
             <div class="container">
                 <h2 id="gallery-title" class="section-title">Music Video Gallery</h2>
                 <p class="section-subtitle">YouTubeで公開中のMVを季節とともにお楽しみください</p>
-                
+
                 <!-- Season Navigation -->
                 <div class="season-nav" role="tablist" aria-label="季節選択" id="season-nav">
                     <!-- Generated by JavaScript -->
                 </div>
-                
+
                 <!-- Season Content -->
                 <div class="season-content" id="season-content">
                     <!-- Generated by JavaScript -->
@@ -261,13 +286,15 @@
                         四季を奏でる音楽アーティスト
                     </p>
                 </div>
-                
+
                 <div class="footer-section">
                     <h4 class="footer-section-title">秀歌をフォローする</h4>
                     <div class="social-links" id="social-links">
-                        <a href="https://www.youtube.com/@project-shuka" rel="noopener noreferrer" target="_blank" class="social-link youtube" aria-label="YouTube">
+                        <a href="https://www.youtube.com/@project-shuka" rel="noopener noreferrer" target="_blank"
+                            class="social-link youtube" aria-label="YouTube">
                             <svg viewBox="0 0 24 24" fill="#FF0000" aria-hidden="true">
-                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                             </svg>
                         </a>
                         <!-- Temporarily hide secondary social links; keep markup commented to avoid layout shift -->
@@ -295,9 +322,9 @@
                         -->
                     </div>
                 </div>
-                
+
             </div>
-            
+
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <p class="copyright">
@@ -309,12 +336,13 @@
     </footer>
 
     <!-- Load non-critical CSS -->
-    
+
     <!-- Load JavaScript with defer for optimal performance -->
     <script src="./assets/js/inline.js" defer></script>
     <script src="./assets/js/effects.js" defer></script>
     <script src="./assets/js/main.js" defer></script>
-    
+
     <script defer src="./assets/js/loader.js"></script>
-  </body>
-  </html>
+</body>
+
+</html>

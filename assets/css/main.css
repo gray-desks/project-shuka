@@ -25,13 +25,17 @@
  * ユーザーインタラクションを無効化し、最背面に配置
  * ============================================================================= */
 .three-js-canvas {
-  position: fixed;        /* 画面固定表示 */
+  position: fixed;
+  /* 画面固定表示 */
   top: 0;
   left: 0;
-  width: 100%;           /* 全画面サイズ */
+  width: 100%;
+  /* 全画面サイズ */
   height: 100%;
-  z-index: -1;           /* 最背面に配置 */
-  pointer-events: none;  /* クリックやタッチを無効化 */
+  z-index: -1;
+  /* 最背面に配置 */
+  pointer-events: none;
+  /* クリックやタッチを無効化 */
 }
 
 /* =============================================================================
@@ -66,31 +70,39 @@ body[data-season="tsuyu"] {
  * 層状の雨雲を表現し、深みと雰囲気を作り出す
  * ============================================================================= */
 body[data-season="tsuyu"] .hero {
-  position: relative;  /* 擬似要素の基準点となるため */
+  position: relative;
+  /* 擬似要素の基準点となるため */
 }
 
 /* ヒーローエリアに梅雨の大気を表現するオーバーレイ */
 body[data-season="tsuyu"] .hero::before {
-  content: '';              /* 空の擬似要素を作成 */
+  content: '';
+  /* 空の擬似要素を作成 */
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;               /* 親要素全体をカバー */
+  bottom: 0;
+  /* 親要素全体をカバー */
   /* 上から下へのグラデーション - 梅雨空の層状構造を表現 */
-  background: linear-gradient(
-    to bottom,
-    rgba(123, 167, 212, 0.1) 0%,    /* 上部:淡い雲 */
-    rgba(74, 144, 184, 0.15) 50%,   /* 中央:少し濃い雲 */
-    rgba(123, 167, 212, 0.2) 100%   /* 下部:雨雲の重み */
-  );
-  pointer-events: none;    /* クリックを無効化 */
-  z-index: 1;             /* 背景より上、コンテンツより下に配置 */
+  background: linear-gradient(to bottom,
+      rgba(123, 167, 212, 0.1) 0%,
+      /* 上部:淡い雲 */
+      rgba(74, 144, 184, 0.15) 50%,
+      /* 中央:少し濃い雲 */
+      rgba(123, 167, 212, 0.2) 100%
+      /* 下部:雨雲の重み */
+    );
+  pointer-events: none;
+  /* クリックを無効化 */
+  z-index: 1;
+  /* 背景より上、コンテンツより下に配置 */
 }
 
 /* ヒーローコンテンツをオーバーレイより上に表示 */
 body[data-season="tsuyu"] .hero-content {
-  z-index: 2;             /* オーバーレイより上に配置 */
+  z-index: 2;
+  /* オーバーレイより上に配置 */
   position: relative;
 }
 
@@ -122,9 +134,10 @@ body[data-season="tsuyu"] .cta-button.primary:hover {
 body[data-season="tsuyu"] .feature,
 body[data-season="tsuyu"] .track,
 body[data-season="tsuyu"] .about-image,
-body[data-season="tsuyu"] /* ホバー時の水面波紋拡大エフェクト */
+body[data-season="tsuyu"]
+/* ホバー時の水面波紋拡大エフェクト */
 body[data-season="tsuyu"] .feature:hover,
-body[data-season="tsuyu"] 
+body[data-season="tsuyu"]
 /* =============================================================================
  * 梅雨シーズンのテキストエフェクト
  * =============================================================================
@@ -135,17 +148,22 @@ body[data-season="tsuyu"]
 /* ヒーロータイトルに水滴アニメーション風のエフェクト */
 body[data-season="tsuyu"] .hero-title {
   text-shadow:
-    2px 2px 4px rgba(0, 0, 0, 0.7),        /* 深い影で文字を強調 */
-    0 0 10px rgba(123, 167, 212, 0.3);     /* 水蒸気のような柔らかい光 */
+    2px 2px 4px rgba(0, 0, 0, 0.7),
+    /* 深い影で文字を強調 */
+    0 0 10px rgba(123, 167, 212, 0.3);
+  /* 水蒸気のような柔らかい光 */
 }
 
 /* セクションタイトルを梅雨の暗い背景でも読みやすく */
 body[data-season="tsuyu"] .section-title {
   text-shadow:
-    3px 3px 5px rgba(0, 0, 0, 0.7),        /* より深い影で明瞭に */
-    -1px -1px 3px rgba(255, 255, 255, 0.15), /* 白いハイライトを強化 */
+    3px 3px 5px rgba(0, 0, 0, 0.7),
+    /* より深い影で明瞭に */
+    -1px -1px 3px rgba(255, 255, 255, 0.15),
+    /* 白いハイライトを強化 */
     0 0 16px rgba(0, 0, 0, 0.5),
-    0 0 24px rgba(123, 167, 212, 0.2);     /* 梅雨の青みがかった光 */
+    0 0 24px rgba(123, 167, 212, 0.2);
+  /* 梅雨の青みがかった光 */
   -webkit-text-stroke: 0.7px rgba(0, 0, 0, 0.35);
 }
 
@@ -178,96 +196,164 @@ body[data-season="tsuyu"] .ripple {
   /* 水面に広がる波紋のような光る影 */
   box-shadow: 0 0 12px rgba(74, 144, 184, 0.4);
 }
+
 /* ===== 季節変数設定終了 ===== */
 /* ===== メインカラーシステム定義 - サイト全体デザイン統一 ===== */
 :root {
   /* ===== プライマリカラーパレット ===== */
-  --primary: #6366f1;            /* メインブランドカラー（インディゴブルー） */
-  --primary-light: #8b5cf6;      /* ライトバリエーション（パープル系） */
-  --primary-dark: #4f46e5;       /* ダークバリエーション（濃いブルー） */
-  --secondary: #f59e0b;          /* セカンダリーカラー（アンバー） */
-  --secondary-light: #fbbf24;    /* ライトアンバー */
-  --secondary-dark: #d97706;     /* ダークアンバー */
-  --accent: #ec4899;             /* アクセントカラー（ピンク） */
-  --accent-light: #f472b6;       /* ライトピンク */
-  --accent-dark: #db2777;        /* ダークピンク */
-  
+  --primary: #6366f1;
+  /* メインブランドカラー（インディゴブルー） */
+  --primary-light: #8b5cf6;
+  /* ライトバリエーション（パープル系） */
+  --primary-dark: #4f46e5;
+  /* ダークバリエーション（濃いブルー） */
+  --secondary: #f59e0b;
+  /* セカンダリーカラー（アンバー） */
+  --secondary-light: #fbbf24;
+  /* ライトアンバー */
+  --secondary-dark: #d97706;
+  /* ダークアンバー */
+  --accent: #ec4899;
+  /* アクセントカラー（ピンク） */
+  --accent-light: #f472b6;
+  /* ライトピンク */
+  --accent-dark: #db2777;
+  /* ダークピンク */
+
   /* ===== ニュートラルグレースケール ===== */
-  --neutral-50: #f9fafb;         /* 極薄グレー（背景用） */
-  --neutral-100: #f3f4f6;        /* 薄グレー（カード背景） */
-  --neutral-200: #e5e7eb;        /* ボーダー用薄グレー */
-  --neutral-300: #d1d5db;        /* セカンダリテキスト用 */
-  --neutral-400: #9ca3af;        /* ミュートテキスト用 */
-  --neutral-500: #6b7280;        /* 中間グレー */
-  --neutral-600: #4b5563;        /* ダークグレー */
-  --neutral-700: #374151;        /* ダーク背景用 */
-  --neutral-800: #1f2937;        /* 濃いダーク */
-  --neutral-900: #111827;        /* 最深ダーク */
-  
+  --neutral-50: #f9fafb;
+  /* 極薄グレー（背景用） */
+  --neutral-100: #f3f4f6;
+  /* 薄グレー（カード背景） */
+  --neutral-200: #e5e7eb;
+  /* ボーダー用薄グレー */
+  --neutral-300: #d1d5db;
+  /* セカンダリテキスト用 */
+  --neutral-400: #9ca3af;
+  /* ミュートテキスト用 */
+  --neutral-500: #6b7280;
+  /* 中間グレー */
+  --neutral-600: #4b5563;
+  /* ダークグレー */
+  --neutral-700: #374151;
+  /* ダーク背景用 */
+  --neutral-800: #1f2937;
+  /* 濃いダーク */
+  --neutral-900: #111827;
+  /* 最深ダーク */
+
   /* ===== セマンティックカラー（意味付けされた色） ===== */
-  --background: #111827;         /* メイン背景色 */
-  --surface: #1f2937;            /* カードやパネルの表面色 */
-  --text: #f9fafb;               /* メインテキスト色 */
-  --text-secondary: #d1d5db;     /* セカンダリテキスト色 */
-  --text-muted: #9ca3af;         /* 控えめなテキスト色 */
-  --border: #374151;             /* ボーダーや線の色 */
-  --shadow: rgba(0, 0, 0, 0.3);  /* 基本シャドウ */
-  --shadow-lg: rgba(0, 0, 0, 0.4); /* 大きなシャドウ */
-  
+  --background: #111827;
+  /* メイン背景色 */
+  --surface: #1f2937;
+  /* カードやパネルの表面色 */
+  --text: #f9fafb;
+  /* メインテキスト色 */
+  --text-secondary: #d1d5db;
+  /* セカンダリテキスト色 */
+  --text-muted: #9ca3af;
+  /* 控えめなテキスト色 */
+  --border: #374151;
+  /* ボーダーや線の色 */
+  --shadow: rgba(0, 0, 0, 0.3);
+  /* 基本シャドウ */
+  --shadow-lg: rgba(0, 0, 0, 0.4);
+  /* 大きなシャドウ */
+
   /* ===== タイポグラフィシステム ===== */
   /* ===== レスポンシブフォントサイズ（clamp関数使用） ===== */
-  --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);     /* 最小テキスト */
-  --text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);        /* 小テキスト */
-  --text-base: clamp(1rem, 0.9rem + 0.4vw, 1.125rem);      /* ベーステキスト（標準） */
-  --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);       /* 大テキスト */
-  --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);       /* 特大テキスト */
-  --text-2xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);         /* 小タイトル */
-  --text-3xl: clamp(1.875rem, 1.6rem + 1vw, 2.5rem);       /* 中タイトル */
-  --text-4xl: clamp(2.25rem, 1.9rem + 1.4vw, 3rem);        /* 大タイトル */
-  --text-5xl: clamp(3rem, 2.5rem + 2vw, 4rem);             /* 特大タイトル */
-  
-  
+  --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  /* 最小テキスト */
+  --text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+  /* 小テキスト */
+  --text-base: clamp(1rem, 0.9rem + 0.4vw, 1.125rem);
+  /* ベーステキスト（標準） */
+  --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  /* 大テキスト */
+  --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  /* 特大テキスト */
+  --text-2xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  /* 小タイトル */
+  --text-3xl: clamp(1.875rem, 1.6rem + 1vw, 2.5rem);
+  /* 中タイトル */
+  --text-4xl: clamp(2.25rem, 1.9rem + 1.4vw, 3rem);
+  /* 大タイトル */
+  --text-5xl: clamp(3rem, 2.5rem + 2vw, 4rem);
+  /* 特大タイトル */
+
+
   /* ===== スペーシングシステム（8pxグリッドベース） ===== */
-  --space-1: 0.25rem;   /* 4px  - 最小間隔 */
-  --space-2: 0.5rem;    /* 8px  - 基本単位 */
-  --space-3: 0.75rem;   /* 12px - 小間隔 */
-  --space-4: 1rem;      /* 16px - 中間隔 */
-  --space-5: 1.25rem;   /* 20px - 中大間隔 */
-  --space-6: 1.5rem;    /* 24px - 大間隔 */
-  --space-8: 2rem;      /* 32px - 特大間隔 */
-  --space-10: 2.5rem;   /* 40px - セクション間隔 */
-  --space-12: 3rem;     /* 48px - 大セクション間隔 */
-  --space-16: 4rem;     /* 64px - 特大セクション間隔 */
-  --space-20: 5rem;     /* 80px - 巨大間隔 */
-  --space-24: 6rem;     /* 96px - 超大間隔 */
-  --space-32: 8rem;     /* 128px - 最大間隔 */
-  
-  
+  --space-1: 0.25rem;
+  /* 4px  - 最小間隔 */
+  --space-2: 0.5rem;
+  /* 8px  - 基本単位 */
+  --space-3: 0.75rem;
+  /* 12px - 小間隔 */
+  --space-4: 1rem;
+  /* 16px - 中間隔 */
+  --space-5: 1.25rem;
+  /* 20px - 中大間隔 */
+  --space-6: 1.5rem;
+  /* 24px - 大間隔 */
+  --space-8: 2rem;
+  /* 32px - 特大間隔 */
+  --space-10: 2.5rem;
+  /* 40px - セクション間隔 */
+  --space-12: 3rem;
+  /* 48px - 大セクション間隔 */
+  --space-16: 4rem;
+  /* 64px - 特大セクション間隔 */
+  --space-20: 5rem;
+  /* 80px - 巨大間隔 */
+  --space-24: 6rem;
+  /* 96px - 超大間隔 */
+  --space-32: 8rem;
+  /* 128px - 最大間隔 */
+
+
   /* ===== 角丸システム ===== */
-  --radius-sm: 0.25rem;          /* 小さな角丸 */
-  --radius: 0.5rem;              /* 標準角丸 */
-  --radius-md: 0.75rem;          /* 中角丸 */
-  --radius-lg: 1rem;             /* 大きな角丸 */
-  --radius-xl: 1.5rem;           /* 特大角丸 */
-  --radius-full: 9999px;         /* 完全な円形 */
-  
-  
+  --radius-sm: 0.25rem;
+  /* 小さな角丸 */
+  --radius: 0.5rem;
+  /* 標準角丸 */
+  --radius-md: 0.75rem;
+  /* 中角丸 */
+  --radius-lg: 1rem;
+  /* 大きな角丸 */
+  --radius-xl: 1.5rem;
+  /* 特大角丸 */
+  --radius-full: 9999px;
+  /* 完全な円形 */
+
+
   /* ===== アニメーション時間設定 ===== */
-  --transition-fast: 150ms ease-in-out;     /* 素早いアニメーション */
-  --transition-normal: 300ms ease-in-out;   /* 標準アニメーション */
-  --transition-slow: 500ms ease-in-out;     /* ゆっくりアニメーション */
-  
-  
+  --transition-fast: 150ms ease-in-out;
+  /* 素早いアニメーション */
+  --transition-normal: 300ms ease-in-out;
+  /* 標準アニメーション */
+  --transition-slow: 500ms ease-in-out;
+  /* ゆっくりアニメーション */
+
+
   /* ===== Z-indexスケール（層の管理） ===== */
-  --z-dropdown: 1000;            /* ドロップダウンメニュー */
-  --z-sticky: 1010;              /* スティッキー要素 */
-  --z-fixed: 1020;               /* 固定要素（ヘッダーなど） */
-  --z-modal-backdrop: 1030;      /* モーダル背景 */
-  --z-modal: 1040;               /* モーダル本体 */
-  --z-nav-toggle: 1045;          /* モバイルメニュートグル */
-  --z-popover: 1050;             /* ポップオーバー */
-  --z-tooltip: 1060;             /* ツールチップ（最前面） */
-  --header-height: 72px;         /* 固定ヘッダー高さ */
+  --z-dropdown: 1000;
+  /* ドロップダウンメニュー */
+  --z-sticky: 1010;
+  /* スティッキー要素 */
+  --z-fixed: 1020;
+  /* 固定要素（ヘッダーなど） */
+  --z-modal-backdrop: 1030;
+  /* モーダル背景 */
+  --z-modal: 1040;
+  /* モーダル本体 */
+  --z-nav-toggle: 1045;
+  /* モバイルメニュートグル */
+  --z-popover: 1050;
+  /* ポップオーバー */
+  --z-tooltip: 1060;
+  /* ツールチップ（最前面） */
+  --header-height: 72px;
+  /* 固定ヘッダー高さ */
 }
 
 
@@ -275,45 +361,64 @@ body[data-season="tsuyu"] .ripple {
 *,
 *::before,
 *::after {
-  box-sizing: border-box;         /* パディングとボーダーを幅に含める */
-  margin: 0;                      /* デフォルトマージンをリセット */
-  padding: 0;                     /* デフォルトパディングをリセット */
+  box-sizing: border-box;
+  /* パディングとボーダーを幅に含める */
+  margin: 0;
+  /* デフォルトマージンをリセット */
+  padding: 0;
+  /* デフォルトパディングをリセット */
 }
 
 /* HTML全体のスクロール動作設定 */
 html {
-  font-size: 100%;                /* ブラウザデフォルトフォントサイズを維持 */
-  scroll-behavior: smooth;        /* スムーズスクロールでUX向上 */
+  font-size: 100%;
+  /* ブラウザデフォルトフォントサイズを維持 */
+  scroll-behavior: smooth;
+  /* スムーズスクロールでUX向上 */
 }
 
 /* アクセシビリティ対応 - モーションを抑えたユーザー向け */
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;        /* スムーズスクロールを無効化 */
+    scroll-behavior: auto;
+    /* スムーズスクロールを無効化 */
   }
-  
+
   /* 全てのアニメーションを最小時間に短縮 */
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;      /* アニメーション時間を最小化 */
-    animation-iteration-count: 1 !important;    /* アニメーション繰り返しを無効 */
-    transition-duration: 0.01ms !important;     /* トランジションを最小化 */
+    animation-duration: 0.01ms !important;
+    /* アニメーション時間を最小化 */
+    animation-iteration-count: 1 !important;
+    /* アニメーション繰り返しを無効 */
+    transition-duration: 0.01ms !important;
+    /* トランジションを最小化 */
   }
 }
 
 /* メインbody要素 - サイト全体のコンテナ（上部の重複定義から統合） */
 body {
-  font-family: var(--ff-body);        /* 日本語最適化フォント適用 */
-  font-size: var(--text-base);        /* レスポンシブベースフォントサイズ */
-  line-height: 1.6;                   /* 読みやすい行間設定 */
-  color: var(--text);                 /* メインテキスト色適用 */
-  background-color: var(--background); /* ベース背景色 */
-  overflow-x: hidden;                 /* 横スクロール禁止 */
-  min-height: 100dvh;                 /* ビューポートの最低高さを確保 */
-  position: relative;                 /* 位置基準設定 */
-  margin: 0;                          /* ブラウザデフォルトマージンをリセット */
-  padding: 0;                         /* デフォルトパディング削除 */
+  font-family: var(--ff-body);
+  /* 日本語最適化フォント適用 */
+  font-size: var(--text-base);
+  /* レスポンシブベースフォントサイズ */
+  line-height: 1.6;
+  /* 読みやすい行間設定 */
+  color: var(--text);
+  /* メインテキスト色適用 */
+  background-color: var(--background);
+  /* ベース背景色 */
+  overflow-x: hidden;
+  /* 横スクロール禁止 */
+  min-height: 100dvh;
+  /* ビューポートの最低高さを確保 */
+  position: relative;
+  /* 位置基準設定 */
+  margin: 0;
+  /* ブラウザデフォルトマージンをリセット */
+  padding: 0;
+  /* デフォルトパディング削除 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -326,53 +431,73 @@ body.menu-open {
 /* ===== 季節対応和紙背景システム ===== */
 /* 季節に合わせて自動切替される背景テクスチャ */
 body::before {
-  content: '';                        /* 疑似要素の作成 */
-  position: fixed;                    /* 画面に固定表示 */
+  content: '';
+  /* 疑似要素の作成 */
+  position: fixed;
+  /* 画面に固定表示 */
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;                          /* 全画面をカバー */
-  background-image: url('../images/backgrounds/背景_春模様.webp'); /* デフォルトは春テーマ */
-  background-size: cover;             /* 画面全体をカバー */
-  background-position: center;        /* 中央配置 */
-  background-repeat: no-repeat;       /* 繰り返しなし */
-  background-attachment: fixed;       /* スクロールで固定（パララックス効果） */
-  opacity: 1;                         /* 完全不透明 */
-  
-  pointer-events: none;               /* クリックイベントを透過 */
-  transition: opacity 0.5s ease-in-out; /* 季節切替時のスムーズフェード */
-  
-  z-index: -1;                        /* 最背面へ配置 */
-  mix-blend-mode: normal;             /* 通常の合成モード */
+  bottom: 0;
+  /* 全画面をカバー */
+  background-image: url('../images/backgrounds/背景_春模様.webp');
+  /* デフォルトは春テーマ */
+  background-size: cover;
+  /* 画面全体をカバー */
+  background-position: center;
+  /* 中央配置 */
+  background-repeat: no-repeat;
+  /* 繰り返しなし */
+  background-attachment: fixed;
+  /* スクロールで固定（パララックス効果） */
+  opacity: 1;
+  /* 完全不透明 */
+
+  pointer-events: none;
+  /* クリックイベントを透過 */
+  transition: opacity 0.5s ease-in-out;
+  /* 季節切替時のスムーズフェード */
+
+  z-index: -1;
+  /* 最背面へ配置 */
+  mix-blend-mode: normal;
+  /* 通常の合成モード */
 }
 
 /* ===== 季節別和紙背景設定 ===== */
 /* 各季節に合わせた独自の和紙テクスチャを適用 */
 body[data-season="spring"]::before {
-  background-image: url('../images/backgrounds/背景_春模様.webp'); /* 春：桜色の和紙 */
+  background-image: url('../images/backgrounds/背景_春模様.webp');
+  /* 春：桜色の和紙 */
 }
 
 body[data-season="summer"]::before {
-  background-image: url('../images/backgrounds/背景_夏模様.webp'); /* 夏：緑色の和紙 */
+  background-image: url('../images/backgrounds/背景_夏模様.webp');
+  /* 夏：緑色の和紙 */
 }
 
 body[data-season="autumn"]::before {
-  background-image: url('../images/backgrounds/背景_秋模様.webp'); /* 秋：紅葉色の和紙 */
+  background-image: url('../images/backgrounds/背景_秋模様.webp');
+  /* 秋：紅葉色の和紙 */
 }
 
 body[data-season="winter"]::before {
-  background-image: url('../images/backgrounds/背景_冬模様.webp'); /* 冬：雪白の和紙 */
+  background-image: url('../images/backgrounds/背景_冬模様.webp');
+  /* 冬：雪白の和紙 */
 }
 
 body[data-season="tsuyu"]::before {
-  background-image: url('../images/backgrounds/和紙-梅雨.webp'); /* 梅雨：雨雲色の和紙 */
-  opacity: 1;                         /* 梅雨時は特に鮮明に表示 */
+  background-image: url('../images/backgrounds/和紙-梅雨.webp');
+  /* 梅雨：雨雲色の和紙 */
+  opacity: 1;
+  /* 梅雨時は特に鮮明に表示 */
 }
 
 /* AllとNoneの背景も梅雨と同じ */
 body[data-season="all"]::before,
 body[data-season="none"]::before {
-  background-image: url('../images/backgrounds/和紙-梅雨.webp'); /* 梅雨：雨雲色の和紙 */
+  background-image: url('../images/backgrounds/和紙-梅雨.webp');
+  /* 梅雨：雨雲色の和紙 */
   opacity: 1;
 }
 
@@ -381,7 +506,8 @@ body[data-season="none"]::before {
 /* レスポンシブ対応 - モバイルでのパフォーマンス最適化 */
 @media (max-width: 768px) {
   body::before {
-    background-attachment: scroll; /* モバイルでfixedを避ける */
+    background-attachment: scroll;
+    /* モバイルでfixedを避ける */
     background-size: cover;
   }
 }
@@ -395,7 +521,8 @@ body[data-season="none"]::before {
 }
 
 /* 高解像度ディスプレイ対応 */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
   body::before {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
@@ -403,7 +530,12 @@ body[data-season="none"]::before {
 }
 
 /* ===== タイポグラフィ - 文字スタイル設定 ===== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--ff-heading);
   font-weight: 700;
   line-height: 1.2;
@@ -411,12 +543,29 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text);
 }
 
-h1 { font-size: var(--text-5xl); }
-h2 { font-size: var(--text-4xl); }
-h3 { font-size: var(--text-3xl); }
-h4 { font-size: var(--text-2xl); }
-h5 { font-size: var(--text-xl); }
-h6 { font-size: var(--text-lg); }
+h1 {
+  font-size: var(--text-5xl);
+}
+
+h2 {
+  font-size: var(--text-4xl);
+}
+
+h3 {
+  font-size: var(--text-3xl);
+}
+
+h4 {
+  font-size: var(--text-2xl);
+}
+
+h5 {
+  font-size: var(--text-xl);
+}
+
+h6 {
+  font-size: var(--text-lg);
+}
 
 p {
   margin-bottom: var(--space-4);
@@ -563,9 +712,12 @@ a:focus {
 
 /* 日本語ロゴ補助テキスト */
 .logo-jp {
-  font-family: var(--ff-mincho);   /* 統一明朝体フォント */
-  color: var(--text);             /* 標準テキスト色 */
-  font-weight: 400;              /* ノーマルウェイト */
+  font-family: var(--ff-mincho);
+  /* 統一明朝体フォント */
+  color: var(--text);
+  /* 標準テキスト色 */
+  font-weight: 400;
+  /* ノーマルウェイト */
 }
 
 .menu-toggle {
@@ -596,7 +748,7 @@ a:focus {
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-.menu-toggle span + span {
+.menu-toggle span+span {
   margin-top: 0;
 }
 
@@ -709,11 +861,16 @@ a:focus {
  * - 適切な間隔で各アイコンを分離し操作しやすさを向上
  */
 .social-links {
-  display: flex;                /* アイコンを横並びで整列 */
-  gap: 1rem;                   /* アイコン間の適切なスペーシング */
-  justify-content: center;     /* 中央揃えで視覚的バランス確保 */
-  margin-top: 1.5rem;          /* 上部コンテンツとの適切な分離 */
-  flex-wrap: wrap;             /* 画面幅が狭い場合に折り返して表示 */
+  display: flex;
+  /* アイコンを横並びで整列 */
+  gap: 1rem;
+  /* アイコン間の適切なスペーシング */
+  justify-content: center;
+  /* 中央揃えで視覚的バランス確保 */
+  margin-top: 1.5rem;
+  /* 上部コンテンツとの適切な分離 */
+  flex-wrap: wrap;
+  /* 画面幅が狭い場合に折り返して表示 */
 }
 
 /* 
@@ -728,25 +885,35 @@ a:focus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 60px;                 /* タップ領域を拡大（モバイル親和性） */
+  width: 60px;
+  /* タップ領域を拡大（モバイル親和性） */
   height: 48px;
-  border-radius: 12px;         /* 角丸をやや大きく */
-  font-size: 20px;             /* アイコンサイズをわずかに拡大 */
-  color: var(--accent);        /* テーマ統一のアクセントカラー */
+  border-radius: 12px;
+  /* 角丸をやや大きく */
+  font-size: 20px;
+  /* アイコンサイズをわずかに拡大 */
+  color: var(--accent);
+  /* テーマ統一のアクセントカラー */
   transition: background var(--transition-fast),
-              transform var(--transition-fast),
-              box-shadow var(--transition-fast),
-              opacity var(--transition-fast);
-  background: linear-gradient(135deg, 
-              rgba(255, 255, 255, 0.15) 0%, 
-              rgba(255, 255, 255, 0.08) 100%);   /* グラデーション背景で深み */
-  border: 1px solid rgba(255, 255, 255, 0.3);    /* より明確な枠線 */
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),
-              0 4px 14px rgba(0,0,0,0.4),
-              0 0 0 1px rgba(255,255,255,0.1),    /* 外側の光の縁取りを強化 */
-              0 0 20px rgba(255,255,255,0.05);    /* 柔らかいグロー効果 */
-  backdrop-filter: blur(6px);  /* グラス感の演出（対応環境） */
-  position: relative;          /* ツールチップのための位置指定 */
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.08) 100%);
+  /* グラデーション背景で深み */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* より明確な枠線 */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 4px 14px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    /* 外側の光の縁取りを強化 */
+    0 0 20px rgba(255, 255, 255, 0.05);
+  /* 柔らかいグロー効果 */
+  backdrop-filter: blur(6px);
+  /* グラス感の演出（対応環境） */
+  position: relative;
+  /* ツールチップのための位置指定 */
 }
 
 /* ツールチップ表示 */
@@ -796,16 +963,22 @@ a:focus {
 
 /* ホバー時の透明度変化で操作感をフィードバック */
 .social-links a:hover {
-  opacity: 1;                  /* コントラストを保つ */
-  transform: translateY(-2px); /* 浮き上がりを明確に */
-  background: linear-gradient(135deg, 
-              rgba(255, 255, 255, 0.25) 0%, 
-              rgba(255, 255, 255, 0.15) 100%);   /* ホバー時のグラデーション */
-  border: 1px solid rgba(255, 255, 255, 0.5);    /* ホバー時の枠線も明るく */
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.25),
-              0 8px 22px rgba(0,0,0,0.5),
-              0 0 0 1px rgba(255,255,255,0.2),    /* より明確な光の縁取り */
-              0 0 30px rgba(255,255,255,0.15);    /* ホバー時のグロー強化 */
+  opacity: 1;
+  /* コントラストを保つ */
+  transform: translateY(-2px);
+  /* 浮き上がりを明確に */
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.15) 100%);
+  /* ホバー時のグラデーション */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* ホバー時の枠線も明るく */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 8px 22px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    /* より明確な光の縁取り */
+    0 0 30px rgba(255, 255, 255, 0.15);
+  /* ホバー時のグロー強化 */
 }
 
 /* フォーカスリング（キーボード操作向け） */
@@ -813,15 +986,15 @@ a:focus {
   outline: 3px solid color-mix(in oklab, var(--primary) 70%, white 30%);
   outline-offset: 2px;
   box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.2),
-              0 10px 24px rgba(0,0,0,0.5);
+    0 10px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* クリック時の押し込み表現 */
 .social-links a:active {
   transform: translateY(0);
   background: rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.35),
-              0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* アイコン（SVG/画像）の視認性向上 */
@@ -830,10 +1003,10 @@ a:focus {
 .footer-section .social-links a svg,
 .footer-section .social-links a img {
   display: block;
-  width: 28px;                  /* アイコンサイズを一元管理 */
+  width: 28px;
+  /* アイコンサイズを一元管理 */
   height: 28px;
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.4))
-          drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.4)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
 }
 
 /* 
@@ -845,9 +1018,12 @@ a:focus {
  * - ポインターイベント無効化で誤操作を防止
  */
 .social-link.disabled {
-  pointer-events: none;        /* クリック・タッチ操作を無効化 */
-  filter: grayscale(100%);     /* グレースケール化で非アクティブを表現 */
-  opacity: 0.5;                /* 透明度を下げて無効状態を視覚化 */
+  pointer-events: none;
+  /* クリック・タッチ操作を無効化 */
+  filter: grayscale(100%);
+  /* グレースケール化で非アクティブを表現 */
+  opacity: 0.5;
+  /* 透明度を下げて無効状態を視覚化 */
 }
 
 /* モーション削減設定に配慮 */
@@ -868,23 +1044,28 @@ a:focus {
 
 /* Instagramの公式ブランドカラー - 鮮やかなピンク系 */
 .social-link.instagram {
-  color: #E4405F;              /* Instagram公式ブランドピンク */
+  color: #E4405F;
+  /* Instagram公式ブランドピンク */
 }
 
 /* Spotifyの公式ブランドカラー - 特徴的なグリーン */
 .social-link.spotify {
-  color: #1DB954;              /* Spotify公式ブランドグリーン */
+  color: #1DB954;
+  /* Spotify公式ブランドグリーン */
 }
 
 /* TikTokの公式ブランドカラー - ブラック（ダークテーマで白） */
 .social-link.tiktok {
-  color: #000000;              /* TikTok公式ブランドブラック */
+  color: #000000;
+  /* TikTok公式ブランドブラック */
 }
 
 /* ダークテーマでのTikTokアイコン色調整 */
 [data-theme="dark"] .social-link.tiktok {
-  color: #ffffff;              /* ダークテーマではホワイト */
+  color: #ffffff;
+  /* ダークテーマではホワイト */
 }
+
 /* ===== フッターアイコンスタイル終了 ===== */
 
 /* 
@@ -901,13 +1082,16 @@ a:focus {
 
   /* モバイル用ナビゲーションコンテナの調整 */
   .nav-container {
-    flex-wrap: nowrap;          /* 要素の折り返しを禁止して一列表示 */
-    gap: var(--space-3);        /* ロゴとナビゲーションの適切な間隔 */
+    flex-wrap: nowrap;
+    /* 要素の折り返しを禁止して一列表示 */
+    gap: var(--space-3);
+    /* ロゴとナビゲーションの適切な間隔 */
     align-items: center;
   }
 
   .menu-toggle {
-    display: inline-flex;       /* モバイルでのみ表示 */
+    display: inline-flex;
+    /* モバイルでのみ表示 */
     margin-left: auto;
   }
 
@@ -921,22 +1105,35 @@ a:focus {
    * - 縦方向のレイアウトでモバイルに最適化
    */
   .nav-menu {
-    position: fixed;            /* ビューポート全体をカバーして表示 */
+    position: fixed;
+    /* ビューポート全体をカバーして表示 */
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;                  /* フルスクリーンカバレッジ */
-    background: var(--neutral-900); /* 濃い背景でコンテンツを目立たせる */
-    border-top: 1px solid var(--border); /* 上部に境界線で親窓との分離 */
-    flex-direction: column;     /* メニュー項目を縦並びで配置 */
-    gap: 0;                     /* メニュー項目間のスペーシングは個別に管理 */
-    padding: calc(var(--space-12) + 40px) var(--space-4) var(--space-8); /* ヘッダー分を除いた余白 */
-    transform: translateY(-100%); /* 初期状態は画面上部に隠し */
-    opacity: 0;                 /* 初期状態は透明 */
-    visibility: hidden;         /* スクリーンリーダーから隠し */
-    display: none;              /* 初期状態は非表示 */
-    transition: all var(--transition-normal); /* スムーズな開閉アニメーション */
-    z-index: var(--z-modal);    /* モーダルレベルの重なり順で最前面表示 */
+    bottom: 0;
+    /* フルスクリーンカバレッジ */
+    background: var(--neutral-900);
+    /* 濃い背景でコンテンツを目立たせる */
+    border-top: 1px solid var(--border);
+    /* 上部に境界線で親窓との分離 */
+    flex-direction: column;
+    /* メニュー項目を縦並びで配置 */
+    gap: 0;
+    /* メニュー項目間のスペーシングは個別に管理 */
+    padding: calc(var(--space-12) + 40px) var(--space-4) var(--space-8);
+    /* ヘッダー分を除いた余白 */
+    transform: translateY(-100%);
+    /* 初期状態は画面上部に隠し */
+    opacity: 0;
+    /* 初期状態は透明 */
+    visibility: hidden;
+    /* スクリーンリーダーから隠し */
+    display: none;
+    /* 初期状態は非表示 */
+    transition: all var(--transition-normal);
+    /* スムーズな開閉アニメーション */
+    z-index: var(--z-modal);
+    /* モーダルレベルの重なり順で最前面表示 */
   }
 
   .nav-menu.active {
@@ -999,8 +1196,10 @@ a:focus {
  * - ユーザーのサイト体験をパーソナライズ
  */
 .season-selector-buttons {
-  display: flex;               /* ボタンを水平に並べて表示 */
-  gap: var(--space-2);         /* ボタン間の適切なスペーシング */
+  display: flex;
+  /* ボタンを水平に並べて表示 */
+  gap: var(--space-2);
+  /* ボタン間の適切なスペーシング */
 }
 
 /* 
@@ -1017,19 +1216,32 @@ a:focus {
  * - スムーズな背景色変化でユーザーフィードバック
  */
 .season-option {
-  background: var(--background);  /* テーマ統一の背景色 */
-  color: var(--text);            /* テーマ統一のテキスト色 */
-  border: 1px solid var(--border); /* テーマ統一のボーダー色 */
-  border-radius: var(--radius);  /* 統一感のある角丸 */
-  padding: var(--space-2) var(--space-3); /* ボタン内部の適切な余白 */
-  font-size: var(--text-base);   /* 読みやすい基本フォントサイズ */
-  min-width: 44px;               /* アクセシビリティガイドラインの最小幅 */
-  min-height: 44px;              /* アクセシビリティガイドラインの最小高さ */
-  cursor: pointer;               /* クリック可能であることを明示 */
-  display: inline-flex;          /* インラインFlexboxで中央揃えを実現 */
-  align-items: center;           /* 垂直中央揃え */
-  justify-content: center;       /* 水平中央揃え */
-  transition: all 0.2s ease;     /* すべてのプロパティ変化をスムーズに */
+  background: var(--background);
+  /* テーマ統一の背景色 */
+  color: var(--text);
+  /* テーマ統一のテキスト色 */
+  border: 1px solid var(--border);
+  /* テーマ統一のボーダー色 */
+  border-radius: var(--radius);
+  /* 統一感のある角丸 */
+  padding: var(--space-2) var(--space-3);
+  /* ボタン内部の適切な余白 */
+  font-size: var(--text-base);
+  /* 読みやすい基本フォントサイズ */
+  min-width: 44px;
+  /* アクセシビリティガイドラインの最小幅 */
+  min-height: 44px;
+  /* アクセシビリティガイドラインの最小高さ */
+  cursor: pointer;
+  /* クリック可能であることを明示 */
+  display: inline-flex;
+  /* インラインFlexboxで中央揃えを実現 */
+  align-items: center;
+  /* 垂直中央揃え */
+  justify-content: center;
+  /* 水平中央揃え */
+  transition: all 0.2s ease;
+  /* すべてのプロパティ変化をスムーズに */
 }
 
 /* 
@@ -1046,17 +1258,25 @@ a:focus {
  * - サイト全体のテーマとの一貫性
  */
 .season-option:hover {
-  background: var(--primary-hover, rgba(99, 102, 241, 0.15)); /* ホバー時の背景色 */
-  border-color: var(--primary);                               /* ボーダーをプライマリカラーに */
-  transform: translateY(-2px);                                 /* 軽く浮き上がる効果 */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);                 /* 影を追加 */
+  background: var(--primary-hover, rgba(99, 102, 241, 0.15));
+  /* ホバー時の背景色 */
+  border-color: var(--primary);
+  /* ボーダーをプライマリカラーに */
+  transform: translateY(-2px);
+  /* 軽く浮き上がる効果 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* 影を追加 */
 }
 
 .season-option.active {
-  background: var(--primary);    /* テーマのプライマリカラーでアクティブ状態を表現 */
-  color: #fff;                   /* 白文字で高コントラストと読みやすさを確保 */
-  border-color: var(--primary);  /* ボーダーもプライマリカラーに統一 */
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3); /* アクティブ状態の影 */
+  background: var(--primary);
+  /* テーマのプライマリカラーでアクティブ状態を表現 */
+  color: #fff;
+  /* 白文字で高コントラストと読みやすさを確保 */
+  border-color: var(--primary);
+  /* ボーダーもプライマリカラーに統一 */
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+  /* アクティブ状態の影 */
 }
 
 /* Allボタンのアクティブ状態 - より明るいグレー系で強調 */
@@ -1176,28 +1396,26 @@ a:focus {
 .hero {
   /* ヘッダー下の不要な余白除去 - デザインの一体感向上 */
   margin-top: 0;
-  
+
   /* ビューポートの85%使用 - 視覚的インパクト最大化 */
   height: 85vh;
-  
+
   /* 最小高さ保証 - 小画面での視認性確保 */
   min-height: 480px;
-  
+
   /* 背景構成:
    * 1. 半透明オーバーレイ（可読性向上）
    * 2. 秀歌メインビジュアル（WebP最適化済み）
    */
-  background: linear-gradient(
-    rgba(0, 0, 0, 0.4), 
-    rgba(0, 0, 0, 0.4)
-  ), url('../images/portraits/秀歌-メインビジュアル.webp');
-  
+  background: linear-gradient(rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)), url('../images/portraits/秀歌-メインビジュアル.webp');
+
   /* 背景画像の完全カバレッジ - どの画面比でも美しく表示 */
   background-size: cover;
-  
+
   /* 中央上部配置 - 被写体の最適な表示位置 */
   background-position: center top;
-  
+
   /* パララックス効果 - 没入感の演出（高性能デバイス向け） */
   background-attachment: fixed;
 }
@@ -1214,7 +1432,7 @@ a:focus {
   .hero {
     /* 被写体が画面上部に確実に表示される配置 */
     background-position: center top;
-    
+
     /* より多くの画面面積を活用 - モバイルでの迫力向上 */
     height: 90vh;
   }
@@ -1242,9 +1460,13 @@ a:focus {
   .hero {
     /* パララックス無効化 - バッテリー消費とパフォーマンス配慮 */
     background-attachment: scroll;
-    
+
     /* Dynamic Viewport Height - ブラウザUIの動的変化に対応 */
     height: 100dvh;
+
+    /* スマホ版メインビジュアル - 縦長画面に最適化された画像 */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.4)), url('../images/portraits/秀歌-メインビジュアル-スマホ版.webp');
   }
 }
 
@@ -1259,16 +1481,16 @@ a:focus {
 .hero-content {
   /* ヘッダー高さ分のオフセット - コンテンツとの重複回避 */
   padding-top: calc(var(--header-height) + env(safe-area-inset-top));
-  
+
   /* 読みやすい行長を維持 - タイポグラフィのベストプラクティス */
   max-width: 800px;
-  
+
   /* 適切な内側余白 - コンテンツの呼吸感確保 */
   padding: var(--space-4);
-  
+
   /* 重要度の高いレイヤー - 背景エフェクトより前面表示 */
   z-index: 2;
-  
+
   /* 相対配置 - z-indexの基準点として機能 */
   position: relative;
 }
@@ -1288,17 +1510,17 @@ a:focus {
 .hero-title {
   /* 大見出しサイズ - 視覚階層の頂点 */
   font-size: var(--text-5xl);
-  
+
   /* 極太フォントウェイト - 強い印象付け */
   font-weight: 800;
-  
+
   /* 下部マージン - 次の要素との適切な間隔 */
   margin-bottom: var(--space-6);
-  
+
   /* テキストシャドウ - 背景画像上での可読性向上 */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  
-  
+
+
   /* 自然改行許可 - レスポンシブ対応 */
   white-space: normal;
 }
@@ -1319,27 +1541,27 @@ a:focus {
 .artist-name {
   /* インラインブロック - 改行制御とサイズ調整の両立 */
   display: inline-block;
-  
+
   /* 上部マージン - タイトルとの視覚的分離 */
   margin-top: var(--space-4);
-  
+
   /* 超特大サイズ - 最高の視覚的重要度 */
   font-size: clamp(3rem, 8vw, 6rem);
-  
+
   /* 最大フォントウェイト - 強烈な印象付け */
   font-weight: 900;
-  
+
   /* ブロック表示で独立 */
   display: block;
-  
+
   /* 密な行間 - コンパクトで力強い表示 */
   line-height: 1.1;
-  
+
   /* 白色 - 清潔で美しい白 */
   color: #f0f0f0;
-  
+
   /* 文字縁取りと微細なシャドウ - 視認性と上品さを両立 */
-  text-shadow: 
+  text-shadow:
     1px 1px 0px rgba(0, 0, 0, 0.5),
     -1px -1px 0px rgba(0, 0, 0, 0.5),
     1px -1px 0px rgba(0, 0, 0, 0.5),
@@ -1359,7 +1581,7 @@ a:focus {
 .artist-name .jp {
   /* 英語部分の70%サイズ - バランスの良い日英混植 */
   font-size: 0.7em;
-  
+
   /* 和文に適したフォントウェイト - 美しい文字表現 */
   font-weight: 700;
 }
@@ -1371,19 +1593,19 @@ a:focus {
 .tagline {
   /* ブロック表示で改行 */
   display: block;
-  
+
   /* アーティスト名より小さいサイズ */
   font-size: var(--text-2xl);
-  
+
   /* 標準的な太さ */
   font-weight: 400;
-  
+
   /* 薄い色で控えめに */
   color: rgba(255, 255, 255, 0.7);
-  
+
   /* 上部に余白を追加 */
   margin-top: var(--space-3);
-  
+
   /* 行間を調整 */
   line-height: 1.3;
 }
@@ -1404,19 +1626,19 @@ a:focus {
 .hero-subtitle {
   /* 小さめサイズ - 控えめな説明役割 */
   font-size: var(--text-base);
-  
+
   /* 薄いグレー色 - 主張しすぎない */
   color: rgba(255, 255, 255, 0.6);
-  
+
   /* 軽い太さ */
   font-weight: 300;
-  
+
   /* 大きな下部マージン - アクションボタンとの明確な分離 */
   margin-bottom: var(--space-10);
-  
+
   /* 控えめなテキストシャドウ - 可読性向上と自然な立体感 */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  
+
 }
 
 /* 
@@ -1435,16 +1657,16 @@ a:focus {
 .hero-actions {
   /* フレックスコンテナ - 子要素の柔軟な配置 */
   display: flex;
-  
+
   /* ボタン間の適切な間隔 - 誤操作防止とデザインバランス */
   gap: var(--space-4);
-  
+
   /* 中央配置 - 視覚的な安定感と美しさ */
   justify-content: center;
-  
+
   /* 自動折り返し - 小画面での適切な表示 */
   flex-wrap: wrap;
-  
+
 }
 
 /* ===== ボタン - インタラクション要素 ===== */
@@ -1471,40 +1693,40 @@ a:focus {
 .cta-button {
   /* フレックスレイアウト - アイコンとテキストの整列制御 */
   display: inline-flex;
-  
+
   /* 垂直中央揃え - 内容要素の美しい配置 */
   align-items: center;
-  
+
   /* アイコンとテキスト間の適切なスペーシング */
   gap: var(--space-2);
-  
+
   /* 十分なパディング - タッチターゲット44px以上を確保 */
   padding: var(--space-4) var(--space-6);
-  
+
   /* ボーダーなし - ミニマルなデザイン哲学 */
   border: none;
-  
+
   /* 大きな角丸 - 和風の柔らかさを表現 */
   border-radius: var(--radius-lg);
-  
+
   /* 基本文字サイズ - 可読性とデザインバランス */
   font-size: var(--text-base);
-  
+
   /* セミボールド - 適度な強調と読みやすさ */
   font-weight: 600;
-  
+
   /* アンダーライン除去 - クリーンな外観 */
   text-decoration: none;
-  
+
   /* ポインターカーソル - インタラクティブ要素の明示 */
   cursor: pointer;
-  
+
   /* スムーズトランジション - 全プロパティの滑らかな変化 */
   transition: all var(--transition-normal);
-  
+
   /* 相対配置 - 内部要素の基準点として機能 */
   position: relative;
-  
+
   /* 内容の隠し領域制御 - アニメーション効果用 */
   overflow: hidden;
 }
@@ -1523,28 +1745,29 @@ a:focus {
  * - 0.4秒の適度な速度による上品なアニメーション
  * - ドロップシャドウによる立体感と重要性の強調
  */
-.cta-button.primary{
+.cta-button.primary {
   /* 動的グラデーション背景 - 視覚的な魅力と品格を演出 */
-  background: linear-gradient(120deg,var(--accent) 0%,var(--primary) 100%);
-  
+  background: linear-gradient(120deg, var(--accent) 0%, var(--primary) 100%);
+
   /* 200%サイズ - ホバーアニメーション用の余白確保 */
   background-size: 200% 100%;
-  
+
   /* 白文字 - グラデーション背景上での最適なコントラスト */
   color: white;
-  
+
   /* 立体感のあるシャドウ - 重要性と押しやすさを視覚的に伝達 */
   box-shadow: 0 4px 15px var(--shadow-lg);
-  
+
   /* 背景位置のトランジション - 滑らかなグラデーション移動 */
   transition: background-position .4s ease;
 }
 
 /* ホバー時のグラデーション移動 - エレガントな色彩変化 */
-.cta-button.primary:hover{
+.cta-button.primary:hover {
   /* グラデーションを右端に移動 - 色調の動的変化を演出 */
   background-position: 100% 0;
 }
+
 /* ===== CTAグラデーション設定終了 ===== */
 
 /* 
@@ -1564,7 +1787,7 @@ a:focus {
 .cta-button.primary:focus {
   /* 上方向への軽微な移動 - ボタンが浮き上がる印象を演出 */
   transform: translateY(-2px);
-  
+
   /* シャドウの拡大 - 立体感の強化と視覚的重要性の向上 */
   box-shadow: 0 8px 25px var(--shadow-lg);
 }
@@ -1585,10 +1808,10 @@ a:focus {
 .cta-button.secondary {
   /* 透明背景 - 控えめで品のある印象を演出 */
   background: transparent;
-  
+
   /* 白文字 - ダークな背景上での視認性確保 */
   color: white;
-  
+
   /* 白ボーダー - 境界の明確化とエレガントな印象 */
   border: 2px solid white;
 }
@@ -1610,10 +1833,10 @@ a:focus {
 .cta-button.secondary:focus {
   /* 背景色の反転 - 印象的な状態変化を演出 */
   background: white;
-  
+
   /* テキスト色をプライマリに変更 - コントラスト確保 */
   color: var(--primary);
-  
+
   /* プライマリボタンと同様の浮上効果 - 一貫したインタラクション */
   transform: translateY(-2px);
 }
@@ -1637,10 +1860,10 @@ a:focus {
 .about {
   /* 大きな上下パディング - セクションの重要性と品格を表現 */
   padding: var(--space-24) 0;
-  
+
   /* 半透明黒背景 - 和風の深みとモダンな洗練さの融合 */
   background: linear-gradient(180deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.8));
-  
+
   /* 微細なブラー効果 - 背景との自然な統合と立体感 */
   backdrop-filter: blur(1px);
 }
@@ -1661,13 +1884,13 @@ a:focus {
 .about-content {
   /* CSS Gridレイアウト - 柔軟な2次元配置制御 */
   display: grid;
-  
+
   /* モバイルファースト - 単一列レイアウト */
   grid-template-columns: 1fr;
-  
+
   /* 要素間の適切なスペーシング - 情報の整理と読みやすさ */
   gap: var(--space-12);
-  
+
   /* 中央揃え - 視覚的バランスと安定感の確保 */
   align-items: center;
 }
@@ -1705,10 +1928,10 @@ a:focus {
 .about-intro {
   /* 大きめの文字サイズ - 重要なメッセージの視覚的強調 */
   font-size: var(--text-lg);
-  
+
   /* 適切な下部余白 - コンテンツの読みやすさと情報階層 */
   margin-bottom: var(--space-8);
-  
+
   /* システムテキストカラー - テーマとの一貫性とアクセシビリティ */
   color: var(--text);
 }
@@ -1729,7 +1952,7 @@ a:focus {
 .features {
   /* CSS Grid - フィーチャーカードの柔軟な配置制御 */
   display: grid;
-  
+
   /* 一貫した間隔 - コンテンツ間の調和と読みやすさ */
   gap: var(--space-8);
 }
@@ -1751,16 +1974,16 @@ a:focus {
 .feature {
   /* 適切な内側パディング - コンテンツの呼吸感と読みやすさ */
   padding: var(--space-6);
-  
+
   /* システム背景色 - 統一されたブランド体験 */
   background: var(--background);
-  
+
   /* 大きな角丸 - 和風の柔らかさとモダンな洗練さ */
   border-radius: var(--radius-lg);
-  
+
   /* 立体感のあるシャドウ - カードの存在感と重要性表現 */
   box-shadow: 0 2px 10px var(--shadow);
-  
+
   /* スムーズシャドウトランジション - ホバー効果のための準備 */
   transition: box-shadow var(--transition-normal);
 }
@@ -1800,10 +2023,10 @@ a:focus {
 .feature-title {
   /* 適切な下部マージン - タイトルと説明文の視覚的分離 */
   margin-bottom: var(--space-3);
-  
+
   /* システムテキストカラー - テーマの一貫性と可読性確保 */
   color: var(--text);
-  
+
   /* 中見出しサイズ - 情報階層の明確な表現 */
   font-size: var(--text-xl);
 }
@@ -1848,13 +2071,13 @@ a:focus {
 .about-image {
   /* フル幅表示 - コンテナの幅を最大限活用 */
   width: 100%;
-  
+
   /* アスペクト比維持 - 正しいプロポーションでの表示 */
   height: auto;
-  
+
   /* 大きな角丸 - 和風の柔らかさとモダンな洗練さの融合 */
   border-radius: var(--radius-xl);
-  
+
   /* ドラマティックなドロップシャドウ - アーティストの存在感と重要性を視覚的に強調 */
   box-shadow: 0 10px 30px var(--shadow-lg);
 }
@@ -1883,7 +2106,7 @@ a:focus {
 .gallery {
   /* 大きな上下パディング - ギャラリーの重要性と品格を表現 */
   padding: var(--space-24) 0;
-  
+
   /* 微細なバックドロップフィルター - 背景との自然な統合 */
   backdrop-filter: blur(0.5px);
 }
@@ -1906,19 +2129,19 @@ a:focus {
 .season-nav {
   /* フレックスコンテナ - 季節ボタンの柔軟な横並び */
   display: flex;
-  
+
   /* 中央配置 - 視覚的バランスと対称性の確保 */
   justify-content: center;
-  
+
   /* ボタン間の適切な間隔 - 誇操作防止と美しいバランス */
   gap: var(--space-6);
-  
+
   /* 下部マージン - ナビゲーションとコンテンツの分離 */
   margin-bottom: var(--space-16);
-  
+
   /* 自動折り返し - 小画面での柔軟な表示 */
   flex-wrap: wrap;
-  
+
   /* コンテナパディング - 適切な内側余白で呼吸感確保 */
   padding: var(--space-4);
 }
@@ -1952,55 +2175,55 @@ a:focus {
 .season-btn {
   /* 相対配置 - 絶対配置された子要素の基準点 */
   position: relative;
-  
+
   /* フレックスコンテナ - 内部要素の右下配置 */
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
-  
+
   /* 内側パディング - テキストと縁の適切な間隔 */
   padding: var(--space-4);
-  
+
   /* 固定サイズ - 横長構図で統一感あるカードサイズ */
   width: 240px;
   height: 140px;
-  
+
   /* 白文字 - 背景画像上での最適な可読性 */
   color: white;
-  
+
   /* 背景画像の最適化設定 */
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  
+
   /* 画像レンダリング最適化 - 鮮明で鮮やかな表示 */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  
+
   /* CSSフィルター - 明度とコントラストで美しさを強化 */
   filter: brightness(1.2) contrast(1.1);
-  
+
   /* 半透明白ボーダー - 上品でエレガントな境界線 */
   border: 3px solid rgba(255, 255, 255, 0.8);
-  
+
   /* 適度な角丸 - 和風の柔らかさとモダンな洗練さ */
   border-radius: 8px;
-  
+
   /* ポインターカーソル - インタラクティブ要素であることを明示 */
   cursor: pointer;
-  
+
   /* 和文フォント - ブランド世界観と文字の美しさ */
   font-family: var(--ff-mincho);
-  
+
   /* 多層シャドウ - 高級感と立体感の絶妙な演出 */
-  box-shadow: 
+  box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.25),
     0 4px 8px rgba(0, 0, 0, 0.15);
-  
+
   /* 高品質イージング - 滞らかで自然なアニメーション */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* オーバーフロー非表示 - 精密なアニメーション用 */
   overflow: hidden;
 }
@@ -2023,29 +2246,27 @@ a:focus {
 .season-btn::before {
   /* 空のコンテンツ - CSSプラクティスに準拠した撬似要素 */
   content: "";
-  
+
   /* 絶対配置 - 親要素全体をカバー */
   position: absolute;
-  
+
   /* 全体をカバー - モダンCSSの簡潑記法 */
   inset: 0;
-  
+
   /* 
    * 縦方向グラデーションで可読性を強化:
    * - 下部: 適度な陰影でテキストを強調
    * - 中間: 軽い陰影で自然な移行
    * - 上部: 完全透明で背景画像を最大限活用
    */
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.1) 60%,
-    transparent 100%
-  );
-  
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.1) 60%,
+      transparent 100%);
+
   /* 透明度トランジション - インタラクション時の滞らかな変化 */
   transition: opacity 0.3s ease;
-  
+
   /* マウスイベント無効 - オーバーレイがクリックを妨げないように */
   pointer-events: none;
 }
@@ -2073,10 +2294,10 @@ a:focus {
 .season-btn:focus-visible {
   /* 大胆な浮上とスケール拡大 - ダイナミックな3D効果 */
   transform: translateY(-8px) scale(1.05);
-  
-  
+
+
   /* ドラマティックな多層シャドウ - 最大限の立体感と存在感 */
-  box-shadow: 
+  box-shadow:
     0 16px 40px rgba(0, 0, 0, 0.3),
     0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -2105,13 +2326,13 @@ a:focus {
 .season-btn::after {
   /* 空のコンテンツ - 擬似要素の標準実装 */
   content: "";
-  
+
   /* 絶対配置 - 親要素全体をカバーするオーバーレイ */
   position: absolute;
-  
+
   /* 全面カバー - 簡潔なCSS記法 */
   inset: 0;
-  
+
   /* 
    * 対角線シャイングラデーション:
    * - 45度の光の角度で自然な反射を模擬
@@ -2119,19 +2340,17 @@ a:focus {
    * - 中央50%で最大の輝きを演出
    * - 半透明の白で上品な光沢感
    */
-  background: linear-gradient(
-    45deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.15) 50%,
-    transparent 70%
-  );
-  
+  background: linear-gradient(45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 70%);
+
   /* デフォルトで非表示 - ホバー時の特別効果として機能 */
   opacity: 0;
-  
+
   /* 透明度トランジション - 滞らかな出現と消失 */
   transition: opacity 0.3s ease;
-  
+
   /* マウスイベント無効 - オーバーレイがクリックを妨げない */
   pointer-events: none;
 }
@@ -2213,8 +2432,8 @@ a:focus {
 
 .season-btn[data-season="all"]:hover::before {
   background: linear-gradient(135deg,
-    rgba(229, 231, 235, 0.35),
-    rgba(209, 213, 217, 0.25));
+      rgba(229, 231, 235, 0.35),
+      rgba(209, 213, 217, 0.25));
 }
 
 /* その他ボタン - より明るく強調 */
@@ -2230,8 +2449,8 @@ a:focus {
 
 .season-btn[data-season="none"]:hover::before {
   background: linear-gradient(135deg,
-    rgba(203, 213, 225, 0.35),
-    rgba(148, 163, 184, 0.25));
+      rgba(203, 213, 225, 0.35),
+      rgba(148, 163, 184, 0.25));
 }
 
 /* 春ボタン */
@@ -2245,8 +2464,8 @@ a:focus {
 
 .season-btn[data-season="spring"]:hover::before {
   background: linear-gradient(135deg,
-    rgba(244, 114, 182, 0.25),
-    rgba(236, 72, 153, 0.15));
+      rgba(244, 114, 182, 0.25),
+      rgba(236, 72, 153, 0.15));
 }
 
 /* 夏ボタン */
@@ -2260,8 +2479,8 @@ a:focus {
 
 .season-btn[data-season="summer"]:hover::before {
   background: linear-gradient(135deg,
-    rgba(34, 211, 238, 0.25),
-    rgba(6, 182, 212, 0.15));
+      rgba(34, 211, 238, 0.25),
+      rgba(6, 182, 212, 0.15));
 }
 
 /* 秋ボタン */
@@ -2275,8 +2494,8 @@ a:focus {
 
 .season-btn[data-season="autumn"]:hover::before {
   background: linear-gradient(135deg,
-    rgba(251, 146, 60, 0.25),
-    rgba(249, 115, 22, 0.15));
+      rgba(251, 146, 60, 0.25),
+      rgba(249, 115, 22, 0.15));
 }
 
 /* 冬ボタン */
@@ -2290,8 +2509,8 @@ a:focus {
 
 .season-btn[data-season="winter"]:hover::before {
   background: linear-gradient(135deg,
-    rgba(165, 180, 252, 0.25),
-    rgba(129, 140, 248, 0.15));
+      rgba(165, 180, 252, 0.25),
+      rgba(129, 140, 248, 0.15));
 }
 
 /*
@@ -2337,10 +2556,13 @@ a:focus {
 
 .season-btn[data-season="all"],
 .season-btn[data-season="none"] {
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
 }
 
-.season-btn::before { opacity: 0.35; }
+.season-btn::before {
+  opacity: 0.35;
+}
+
 SURF_END SeasonTextColor */
 
 /* ギャラリーボタンスタイリング */
@@ -2349,12 +2571,10 @@ SURF_END SeasonTextColor */
 }
 
 .season-btn::before {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.4) 60%,
-    transparent 100%
-  );
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.4) 60%,
+      transparent 100%);
 }
 
 /* 季節ボタンのレスポンシブ調整 */
@@ -2527,14 +2747,17 @@ SURF_END SeasonTextColor */
   position: relative;
   z-index: 10;
   font-size: var(--text-xl);
-  font-weight: 400;                /* taglineと同じ標準的な太さ */
+  font-weight: 400;
+  /* taglineと同じ標準的な太さ */
   letter-spacing: 0.15em;
   text-shadow:
     1px 1px 2px rgba(0, 0, 0, 0.2),
     0 0 4px rgba(0, 0, 0, 0.1);
   -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.15);
-  color: rgba(255, 255, 255, 0.7); /* taglineと同じ薄い白色 */
-  line-height: 1.3;                /* taglineと同じ行間 */
+  color: rgba(255, 255, 255, 0.7);
+  /* taglineと同じ薄い白色 */
+  line-height: 1.3;
+  /* taglineと同じ行間 */
   background: rgba(0, 0, 0, 0.4);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius);
@@ -2790,13 +3013,20 @@ SURF_END SeasonTextColor */
  * - サイト内ナビゲーションの補助手段
  */
 .footer {
-  background-image: url('../images/backgrounds/背景_黒和紙.webp'); /* 和風テクスチャ背景 */
-  background-size: cover;             /* 背景イメージを全面にカバー */
-  background-repeat: repeat;          /* パターンの繰り返しで統一感を演出 */
-  color: var(--neutral-300);          /* 控えめで読みやすいテキスト色 */
-  padding: var(--space-20) 0 var(--space-10); /* 上部に十分、下部に適度の余白 */
-  position: relative;                 /* 内部要素の基準点として設定 */
-  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.4); /* 上部に影でセクションの境界を明確化 */
+  background-image: url('../images/backgrounds/背景_黒和紙.webp');
+  /* 和風テクスチャ背景 */
+  background-size: cover;
+  /* 背景イメージを全面にカバー */
+  background-repeat: repeat;
+  /* パターンの繰り返しで統一感を演出 */
+  color: var(--neutral-300);
+  /* 控えめで読みやすいテキスト色 */
+  padding: var(--space-20) 0 var(--space-10);
+  /* 上部に十分、下部に適度の余白 */
+  position: relative;
+  /* 内部要素の基準点として設定 */
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.4);
+  /* 上部に影でセクションの境界を明確化 */
 }
 
 /* 
@@ -2809,10 +3039,14 @@ SURF_END SeasonTextColor */
  * - 下部マージンで著作権情報との適切な分離
  */
 .footer-content {
-  display: grid;                /* 柔軟なグリッドシステムでレスポンシブ対応 */
-  grid-template-columns: 1fr;   /* モバイルでは単一列配置 */
-  gap: var(--space-12);         /* セクション間の大きな間隔 */
-  margin-bottom: var(--space-12); /* 著作権エリアとの適切な分離 */
+  display: grid;
+  /* 柔軟なグリッドシステムでレスポンシブ対応 */
+  grid-template-columns: 1fr;
+  /* モバイルでは単一列配置 */
+  gap: var(--space-12);
+  /* セクション間の大きな間隔 */
+  margin-bottom: var(--space-12);
+  /* 著作権エリアとの適切な分離 */
 }
 
 @media (min-width: 768px) {
@@ -2836,7 +3070,8 @@ SURF_END SeasonTextColor */
  * - 他のフッター要素とのバランスを考慮したサイジング
  */
 .footer-brand {
-  max-width: 400px;             /* 読みやすいライン長に制限して可読性向上 */
+  max-width: 400px;
+  /* 読みやすいライン長に制限して可読性向上 */
 }
 
 /* 
@@ -2849,12 +3084,18 @@ SURF_END SeasonTextColor */
  * - 適度なフォントウェイトで存在感と品格を両立
  */
 .footer-logo {
-  color: var(--primary);          /* ブランドカラーで一貫性を保持 */
-  margin-bottom: var(--space-4);  /* ロゴ下の適切な間隔 */
-  font-size: var(--text-xl);     /* 目立つが大きすぎないサイズ */
-  font-weight: 700;              /* セミボールドで存在感を演出 */
-  font-family: var(--ff-mincho); /* 和風セリフフォント */
-  letter-spacing: 0.05em;        /* 文字間を広げて日本語の美しさを表現 */
+  color: var(--primary);
+  /* ブランドカラーで一貫性を保持 */
+  margin-bottom: var(--space-4);
+  /* ロゴ下の適切な間隔 */
+  font-size: var(--text-xl);
+  /* 目立つが大きすぎないサイズ */
+  font-weight: 700;
+  /* セミボールドで存在感を演出 */
+  font-family: var(--ff-mincho);
+  /* 和風セリフフォント */
+  letter-spacing: 0.05em;
+  /* 文字間を広げて日本語の美しさを表現 */
 }
 
 .footer-description {
@@ -2914,7 +3155,8 @@ SURF_END SeasonTextColor */
 }
 
 .footer-social .social-icon {
-  width: 28px;                    /* アイコンサイズを統一 */
+  width: 28px;
+  /* アイコンサイズを統一 */
   height: 28px;
   transition: all var(--transition-normal);
 }
@@ -2978,13 +3220,20 @@ SURF_END SeasonTextColor */
  * - JavaScriptで雨粒の物理的な動きや空気感を演出
  */
 .rain-canvas {
-  position: fixed;              /* スクロールに関係なく画面に固定表示 */
-  top: 0;                      /* 画面上端から開始 */
-  left: 0;                     /* 画面左端から開始 */
-  width: 100%;                 /* 画面幅いっぱいに広げる */
-  height: 100%;                /* 画面高さいっぱいに広げる */
-  pointer-events: none;        /* クリックやタッチイベントを無効化 */
-  z-index: var(--z-sticky);    /* 適切な重なり順で他要素とのバランスを確保 */
+  position: fixed;
+  /* スクロールに関係なく画面に固定表示 */
+  top: 0;
+  /* 画面上端から開始 */
+  left: 0;
+  /* 画面左端から開始 */
+  width: 100%;
+  /* 画面幅いっぱいに広げる */
+  height: 100%;
+  /* 画面高さいっぱいに広げる */
+  pointer-events: none;
+  /* クリックやタッチイベントを無効化 */
+  z-index: var(--z-sticky);
+  /* 適切な重なり順で他要素とのバランスを確保 */
 }
 
 /* ===== アニメーション - 動的演出効果 ===== */
@@ -3032,6 +3281,7 @@ SURF_END SeasonTextColor */
     opacity: 0;
     transform: translateX(-30px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -3043,6 +3293,7 @@ SURF_END SeasonTextColor */
     opacity: 0;
     transform: translateX(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -3091,20 +3342,49 @@ SURF_END SeasonTextColor */
   text-align: center;
 }
 
-.mb-0 { margin-bottom: 0; }
-.mb-2 { margin-bottom: var(--space-2); }
-.mb-4 { margin-bottom: var(--space-4); }
-.mb-6 { margin-bottom: var(--space-6); }
-.mb-8 { margin-bottom: var(--space-8); }
+.mb-0 {
+  margin-bottom: 0;
+}
 
-.mt-0 { margin-top: 0; }
-.mt-2 { margin-top: var(--space-2); }
-.mt-4 { margin-top: var(--space-4); }
-.mt-6 { margin-top: var(--space-6); }
-.mt-8 { margin-top: var(--space-8); }
+.mb-2 {
+  margin-bottom: var(--space-2);
+}
+
+.mb-4 {
+  margin-bottom: var(--space-4);
+}
+
+.mb-6 {
+  margin-bottom: var(--space-6);
+}
+
+.mb-8 {
+  margin-bottom: var(--space-8);
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mt-2 {
+  margin-top: var(--space-2);
+}
+
+.mt-4 {
+  margin-top: var(--space-4);
+}
+
+.mt-6 {
+  margin-top: var(--space-6);
+}
+
+.mt-8 {
+  margin-top: var(--space-8);
+}
 
 /* ===== 印刷スタイル - 紙出力最適化 ===== */
 @media print {
+
   .header,
   .hero-actions,
   .season-nav,
@@ -3112,14 +3392,14 @@ SURF_END SeasonTextColor */
   .social-links {
     display: none;
   }
-  
+
   .hero {
     background: none;
     color: var(--text);
     height: auto;
     padding: var(--space-8) 0;
   }
-  
+
   .season-panel {
     display: block !important;
     page-break-inside: avoid;
@@ -3161,13 +3441,11 @@ SURF_END SeasonTextColor */
 .ink-drop {
   position: absolute;
   pointer-events: none;
-  background: radial-gradient(
-    circle,
-    rgba(47, 79, 79, 0.4) 0%,
-    rgba(105, 105, 105, 0.25) 40%,
-    rgba(128, 128, 128, 0.1) 70%,
-    transparent 100%
-  );
+  background: radial-gradient(circle,
+      rgba(47, 79, 79, 0.4) 0%,
+      rgba(105, 105, 105, 0.25) 40%,
+      rgba(128, 128, 128, 0.1) 70%,
+      transparent 100%);
   border-radius: 50%;
   transform: scale(0);
   animation: inkSpread ease-out forwards;
@@ -3178,11 +3456,10 @@ SURF_END SeasonTextColor */
   position: absolute;
   pointer-events: none;
   background: linear-gradient(var(--leaf-angle, 45deg),
-    rgba(34, 139, 34, 0.3) 0%,
-    rgba(107, 142, 35, 0.25) 30%,
-    rgba(85, 107, 47, 0.15) 60%,
-    transparent 100%
-  );
+      rgba(34, 139, 34, 0.3) 0%,
+      rgba(107, 142, 35, 0.25) 30%,
+      rgba(85, 107, 47, 0.15) 60%,
+      transparent 100%);
   border-radius: 50% 0 50% 0;
   transform: scale(0) rotate(0deg);
   animation: leafFloat ease-out forwards;
@@ -3192,13 +3469,11 @@ SURF_END SeasonTextColor */
 .subtle-glow {
   position: absolute;
   pointer-events: none;
-  background: radial-gradient(
-    circle,
-    rgba(240, 248, 255, 0.12) 0%,
-    rgba(230, 230, 250, 0.08) 30%,
-    rgba(211, 211, 211, 0.04) 60%,
-    transparent 100%
-  );
+  background: radial-gradient(circle,
+      rgba(240, 248, 255, 0.12) 0%,
+      rgba(230, 230, 250, 0.08) 30%,
+      rgba(211, 211, 211, 0.04) 60%,
+      transparent 100%);
   border-radius: 50%;
   transform: scale(0);
   animation: subtleGlowExpand 2s ease-out forwards;
@@ -3223,14 +3498,17 @@ SURF_END SeasonTextColor */
     transform: scale(0);
     opacity: 0.6;
   }
+
   40% {
     transform: scale(1.2) translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3));
     opacity: 0.4;
   }
+
   80% {
     transform: scale(0.8) translate(calc(var(--dx) * 0.8), calc(var(--dy) * 0.8));
     opacity: 0.1;
   }
+
   100% {
     transform: scale(0.3) translate(var(--dx), var(--dy));
     opacity: 0;
@@ -3243,14 +3521,17 @@ SURF_END SeasonTextColor */
     transform: scale(0) rotate(0deg);
     opacity: 0.5;
   }
+
   25% {
     transform: scale(1) rotate(45deg) translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2));
     opacity: 0.4;
   }
+
   60% {
     transform: scale(0.8) rotate(90deg) translate(calc(var(--dx) * 0.6), calc(var(--dy) * 0.6));
     opacity: 0.2;
   }
+
   100% {
     transform: scale(0.4) rotate(180deg) translate(var(--dx), var(--dy));
     opacity: 0;
@@ -3262,14 +3543,17 @@ SURF_END SeasonTextColor */
     transform: scale(0);
     opacity: 0.15;
   }
+
   40% {
     transform: scale(1.8);
     opacity: 0.08;
   }
+
   80% {
     transform: scale(2.5);
     opacity: 0.03;
   }
+
   100% {
     transform: scale(3);
     opacity: 0;
@@ -3281,10 +3565,12 @@ SURF_END SeasonTextColor */
     transform: scale(0) translate(0, 0);
     opacity: 0.8;
   }
+
   30% {
     transform: scale(2) translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3));
     opacity: 0.4;
   }
+
   100% {
     transform: scale(0.8) translate(var(--dx), var(--dy));
     opacity: 0;
@@ -3306,26 +3592,39 @@ SURF_END SeasonTextColor */
  * - 0.6秒の絶妙なタイミングで印象的な瞬間を演出
  */
 .gold-sparkle {
-  position: absolute;           /* クリック位置を基準に配置 */
-  pointer-events: none;         /* UI操作を妨げないように無効化 */
+  position: absolute;
+  /* クリック位置を基準に配置 */
+  pointer-events: none;
+  /* UI操作を妨げないように無効化 */
   /* 本物の金箱を模した美しいラジアルグラデーション */
-  background: radial-gradient(
-    circle,
-    rgba(255, 215, 0, 1) 0%,      /* 中心部: 純金の濃い輝き */
-    rgba(255, 235, 59, 0.95) 15%, /* 内側: 明るい金色の光 */
-    rgba(255, 193, 7, 0.8) 35%,   /* 中間: 深い金色の温かみ */
-    rgba(255, 175, 0, 0.4) 60%,   /* 外側: 柔らかいオレンジの温かみ */
-    transparent 85%               /* 外縁: 自然な透明への遷移 */
-  );
-  border-radius: 50%;           /* 完美な円形で結晶の美しさを表現 */
-  transform: scale(0) rotate(0deg); /* 初期状態は非表示 */
-  animation: goldSparkleIntense 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; /* 弾力的な爆発アニメーション */
+  background: radial-gradient(circle,
+      rgba(255, 215, 0, 1) 0%,
+      /* 中心部: 純金の濃い輝き */
+      rgba(255, 235, 59, 0.95) 15%,
+      /* 内側: 明るい金色の光 */
+      rgba(255, 193, 7, 0.8) 35%,
+      /* 中間: 深い金色の温かみ */
+      rgba(255, 175, 0, 0.4) 60%,
+      /* 外側: 柔らかいオレンジの温かみ */
+      transparent 85%
+      /* 外縁: 自然な透明への遷移 */
+    );
+  border-radius: 50%;
+  /* 完美な円形で結晶の美しさを表現 */
+  transform: scale(0) rotate(0deg);
+  /* 初期状態は非表示 */
+  animation: goldSparkleIntense 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  /* 弾力的な爆発アニメーション */
   /* 多層シャドウで光の拡散と内側の輝きを表現 */
-  box-shadow: 
-    0 0 30px rgba(255, 215, 0, 0.9),    /* 内側の強い金色の光 */
-    0 0 60px rgba(255, 215, 0, 0.6),    /* 中間の柔らかい拡散光 */
-    0 0 100px rgba(255, 235, 59, 0.3),  /* 外側の大きなオーラ */
-    inset 0 0 15px rgba(255, 235, 59, 0.7); /* 内側からの輝く内光 */
+  box-shadow:
+    0 0 30px rgba(255, 215, 0, 0.9),
+    /* 内側の強い金色の光 */
+    0 0 60px rgba(255, 215, 0, 0.6),
+    /* 中間の柔らかい拡散光 */
+    0 0 100px rgba(255, 235, 59, 0.3),
+    /* 外側の大きなオーラ */
+    inset 0 0 15px rgba(255, 235, 59, 0.7);
+  /* 内側からの輝く内光 */
 }
 
 /* 
@@ -3343,38 +3642,49 @@ SURF_END SeasonTextColor */
  * - 段階的なサイズ変化で遠近感を演出
  */
 .gold-particle {
-  position: absolute;           /* クリック位置からの相対配置 */
-  pointer-events: none;         /* インタラクションを妨げない設定 */
+  position: absolute;
+  /* クリック位置からの相対配置 */
+  pointer-events: none;
+  /* インタラクションを妨げない設定 */
   /* 動的角度を持つ立体的なリニアグラデーション */
-  background: linear-gradient(var(--particle-angle, 45deg), 
-    rgba(255, 215, 0, 1) 0%,      /* 上部: 純金の強い光 */
-    rgba(255, 235, 59, 0.95) 25%, /* 上中: 明るい金の反射 */
-    rgba(255, 193, 7, 0.8) 50%,   /* 中央: 深みのある金色 */
-    rgba(255, 175, 0, 0.4) 75%,   /* 下中: 柔らかいオレンジ */
-    transparent 100%              /* 下部: 自然な透明 */
-  );
-  border-radius: 2px;           /* 粒子らしい小さな角丸 */
-  transform: scale(0) rotate(0deg); /* 初期状態は非表示 */
-  animation: goldParticleFloatIntense ease-out forwards; /* 物理的な浮遊アニメーション */
+  background: linear-gradient(var(--particle-angle, 45deg),
+      rgba(255, 215, 0, 1) 0%,
+      /* 上部: 純金の強い光 */
+      rgba(255, 235, 59, 0.95) 25%,
+      /* 上中: 明るい金の反射 */
+      rgba(255, 193, 7, 0.8) 50%,
+      /* 中央: 深みのある金色 */
+      rgba(255, 175, 0, 0.4) 75%,
+      /* 下中: 柔らかいオレンジ */
+      transparent 100%
+      /* 下部: 自然な透明 */
+    );
+  border-radius: 2px;
+  /* 粒子らしい小さな角丸 */
+  transform: scale(0) rotate(0deg);
+  /* 初期状態は非表示 */
+  animation: goldParticleFloatIntense ease-out forwards;
+  /* 物理的な浮遊アニメーション */
   /* 粒子の光の拡散シャドウ */
-  box-shadow: 
-    0 0 12px rgba(255, 215, 0, 0.8),  /* 内側の集中した光 */
-    0 0 24px rgba(255, 235, 59, 0.4); /* 外側の柔らかいオーラ */
+  box-shadow:
+    0 0 12px rgba(255, 215, 0, 0.8),
+    /* 内側の集中した光 */
+    0 0 24px rgba(255, 235, 59, 0.4);
+  /* 外側の柔らかいオーラ */
 }
 
 .gold-flake {
   position: absolute;
   pointer-events: none;
   background: linear-gradient(var(--flake-angle, 60deg),
-    rgba(255, 215, 0, 0.95) 0%,
-    rgba(255, 235, 59, 0.9) 30%,
-    rgba(255, 193, 7, 0.7) 60%,
-    transparent 100%
-  );
+      rgba(255, 215, 0, 0.95) 0%,
+      rgba(255, 235, 59, 0.9) 30%,
+      rgba(255, 193, 7, 0.7) 60%,
+      transparent 100%);
   border-radius: 50% 10% 50% 10%;
   transform: scale(0) rotate(0deg);
   animation: goldFlakeScatter ease-out forwards;
-  box-shadow: 
+  box-shadow:
     0 0 8px rgba(255, 215, 0, 0.6),
     inset 0 0 4px rgba(255, 235, 59, 0.5);
 }
@@ -3382,23 +3692,21 @@ SURF_END SeasonTextColor */
 .gold-shimmer {
   position: absolute;
   pointer-events: none;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    rgba(255, 215, 0, 0.8) 45deg,
-    rgba(255, 235, 59, 1) 90deg,
-    rgba(255, 193, 7, 0.8) 135deg,
-    transparent 180deg,
-    rgba(255, 215, 0, 0.6) 225deg,
-    rgba(255, 235, 59, 0.9) 270deg,
-    rgba(255, 193, 7, 0.6) 315deg,
-    transparent 360deg
-  );
+  background: conic-gradient(from 0deg,
+      transparent 0deg,
+      rgba(255, 215, 0, 0.8) 45deg,
+      rgba(255, 235, 59, 1) 90deg,
+      rgba(255, 193, 7, 0.8) 135deg,
+      transparent 180deg,
+      rgba(255, 215, 0, 0.6) 225deg,
+      rgba(255, 235, 59, 0.9) 270deg,
+      rgba(255, 193, 7, 0.6) 315deg,
+      transparent 360deg);
   border-radius: 50%;
   transform: scale(0) rotate(0deg);
   animation: goldShimmerIntense 1s ease-out forwards;
   mix-blend-mode: screen;
-  box-shadow: 
+  box-shadow:
     0 0 40px rgba(255, 215, 0, 0.5),
     0 0 80px rgba(255, 235, 59, 0.3);
 }
@@ -3412,7 +3720,7 @@ SURF_END SeasonTextColor */
   border-radius: 50%;
   transform: scale(0);
   animation: goldBurstExplosion ease-out forwards;
-  box-shadow: 
+  box-shadow:
     0 0 20px rgba(255, 215, 0, 1),
     0 0 40px rgba(255, 235, 59, 0.6);
 }
@@ -3422,14 +3730,17 @@ SURF_END SeasonTextColor */
     transform: scale(0) rotate(0deg);
     opacity: 1;
   }
+
   15% {
     transform: scale(1.2) rotate(60deg);
     opacity: 1;
   }
+
   50% {
     transform: scale(1.8) rotate(180deg);
     opacity: 0.8;
   }
+
   100% {
     transform: scale(3) rotate(720deg);
     opacity: 0;
@@ -3441,14 +3752,17 @@ SURF_END SeasonTextColor */
     transform: scale(0) rotate(0deg);
     opacity: 1;
   }
+
   20% {
     transform: scale(1.2) rotate(90deg) translate(calc(var(--dx) * 0.2), calc(var(--dy) * 0.2));
     opacity: 0.9;
   }
+
   60% {
     opacity: 0.7;
     transform: scale(1) rotate(270deg) translate(var(--dx), var(--dy));
   }
+
   100% {
     transform: scale(0.1) rotate(540deg) translate(calc(var(--dx) * 1.8), calc(var(--dy) * 1.8));
     opacity: 0;
@@ -3460,14 +3774,17 @@ SURF_END SeasonTextColor */
     transform: scale(0) rotate(0deg);
     opacity: 1;
   }
+
   30% {
     transform: scale(1.5) rotate(180deg) translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3));
     opacity: 0.8;
   }
+
   70% {
     transform: scale(1) rotate(360deg) translate(calc(var(--dx) * 0.8), calc(var(--dy) * 0.8));
     opacity: 0.4;
   }
+
   100% {
     transform: scale(0.3) rotate(720deg) translate(calc(var(--dx) * 1.5), calc(var(--dy) * 1.5));
     opacity: 0;
@@ -3479,14 +3796,17 @@ SURF_END SeasonTextColor */
     transform: scale(0) rotate(0deg);
     opacity: 0.8;
   }
+
   30% {
     transform: scale(2) rotate(180deg);
     opacity: 0.9;
   }
+
   70% {
     transform: scale(3.5) rotate(360deg);
     opacity: 0.4;
   }
+
   100% {
     transform: scale(5) rotate(540deg);
     opacity: 0;
@@ -3498,10 +3818,12 @@ SURF_END SeasonTextColor */
     transform: scale(0) translate(0, 0);
     opacity: 1;
   }
+
   10% {
     transform: scale(3) translate(0, 0);
     opacity: 1;
   }
+
   100% {
     transform: scale(1) translate(var(--dx), var(--dy));
     opacity: 0;
@@ -3513,14 +3835,12 @@ SURF_END SeasonTextColor */
   position: absolute;
   pointer-events: none;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(139, 69, 19, 0.3) 0%,
-    rgba(160, 82, 45, 0.2) 50%,
-    transparent 100%
-  );
+  background: radial-gradient(circle,
+      rgba(139, 69, 19, 0.3) 0%,
+      rgba(160, 82, 45, 0.2) 50%,
+      transparent 100%);
   opacity: 0.7;
-  transform: translate(0,0) scale(0.6);
+  transform: translate(0, 0) scale(0.6);
   animation: refinedParticleFloat ease-out forwards;
   will-change: transform, opacity;
   filter: blur(0.5px);
@@ -3529,13 +3849,11 @@ SURF_END SeasonTextColor */
 .gentle-glow {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(240, 248, 255, 0.08) 30%,
-    rgba(230, 230, 250, 0.05) 60%,
-    transparent 100%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(240, 248, 255, 0.08) 30%,
+      rgba(230, 230, 250, 0.05) 60%,
+      transparent 100%);
   animation: gentleGlow 1.2s ease-out forwards;
   pointer-events: none;
   filter: blur(2px);
@@ -3544,13 +3862,15 @@ SURF_END SeasonTextColor */
 
 @keyframes refinedParticleFloat {
   0% {
-    transform: translate(0,0) scale(0.6);
+    transform: translate(0, 0) scale(0.6);
     opacity: 0.7;
   }
+
   30% {
     opacity: 0.5;
     transform: translate(calc(var(--dx) * 0.3), calc(var(--dy) * 0.3)) scale(0.8);
   }
+
   100% {
     transform: translate(var(--dx), var(--dy)) scale(0.2);
     opacity: 0;
@@ -3562,10 +3882,12 @@ SURF_END SeasonTextColor */
     transform: scale(0.8);
     opacity: 0.2;
   }
+
   50% {
     transform: scale(1.2);
     opacity: 0.1;
   }
+
   100% {
     transform: scale(1.8);
     opacity: 0;
@@ -3578,9 +3900,11 @@ SURF_END SeasonTextColor */
     transform: scale(0);
     opacity: 0.15;
   }
+
   30% {
     opacity: 0.08;
   }
+
   100% {
     transform: scale(1.1);
     opacity: 0;
@@ -3592,9 +3916,11 @@ SURF_END SeasonTextColor */
     transform: scale(0);
     opacity: 0.08;
   }
+
   40% {
     opacity: 0.04;
   }
+
   100% {
     transform: scale(1.3);
     opacity: 0;
@@ -3633,47 +3959,74 @@ SURF_END SeasonTextColor */
  * - ラジアルグラデーションの中心をオフセットして立体感を強化
  */
 .sakura-petal {
-  position: absolute;           /* クリック位置を中心に花びらを発生 */
-  pointer-events: none;         /* UI操作を妨げないように無効化 */
+  position: absolute;
+  /* クリック位置を中心に花びらを発生 */
+  pointer-events: none;
+  /* UI操作を妨げないように無効化 */
   /* 桜の花びらの美しいピンクグラデーション - 中心から外縁に向かって美しく減衰 */
-  background: radial-gradient(circle at 60% 40%, 
-    rgba(255,182,193,0.9) 0%,     /* 中心部: 濃いピンクで花の厚みを表現 */
-    rgba(255,105,180,0.6) 40%,    /* 中間: 深いピンクで色彩の深み */
-    rgba(255,192,203,0.3) 70%,    /* 外側: 淡いピンクで繊細な縁 */
-    transparent 100%);            /* 端: 完全透明で自然な減衰 */
-  border-radius: 70% 90% 70% 90%; /* 桜の花びららしい非対称・不规則な形状 */
-  transform: scale(0) rotate(0deg); /* 初期状態は非表示・回転なし */
-  animation: sakuraBurst ease-out forwards; /* 爆発的に発生して飛び散るアニメーション */
-  filter: drop-shadow(0 0 3px rgba(255,192,203,0.5)); /* 柔らかいピンクの光で立体感を演出 */
+  background: radial-gradient(circle at 60% 40%,
+      rgba(255, 182, 193, 0.9) 0%,
+      /* 中心部: 濃いピンクで花の厚みを表現 */
+      rgba(255, 105, 180, 0.6) 40%,
+      /* 中間: 深いピンクで色彩の深み */
+      rgba(255, 192, 203, 0.3) 70%,
+      /* 外側: 淡いピンクで繊細な縁 */
+      transparent 100%);
+  /* 端: 完全透明で自然な減衰 */
+  border-radius: 70% 90% 70% 90%;
+  /* 桜の花びららしい非対称・不规則な形状 */
+  transform: scale(0) rotate(0deg);
+  /* 初期状態は非表示・回転なし */
+  animation: sakuraBurst ease-out forwards;
+  /* 爆発的に発生して飛び散るアニメーション */
+  filter: drop-shadow(0 0 3px rgba(255, 192, 203, 0.5));
+  /* 柔らかいピンクの光で立体感を演出 */
 }
 
 @keyframes sakuraBurst {
-  0% { transform: translate(0,0) scale(0) rotate(0deg); opacity: 0.9; }
-  80% { opacity: 0.6; }
-  100% { transform: translate(var(--dx), var(--dy)) scale(0.4) rotate(360deg); opacity: 0; }
+  0% {
+    transform: translate(0, 0) scale(0) rotate(0deg);
+    opacity: 0.9;
+  }
+
+  80% {
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.4) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 .click-flash {
   position: absolute;
   pointer-events: none;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0.4) 40%, rgba(255,215,0,0.1) 70%, transparent 100%);
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, rgba(255, 215, 0, 0.4) 40%, rgba(255, 215, 0, 0.1) 70%, transparent 100%);
   transform: scale(0);
   mix-blend-mode: screen;
   animation: clickFlash 0.6s ease-out forwards;
 }
 
 @keyframes clickFlash {
-  0% { transform: scale(0); opacity: 0.9; }
-  100% { transform: scale(2.5); opacity: 0; }
+  0% {
+    transform: scale(0);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
 }
 
 .kabuki-swirl {
   position: absolute;
   pointer-events: none;
   border: 2px solid transparent;
-  border-top-color: rgba(255,215,0,0.9);
-  border-right-color: rgba(255,215,0,0.6);
+  border-top-color: rgba(255, 215, 0, 0.9);
+  border-right-color: rgba(255, 215, 0, 0.6);
   border-radius: 50%;
   mix-blend-mode: screen;
   width: 40px;
@@ -3684,9 +4037,19 @@ SURF_END SeasonTextColor */
 }
 
 @keyframes kabukiSwirlSpin {
-  0% { transform: scale(0) rotate(0deg); opacity: 1; }
-  50% { opacity: 0.8; }
-  100% { transform: scale(3) rotate(720deg); opacity: 0; }
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(3) rotate(720deg);
+    opacity: 0;
+  }
 }
 
 
@@ -3699,12 +4062,14 @@ SURF_END SeasonTextColor */
     --shadow: rgba(0, 0, 0, 0.5);
     --shadow-lg: rgba(0, 0, 0, 0.7);
   }
-  
+
   .cta-button,
   .season-btn {
     border: 2px solid currentColor;
   }
-}/**
+}
+
+/**
  * Accessibility Enhancement Styles
  * Improves focus management, contrast, and screen reader experience
  */
@@ -3788,25 +4153,25 @@ audio:focus-visible {
     --shadow: rgba(0, 0, 0, 0.8);
     --shadow-lg: rgba(0, 0, 0, 0.9);
   }
-  
+
   .cta-button,
   .season-btn,
   .social-link {
     border: 2px solid currentColor;
     font-weight: 700;
   }
-  
+
   .hero-title,
   .hero-subtitle {
     text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
   }
-  
+
   .nav-menu a {
     border: 1px solid transparent;
     font-family: var(--ff-mincho);
     letter-spacing: 0.05em;
   }
-  
+
   .nav-menu a:hover,
   .nav-menu a:focus {
     border-color: currentColor;
@@ -3815,6 +4180,7 @@ audio:focus-visible {
 
 /* ===== モーション減らし設定 ===== */
 @media (prefers-reduced-motion: reduce) {
+
   /* 全てのアニメーションとトランジションを無効化 */
   *,
   *::before,
@@ -3824,13 +4190,13 @@ audio:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   /* アクセシビリティのためフォーカストランジションは維持 */
   :focus,
   :focus-visible {
     transition: outline 0.15s ease-in-out !important;
   }
-  
+
   /* パララックス効果を無効化 */
   .hero {
     background-attachment: scroll !important;
@@ -3846,12 +4212,13 @@ audio:focus-visible {
 /* ===== タッチターゲットサイズ強化 ===== */
 /* モバイル向け最低44pxタッチターゲットを確保 */
 @media (max-width: 768px) {
+
   .season-btn,
   .social-link {
     min-height: 44px;
     min-width: 44px;
   }
-  
+
   .cta-button {
     min-height: 48px;
     padding: var(--space-3) var(--space-6);
@@ -3881,8 +4248,13 @@ audio:focus-visible {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* ローディングスピナーのモーション減らし設定に対応 */
@@ -3911,33 +4283,39 @@ body.using-mouse :focus {
 
 /* ===== 印刷時アクセシビリティ ===== */
 @media print {
+
   /* 印刷時の高コントラストを確保 */
   * {
     background: transparent !important;
     color: black !important;
     box-shadow: none !important;
   }
-  
+
   /* リンクにURLを追加表示 */
   a[href]:after {
     content: " (" attr(href) ")";
     font-size: smaller;
     color: #666;
   }
-  
+
   /* ナビゲーション要素をスキップ */
   .nav-menu,
   .season-nav,
   .hero-actions {
     display: none;
   }
-  
+
   /* 見出しの適切なサイズを確保 */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     page-break-after: avoid;
     font-weight: bold;
   }
-  
+
   /* コンテンツの改ページを回避 */
   .feature,
   .track,
@@ -3966,33 +4344,33 @@ body.using-mouse :focus {
   .container {
     padding: 0 var(--space-3);
   }
-  
+
   .hero-content {
     padding: var(--space-3);
   }
-  
+
   .hero-title {
     font-size: clamp(1.25rem, 6vw, 2.5rem);
     line-height: 1.2;
     margin-bottom: var(--space-4);
     white-space: normal;
   }
-  
+
   .hero-title br {
     display: none;
   }
-  
+
   .hero-subtitle {
     font-size: clamp(1rem, 4vw, 1.25rem);
     margin-bottom: var(--space-6);
   }
-  
+
   .hero-actions {
     flex-direction: column;
     gap: var(--space-3);
     width: 100%;
   }
-  
+
   .cta-button {
     width: 100%;
     justify-content: center;
@@ -4005,11 +4383,11 @@ body.using-mouse :focus {
   .nav-container {
     padding: var(--space-3) var(--space-4);
   }
-  
+
   .logo {
     font-size: clamp(1.25rem, 5vw, 1.5rem);
   }
-  
+
   .nav-menu {
     position: fixed;
     top: 0;
@@ -4035,12 +4413,12 @@ body.using-mouse :focus {
     visibility: visible;
     display: flex;
   }
-  
+
   .nav-menu li {
     width: 100%;
     margin-bottom: var(--space-2);
   }
-  
+
   .nav-menu a {
     display: block;
     padding: var(--space-4);
@@ -4052,37 +4430,39 @@ body.using-mouse :focus {
     margin-bottom: var(--space-2);
     background: var(--surface);
   }
-  
+
 }
 
 /* ===== セクションスペーシング調整 ===== */
 @media (max-width: 768px) {
+
   .about,
   .gallery {
     padding: var(--space-16) 0;
   }
-  
+
   .about-content {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
-  
+
   .about-visual {
     order: -1;
   }
 }
 
 @media (max-width: 480px) {
+
   .about,
   .gallery,
   .contact {
     padding: var(--space-12) 0;
   }
-  
+
   .section-title {
     margin-bottom: var(--space-6);
   }
-  
+
   .section-subtitle {
     margin-bottom: var(--space-8);
   }
@@ -4153,25 +4533,34 @@ body.using-mouse :focus {
 /* タブレット・中型デバイス用調整 */
 @media (max-width: 767px) {
   .social-links {
-    justify-content: center;      /* 中央揃え */
-    gap: var(--space-3);          /* 適度な間隔 */
+    justify-content: center;
+    /* 中央揃え */
+    gap: var(--space-3);
+    /* 適度な間隔 */
   }
 }
 
 /* スマートフォン用調整 */
 @media (max-width: 480px) {
   .social-links {
-    flex-direction: row;          /* 横並びを維持 */
-    flex-wrap: wrap;              /* 必要に応じて折り返し */
-    justify-content: center;      /* 中央揃え */
-    gap: var(--space-2);          /* ボタン間の間隔を狭く */
+    flex-direction: row;
+    /* 横並びを維持 */
+    flex-wrap: wrap;
+    /* 必要に応じて折り返し */
+    justify-content: center;
+    /* 中央揃え */
+    gap: var(--space-2);
+    /* ボタン間の間隔を狭く */
   }
-  
+
   .social-link {
-    width: 44px;                  /* モバイル用サイズ（タッチしやすい最小サイズ） */
+    width: 44px;
+    /* モバイル用サイズ（タッチしやすい最小サイズ） */
     height: 44px;
-    min-width: 44px;              /* 最小サイズを保証 */
-    flex-shrink: 0;               /* 縮小を防ぐ */
+    min-width: 44px;
+    /* 最小サイズを保証 */
+    flex-shrink: 0;
+    /* 縮小を防ぐ */
   }
 }
 
@@ -4182,17 +4571,17 @@ body.using-mouse :focus {
     text-align: center;
     gap: var(--space-8);
   }
-  
+
   .footer-links {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-6);
   }
-  
-  
+
+
   .footer-social {
     justify-content: center;
   }
-  
+
   .footer-bottom-content {
     flex-direction: column;
     text-align: center;
@@ -4204,22 +4593,22 @@ body.using-mouse :focus {
   .footer {
     padding: var(--space-12) 0 var(--space-6);
   }
-  
+
   .footer-links {
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
-  
-  
+
+
   .footer-bottom {
     padding-top: var(--space-6);
   }
-  
+
   .footer-bottom p {
     font-size: var(--text-sm);
   }
-  
-  
+
+
 }
 
 /* ===== フィーチャーカードレスポンシブ ===== */
@@ -4228,7 +4617,7 @@ body.using-mouse :focus {
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
-  
+
   .feature {
     padding: var(--space-4);
     text-align: center;
@@ -4240,21 +4629,21 @@ body.using-mouse :focus {
   .container {
     max-width: 1400px;
   }
-  
+
   .hero-content {
     max-width: 900px;
   }
-  
+
   .about-content {
     grid-template-columns: 1.5fr 1fr;
     gap: var(--space-16);
   }
-  
+
   .season-panel {
     grid-template-columns: 1.2fr 1fr;
     gap: var(--space-16);
   }
-  
+
   /* removed: .contact-content (unused) */
 }
 
@@ -4262,11 +4651,11 @@ body.using-mouse :focus {
   .container {
     max-width: 1600px;
   }
-  
+
   .hero-title {
     font-size: clamp(3rem, 4vw, 5rem);
   }
-  
+
   .hero-subtitle {
     font-size: clamp(1.25rem, 1.5vw, 2rem);
   }
@@ -4278,7 +4667,7 @@ body.using-mouse :focus {
     background-size: cover;
     background-position: center top;
   }
-  
+
   .container {
     max-width: 1800px;
   }
@@ -4290,17 +4679,17 @@ body.using-mouse :focus {
     height: 80vh;
     min-height: 500px;
   }
-  
+
   .hero-title {
     font-size: clamp(2.5rem, 6vw, 3.5rem);
   }
-  
+
   .about-content,
   .season-panel {
     grid-template-columns: 1fr;
     gap: var(--space-10);
   }
-  
+
   .season-nav {
     justify-content: center;
     max-width: 400px;
@@ -4314,52 +4703,54 @@ body.using-mouse :focus {
     height: 100vh;
     background-attachment: scroll;
   }
-  
+
   .hero-content {
     padding: var(--space-2);
   }
-  
+
   .hero-title {
     font-size: clamp(1.25rem, 5vw, 2rem);
     margin-bottom: var(--space-3);
     line-height: 1.3;
   }
-  
+
   .hero-subtitle {
     font-size: clamp(0.875rem, 2.5vw, 1.125rem);
     margin-bottom: var(--space-4);
   }
-  
+
   .hero-actions {
     flex-direction: row;
     gap: var(--space-2);
   }
-  
+
   .cta-button {
     padding: var(--space-2) var(--space-4);
     font-size: var(--text-sm);
   }
-  
+
   .header {
     padding: var(--space-2) 0;
   }
-  
+
   .nav-container {
     padding: var(--space-2) var(--space-4);
   }
-  
+
   .logo {
     font-size: var(--text-lg);
   }
 }
 
 /* ===== 高DPIディスプレイ最適化 ===== */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
   .hero,
-.about-image {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-}
+  .about-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
 }
 
 /* ===== 折りたたみデバイスサポート ===== */
@@ -4367,31 +4758,31 @@ body.using-mouse :focus {
   .container {
     padding: 0 var(--space-2);
   }
-  
+
   .hero-content {
     padding: var(--space-2);
   }
-  
+
   .hero-title {
     font-size: clamp(1.25rem, 8vw, 1.75rem);
   }
-  
+
   .hero-title br {
     display: none;
   }
-  
+
   .hero-subtitle {
     font-size: clamp(0.875rem, 4vw, 1rem);
   }
-  
+
   .nav-container {
     padding: var(--space-2);
   }
-  
+
   .logo {
     font-size: var(--text-base);
   }
-  
+
   .season-nav {
     display: flex;
     flex-direction: row;
@@ -4408,11 +4799,11 @@ body.using-mouse :focus {
     padding: var(--space-1);
     flex-shrink: 0;
   }
-  
+
   .season-icon {
     font-size: var(--text-base);
   }
-  
+
   .season-name {
     font-size: 0.75rem;
   }
@@ -4427,14 +4818,14 @@ body.using-mouse :focus {
     color: black;
     padding: var(--space-8) 0;
   }
-  
+
   .hero-actions,
   .season-nav,
   .nav-menu,
   .social-links {
     display: none;
   }
-  
+
   .season-panel {
     display: block !important;
     page-break-inside: avoid;
@@ -4447,7 +4838,7 @@ body.using-mouse :focus {
   .feature {
     will-change: auto;
   }
-  
+
   .hero {
     transform: translateZ(0);
   }
@@ -4455,13 +4846,14 @@ body.using-mouse :focus {
 
 /* ===== タッチデバイス最適化 ===== */
 @media (hover: none) and (pointer: coarse) {
+
   .cta-button:hover,
   .season-btn:hover,
   .social-link:hover,
   .feature:hover {
     transform: none;
   }
-  
+
   .cta-button:active {
     transform: scale(0.98);
   }
@@ -4469,7 +4861,7 @@ body.using-mouse :focus {
   .season-btn:active {
     transform: none;
   }
-  
+
   /* タッチターゲットサイズを増大 */
   .nav-menu a,
   .season-btn,
@@ -4490,71 +4882,87 @@ body.using-mouse :focus {
 /* ===== 水の波紋エフェクト - 和風美学の強化 ===== */
 /* 画面全体に表示される水面の波紋効果コンテナ */
 .ripple-container {
-  position: fixed;           /* 画面に固定配置し、スクロールに影響されない */
+  position: fixed;
+  /* 画面に固定配置し、スクロールに影響されない */
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none;      /* マウスイベントを透過させる */
-  z-index: 1;               /* 背景より上、コンテンツより下に表示 */
-  overflow: hidden;          /* コンテナ外の波紋を隠す */
-  mix-blend-mode: overlay;   /* 背景と美しく合成 */
-  background-color: rgba(47, 63, 79, 0.05);  /* 薄い和風グレー */
-  transform: translateZ(0);  /* ハードウェアアクセラレーション有効化 */
-  will-change: auto;         /* コンテナ自体はアニメーションしない */
-  contain: strict;           /* CSS封じ込めによりパフォーマンス最適化 */
+  pointer-events: none;
+  /* マウスイベントを透過させる */
+  z-index: 1;
+  /* 背景より上、コンテンツより下に表示 */
+  overflow: hidden;
+  /* コンテナ外の波紋を隠す */
+  mix-blend-mode: overlay;
+  /* 背景と美しく合成 */
+  background-color: rgba(47, 63, 79, 0.05);
+  /* 薄い和風グレー */
+  transform: translateZ(0);
+  /* ハードウェアアクセラレーション有効化 */
+  will-change: auto;
+  /* コンテナ自体はアニメーションしない */
+  contain: strict;
+  /* CSS封じ込めによりパフォーマンス最適化 */
 }
 
 
 /* 墨絵の美学を持つ基本波紋エフェクト */
 .ripple {
-  position: absolute;        /* 絶対位置でクリック位置に表示 */
-  border-radius: 50%;        /* 完全な円形 */
+  position: absolute;
+  /* 絶対位置でクリック位置に表示 */
+  border-radius: 50%;
+  /* 完全な円形 */
   /* 墨が水に滲むような放射状グラデーション */
-  background: radial-gradient(
-    circle,
-    rgba(47, 63, 79, 0.12) 0%,    /* 中心部：濃い墨色 */
-    rgba(47, 63, 79, 0.08) 20%,   /* 内側：やや薄い */
-    rgba(47, 63, 79, 0.04) 50%,   /* 中間：さらに薄く */
-    rgba(47, 63, 79, 0.02) 75%,   /* 外側：かすか */
-    transparent 95%               /* 端：完全透明 */
-  );
-  transform: scale(0);       /* 初期状態は縮小 */
+  background: radial-gradient(circle,
+      rgba(47, 63, 79, 0.12) 0%,
+      /* 中心部：濃い墨色 */
+      rgba(47, 63, 79, 0.08) 20%,
+      /* 内側：やや薄い */
+      rgba(47, 63, 79, 0.04) 50%,
+      /* 中間：さらに薄く */
+      rgba(47, 63, 79, 0.02) 75%,
+      /* 外側：かすか */
+      transparent 95%
+      /* 端：完全透明 */
+    );
+  transform: scale(0);
+  /* 初期状態は縮小 */
   /* 2.8秒かけてゆっくりと拡大・消失 */
   animation: rippleEffect 2.8s cubic-bezier(0.25, 0.65, 0.35, 1) forwards;
-  pointer-events: none;      /* マウスイベント透過 */
-  filter: blur(0.5px);       /* わずかなぼかしで自然さ演出 */
+  pointer-events: none;
+  /* マウスイベント透過 */
+  filter: blur(0.5px);
+  /* わずかなぼかしで自然さ演出 */
   /* 水面の反射を表現する影効果 */
-  box-shadow: 
-    0 0 15px rgba(47, 63, 79, 0.08),     /* 外側の柔らかい光 */
-    inset 0 0 8px rgba(47, 63, 79, 0.04);  /* 内側の深み */
+  box-shadow:
+    0 0 15px rgba(47, 63, 79, 0.08),
+    /* 外側の柔らかい光 */
+    inset 0 0 8px rgba(47, 63, 79, 0.04);
+  /* 内側の深み */
 }
 
 /* 墨絵美学を持つ鯉池の波紋バリエーション */
 .ripple.large {
-  background: radial-gradient(
-    circle,
-    rgba(47, 63, 79, 0.18) 0%,
-    rgba(47, 63, 79, 0.12) 25%,
-    rgba(47, 63, 79, 0.06) 50%,
-    rgba(47, 63, 79, 0.03) 75%,
-    transparent 95%
-  );
+  background: radial-gradient(circle,
+      rgba(47, 63, 79, 0.18) 0%,
+      rgba(47, 63, 79, 0.12) 25%,
+      rgba(47, 63, 79, 0.06) 50%,
+      rgba(47, 63, 79, 0.03) 75%,
+      transparent 95%);
   animation: rippleEffectLarge 3.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   filter: blur(0.8px);
-  box-shadow: 
+  box-shadow:
     0 0 25px rgba(47, 63, 79, 0.1),
     inset 0 0 12px rgba(47, 63, 79, 0.06);
 }
 
 .ripple.small {
-  background: radial-gradient(
-    circle,
-    rgba(47, 63, 79, 0.1) 0%,
-    rgba(47, 63, 79, 0.06) 40%,
-    rgba(47, 63, 79, 0.03) 70%,
-    transparent 95%
-  );
+  background: radial-gradient(circle,
+      rgba(47, 63, 79, 0.1) 0%,
+      rgba(47, 63, 79, 0.06) 40%,
+      rgba(47, 63, 79, 0.03) 70%,
+      transparent 95%);
   animation: rippleEffectSmall 2.2s cubic-bezier(0.25, 0.65, 0.35, 1) forwards;
   filter: blur(0.3px);
   box-shadow: 0 0 12px rgba(47, 63, 79, 0.06);
@@ -4562,16 +4970,14 @@ body.using-mouse :focus {
 
 /* 墨絵の墨汁のひどみ効果 */
 .ripple.elegant {
-  background: radial-gradient(
-    circle,
-    rgba(47, 63, 79, 0.14) 0%,
-    rgba(75, 85, 99, 0.08) 30%,
-    rgba(107, 114, 128, 0.04) 60%,
-    rgba(156, 163, 175, 0.02) 80%,
-    transparent 95%
-  );
+  background: radial-gradient(circle,
+      rgba(47, 63, 79, 0.14) 0%,
+      rgba(75, 85, 99, 0.08) 30%,
+      rgba(107, 114, 128, 0.04) 60%,
+      rgba(156, 163, 175, 0.02) 80%,
+      transparent 95%);
   filter: blur(0.6px);
-  box-shadow: 
+  box-shadow:
     0 0 18px rgba(47, 63, 79, 0.08),
     0 0 35px rgba(47, 63, 79, 0.04);
   animation: rippleElegant 3s cubic-bezier(0.25, 0.65, 0.35, 1) forwards;
@@ -4579,13 +4985,11 @@ body.using-mouse :focus {
 
 /* 微細な水面のゆらぎ */
 .ripple.subtle {
-  background: radial-gradient(
-    circle,
-    rgba(75, 85, 99, 0.08) 0%,
-    rgba(107, 114, 128, 0.05) 40%,
-    rgba(156, 163, 175, 0.02) 70%,
-    transparent 95%
-  );
+  background: radial-gradient(circle,
+      rgba(75, 85, 99, 0.08) 0%,
+      rgba(107, 114, 128, 0.05) 40%,
+      rgba(156, 163, 175, 0.02) 70%,
+      transparent 95%);
   filter: blur(0.8px);
   box-shadow: 0 0 15px rgba(75, 85, 99, 0.04);
   animation: rippleSubtle 3.2s cubic-bezier(0.25, 0.65, 0.35, 1) forwards;
@@ -4599,7 +5003,7 @@ body.using-mouse :focus {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
+  background-image:
     /* 細かい紙の繊維 */
     radial-gradient(ellipse 2px 1px at 25% 30%, rgba(247, 244, 233, 0.025) 0%, transparent 70%),
     radial-gradient(ellipse 1px 2px at 70% 65%, rgba(245, 240, 225, 0.02) 0%, transparent 80%),
@@ -4611,159 +5015,206 @@ body.using-mouse :focus {
   pointer-events: none;
   mix-blend-mode: overlay;
   opacity: 0.6;
-  will-change: auto; /* Don't animate this layer */
+  will-change: auto;
+  /* Don't animate this layer */
 }
 
 
 /* Refined seasonal ripple colors */
 body[data-season="spring"] .ripple:not(.elegant):not(.subtle) {
-  background: radial-gradient(
-    circle,
-    rgba(255, 182, 193, 0.12) 0%,
-    rgba(255, 192, 203, 0.08) 40%,
-    rgba(255, 228, 225, 0.04) 70%,
-    transparent 95%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 182, 193, 0.12) 0%,
+      rgba(255, 192, 203, 0.08) 40%,
+      rgba(255, 228, 225, 0.04) 70%,
+      transparent 95%);
   box-shadow: 0 0 30px rgba(255, 182, 193, 0.08);
 }
 
 body[data-season="summer"] .ripple:not(.elegant):not(.subtle) {
-  background: radial-gradient(
-    circle,
-    rgba(127, 255, 212, 0.1) 0%,
-    rgba(175, 238, 238, 0.06) 40%,
-    rgba(224, 255, 255, 0.03) 70%,
-    transparent 95%
-  );
+  background: radial-gradient(circle,
+      rgba(127, 255, 212, 0.1) 0%,
+      rgba(175, 238, 238, 0.06) 40%,
+      rgba(224, 255, 255, 0.03) 70%,
+      transparent 95%);
   box-shadow: 0 0 30px rgba(127, 255, 212, 0.06);
 }
 
 body[data-season="autumn"] .ripple:not(.elegant):not(.subtle) {
-  background: radial-gradient(
-    circle,
-    rgba(222, 184, 135, 0.1) 0%,
-    rgba(245, 222, 179, 0.06) 40%,
-    rgba(255, 248, 220, 0.03) 70%,
-    transparent 95%
-  );
+  background: radial-gradient(circle,
+      rgba(222, 184, 135, 0.1) 0%,
+      rgba(245, 222, 179, 0.06) 40%,
+      rgba(255, 248, 220, 0.03) 70%,
+      transparent 95%);
   box-shadow: 0 0 30px rgba(222, 184, 135, 0.06);
 }
 
 body[data-season="winter"] .ripple:not(.elegant):not(.subtle) {
-  background: radial-gradient(
-    circle,
-    rgba(230, 230, 250, 0.1) 0%,
-    rgba(248, 248, 255, 0.06) 40%,
-    rgba(255, 250, 250, 0.03) 70%,
-    transparent 95%
-  );
+  background: radial-gradient(circle,
+      rgba(230, 230, 250, 0.1) 0%,
+      rgba(248, 248, 255, 0.06) 40%,
+      rgba(255, 250, 250, 0.03) 70%,
+      transparent 95%);
   box-shadow: 0 0 30px rgba(230, 230, 250, 0.06);
 }
 
 /* 静寂な和風美学 - ゆっくりと穏やかなアニメーション */
 @keyframes rippleEffect {
   0% {
-    transform: scale(0);       /* 開始：点から */
-    opacity: 0.3;              /* 初期不透明度：やや見える */
+    transform: scale(0);
+    /* 開始：点から */
+    opacity: 0.3;
+    /* 初期不透明度：やや見える */
   }
+
   15% {
-    opacity: 0.25;             /* 早期段階：少し薄く */
+    opacity: 0.25;
+    /* 早期段階：少し薄く */
   }
+
   50% {
-    opacity: 0.15;             /* 中間：さらに薄く */
+    opacity: 0.15;
+    /* 中間：さらに薄く */
   }
+
   85% {
-    opacity: 0.05;             /* 後期：かすかに */
+    opacity: 0.05;
+    /* 後期：かすかに */
   }
+
   100% {
-    transform: scale(1);       /* 終了：完全拡大 */
-    opacity: 0;                /* 完全透明で消失 */
+    transform: scale(1);
+    /* 終了：完全拡大 */
+    opacity: 0;
+    /* 完全透明で消失 */
   }
 }
 
 /* 大きな波紋アニメーション - よりゆっくりと優雅に */
 @keyframes rippleEffectLarge {
   0% {
-    transform: scale(0);       /* 開始：中心点から */
-    opacity: 0.35;             /* 初期：やや濃く表示 */
+    transform: scale(0);
+    /* 開始：中心点から */
+    opacity: 0.35;
+    /* 初期：やや濃く表示 */
   }
+
   20% {
-    opacity: 0.25;             /* 早期：穏やかに薄く */
+    opacity: 0.25;
+    /* 早期：穏やかに薄く */
   }
+
   50% {
-    opacity: 0.18;             /* 中間：自然な透明度 */
+    opacity: 0.18;
+    /* 中間：自然な透明度 */
   }
+
   80% {
-    opacity: 0.08;             /* 後期：ほぼ透明 */
+    opacity: 0.08;
+    /* 後期：ほぼ透明 */
   }
+
   100% {
-    transform: scale(1);       /* 終了：最大サイズ */
-    opacity: 0;                /* 完全消失 */
+    transform: scale(1);
+    /* 終了：最大サイズ */
+    opacity: 0;
+    /* 完全消失 */
   }
 }
 
 /* 小さな波紋アニメーション - 素早く繊細に */
 @keyframes rippleEffectSmall {
   0% {
-    transform: scale(0);       /* 開始：点から */
-    opacity: 0.25;             /* 初期：適度な可視性 */
+    transform: scale(0);
+    /* 開始：点から */
+    opacity: 0.25;
+    /* 初期：適度な可視性 */
   }
+
   30% {
-    opacity: 0.18;             /* 早期：やや薄く */
+    opacity: 0.18;
+    /* 早期：やや薄く */
   }
+
   70% {
-    opacity: 0.08;             /* 後期：かすかに */
+    opacity: 0.08;
+    /* 後期：かすかに */
   }
+
   100% {
-    transform: scale(1);       /* 終了：完全拡大 */
-    opacity: 0;                /* 消失 */
+    transform: scale(1);
+    /* 終了：完全拡大 */
+    opacity: 0;
+    /* 消失 */
   }
 }
 
 /* 60fps達成のためのパフォーマンス最適化 */
 .ripple {
-  will-change: transform, opacity;    /* 変化するプロパティを事前に通知 */
-  backface-visibility: hidden;        /* 裏面レンダリングを無効化 */
-  perspective: 1000px;                /* 3D変換の遠近感設定 */
-  transform: translateZ(0);           /* ハードウェアアクセラレーション強制有効化 */
-  contain: layout style paint;        /* CSS封じ込めによる最適化 */
+  will-change: transform, opacity;
+  /* 変化するプロパティを事前に通知 */
+  backface-visibility: hidden;
+  /* 裏面レンダリングを無効化 */
+  perspective: 1000px;
+  /* 3D変換の遠近感設定 */
+  transform: translateZ(0);
+  /* ハードウェアアクセラレーション強制有効化 */
+  contain: layout style paint;
+  /* CSS封じ込めによる最適化 */
 }
 
 /* 洗練されたパーティクル効果の最適化 */
 .refined-particle {
-  will-change: transform, opacity;    /* 変化予告でパフォーマンス向上 */
-  backface-visibility: hidden;        /* 不要な裏面計算を削減 */
-  transform: translateZ(0);           /* GPU処理を促進 */
-  contain: layout style paint;        /* レイアウト影響を局所化 */
+  will-change: transform, opacity;
+  /* 変化予告でパフォーマンス向上 */
+  backface-visibility: hidden;
+  /* 不要な裏面計算を削減 */
+  transform: translateZ(0);
+  /* GPU処理を促進 */
+  contain: layout style paint;
+  /* レイアウト影響を局所化 */
 }
 
 /* 優雅な光沢効果の最適化 */
 .gentle-glow {
-  will-change: transform, opacity;    /* 変化プロパティの事前宣言 */
-  backface-visibility: hidden;        /* 裏面表示を無効化 */
-  transform: translateZ(0);           /* ハードウェア処理を促進 */
-  contain: layout style paint;        /* 影響範囲を制限 */
+  will-change: transform, opacity;
+  /* 変化プロパティの事前宣言 */
+  backface-visibility: hidden;
+  /* 裏面表示を無効化 */
+  transform: translateZ(0);
+  /* ハードウェア処理を促進 */
+  contain: layout style paint;
+  /* 影響範囲を制限 */
 }
 
 /* 金色系エフェクト全体の最適化 */
-.gold-sparkle,    /* 金の輝き */
-.gold-particle,   /* 金のパーティクル */
-.gold-shimmer,    /* 金のきらめき */
-.gold-flake,      /* 金箔片 */
-.gold-burst {     /* 金の爆発効果 */
-  will-change: transform, opacity;    /* アニメーション最適化 */
-  backface-visibility: hidden;        /* 裏面計算削減 */
-  transform: translateZ(0);           /* GPU処理有効化 */
-  contain: layout style paint;        /* パフォーマンス封じ込め */
+.gold-sparkle,
+/* 金の輝き */
+.gold-particle,
+/* 金のパーティクル */
+.gold-shimmer,
+/* 金のきらめき */
+.gold-flake,
+/* 金箔片 */
+.gold-burst {
+  /* 金の爆発効果 */
+  will-change: transform, opacity;
+  /* アニメーション最適化 */
+  backface-visibility: hidden;
+  /* 裏面計算削減 */
+  transform: translateZ(0);
+  /* GPU処理有効化 */
+  contain: layout style paint;
+  /* パフォーマンス封じ込め */
 }
 
 /* 動きを抑えたアクセシビリティ対応 */
 /* 前庭機能障害やモーション酔いを持つユーザーへの配慮 */
 @media (prefers-reduced-motion: reduce) {
   .ripple-container {
-    display: none;                    /* 波紋コンテナを完全非表示 */
+    display: none;
+    /* 波紋コンテナを完全非表示 */
   }
-  
+
   /* 全てのアニメーション要素を無効化 */
   .ripple,
   .gold-sparkle,
@@ -4771,8 +5222,10 @@ body[data-season="winter"] .ripple:not(.elegant):not(.subtle) {
   .gold-shimmer,
   .gold-flake,
   .gold-burst {
-    animation: none;                  /* アニメーション無効 */
-    opacity: 0;                       /* 完全透明で非表示 */
+    animation: none;
+    /* アニメーション無効 */
+    opacity: 0;
+    /* 完全透明で非表示 */
   }
 }
 
@@ -4781,492 +5234,557 @@ body[data-season="winter"] .ripple:not(.elegant):not(.subtle) {
 @media (prefers-contrast: high) {
   .ripple {
     /* 暗い背景用：黒ベースの高コントラスト波紋 */
-    background: radial-gradient(
-      circle,
-      rgba(0, 0, 0, 0.5) 0%,          /* 中心：濃い黒 */
-      rgba(0, 0, 0, 0.3) 30%,         /* 中間：やや薄い黒 */
-      rgba(0, 0, 0, 0.1) 60%,         /* 外側：薄い黒 */
-      transparent 90%                  /* 端：透明 */
-    );
+    background: radial-gradient(circle,
+        rgba(0, 0, 0, 0.5) 0%,
+        /* 中心：濃い黒 */
+        rgba(0, 0, 0, 0.3) 30%,
+        /* 中間：やや薄い黒 */
+        rgba(0, 0, 0, 0.1) 60%,
+        /* 外側：薄い黒 */
+        transparent 90%
+        /* 端：透明 */
+      );
   }
-  
+
   .ripple {
     /* 明るい背景用：白ベースの高コントラスト波紋 */
-    background: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.5) 0%,    /* 中心：濃い白 */
-      rgba(255, 255, 255, 0.3) 30%,   /* 中間：やや薄い白 */
-      rgba(255, 255, 255, 0.1) 60%,   /* 外側：薄い白 */
-      transparent 90%                  /* 端：透明 */
-    );
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.5) 0%,
+        /* 中心：濃い白 */
+        rgba(255, 255, 255, 0.3) 30%,
+        /* 中間：やや薄い白 */
+        rgba(255, 255, 255, 0.1) 60%,
+        /* 外側：薄い白 */
+        transparent 90%
+        /* 端：透明 */
+      );
   }
 }
 
 /* ===== グローバルリセット - 統一されたベーススタイル ===== */
 * {
-    margin: 0;                      /* 全要素の外側余白をリセット */
-    padding: 0;                     /* 全要素の内側余白をリセット */
-    box-sizing: border-box;         /* パディングとボーダーを幅に含めるボックスモデル */
+  margin: 0;
+  /* 全要素の外側余白をリセット */
+  padding: 0;
+  /* 全要素の内側余白をリセット */
+  box-sizing: border-box;
+  /* パディングとボーダーを幅に含めるボックスモデル */
 }
 
 /* ===== CSSカスタムプロパティ - メインテーマカラーとサイズ ===== */
 :root {
-    /* メインカラーパレット */
-    --primary: #6366f1;             /* メインブランドカラー（インディゴ） */
-    --secondary: #f59e0b;           /* セカンダリーカラー（アンバー） */
-    --accent: #ec4899;              /* アクセントカラー（ピンク） */
-    --neutral: #374151;             /* ニュートラルグレー */
-    --background: #111827;          /* 背景色（ダークグレー） */
-    --text: #f9fafb;                /* メインテキスト色（ライトグレー） */
-    --shadow: rgba(0, 0, 0, 0.3);   /* 汎用シャドウ色 */
-    
-    /* スペーシングシステム */
-    --space-4: 1rem;                /* 基本スペーシング（16px） */
-    --space-6: 1.5rem;              /* 中サイズスペーシング（24px） */
-    --space-8: 2rem;                /* 大サイズスペーシング（32px） */
-    
-    /* レスポンシブタイポグラフィシステム */
-    --text-2xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);   /* 大きなタイトル */
-    --text-5xl: clamp(3rem, 2.5rem + 2vw, 4rem);       /* 特大タイトル */
-    --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem); /* 中タイトル */
-    
-    /* デザインシステム */
-    --radius-lg: 1rem;              /* 大きな角丸半径 */
-    --transition-normal: 300ms ease-in-out; /* 標準アニメーション時間 */
+  /* メインカラーパレット */
+  --primary: #6366f1;
+  /* メインブランドカラー（インディゴ） */
+  --secondary: #f59e0b;
+  /* セカンダリーカラー（アンバー） */
+  --accent: #ec4899;
+  /* アクセントカラー（ピンク） */
+  --neutral: #374151;
+  /* ニュートラルグレー */
+  --background: #111827;
+  /* 背景色（ダークグレー） */
+  --text: #f9fafb;
+  /* メインテキスト色（ライトグレー） */
+  --shadow: rgba(0, 0, 0, 0.3);
+  /* 汎用シャドウ色 */
+
+  /* スペーシングシステム */
+  --space-4: 1rem;
+  /* 基本スペーシング（16px） */
+  --space-6: 1.5rem;
+  /* 中サイズスペーシング（24px） */
+  --space-8: 2rem;
+  /* 大サイズスペーシング（32px） */
+
+  /* レスポンシブタイポグラフィシステム */
+  --text-2xl: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  /* 大きなタイトル */
+  --text-5xl: clamp(3rem, 2.5rem + 2vw, 4rem);
+  /* 特大タイトル */
+  --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  /* 中タイトル */
+
+  /* デザインシステム */
+  --radius-lg: 1rem;
+  /* 大きな角丸半径 */
+  --transition-normal: 300ms ease-in-out;
+  /* 標準アニメーション時間 */
 }
 
 
 /* ===== ボディ基本設定 - サイト全体のベーススタイル ===== */
 body {
-    /* フォントシステム：システムフォント優先で可読性を確保 */
-    font-family: var(--ff-mincho);
-    line-height: 1.6;                    /* 読みやすい行間設定 */
-    color: var(--text);                   /* メインテキスト色を適用 */
-    background-color: var(--background); /* メイン背景色を適用 */
-    overflow-x: hidden;                   /* 横スクロールを無効化 */
-    min-height: 100dvh;                   /* ビューポートの最低高さを保証 */
-    position: relative;                   /* 位置基準を設定 */
-    z-index: 0;                          /* スタッキングコンテキストを作成 */
+  /* フォントシステム：システムフォント優先で可読性を確保 */
+  font-family: var(--ff-mincho);
+  line-height: 1.6;
+  /* 読みやすい行間設定 */
+  color: var(--text);
+  /* メインテキスト色を適用 */
+  background-color: var(--background);
+  /* メイン背景色を適用 */
+  overflow-x: hidden;
+  /* 横スクロールを無効化 */
+  min-height: 100dvh;
+  /* ビューポートの最低高さを保証 */
+  position: relative;
+  /* 位置基準を設定 */
+  z-index: 0;
+  /* スタッキングコンテキストを作成 */
 }
 
 /* ===== ヘッダースタイル - 即座表示用 ===== */
 .header {
-    position: fixed;                              /* 画面上部に固定表示 */
-    top: 0;
-    left: 0;
-    right: 0;
-    min-height: var(--header-height);
-    background-image: url('../images/backgrounds/背景_黒和紙.webp'); /* 和風背景紙 */
-    background-size: cover;                       /* 背景を全体にカバー */
-    background-repeat: repeat;                    /* 背景の繰り返し */
-    background-color: rgba(8, 12, 20, 0.9);
-    backdrop-filter: blur(10px);                  /* 背景ブラー効果 */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* 下端の微かなボーダー */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);     /* 深い影で立体感 */
-    z-index: var(--z-fixed);                      /* 他要素より前面に表示 */
-    transition: all var(--transition-normal);     /* スムーズな状態変化 */
-    isolation: isolate;                           /* 子要素の重なり管理を安定させる */
+  position: fixed;
+  /* 画面上部に固定表示 */
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: var(--header-height);
+  background-image: url('../images/backgrounds/背景_黒和紙.webp');
+  /* 和風背景紙 */
+  background-size: cover;
+  /* 背景を全体にカバー */
+  background-repeat: repeat;
+  /* 背景の繰り返し */
+  background-color: rgba(8, 12, 20, 0.9);
+  backdrop-filter: blur(10px);
+  /* 背景ブラー効果 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  /* 下端の微かなボーダー */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  /* 深い影で立体感 */
+  z-index: var(--z-fixed);
+  /* 他要素より前面に表示 */
+  transition: all var(--transition-normal);
+  /* スムーズな状態変化 */
+  isolation: isolate;
+  /* 子要素の重なり管理を安定させる */
 }
 
 /* ナビゲーションコンテナ - ヘッダー内部レイアウト */
 .nav-container {
-    display: flex;                      /* フレックスボックスレイアウト */
-    align-items: center;                /* 垂直中央揃え */
-    justify-content: space-between;     /* 水平方向に等間隔配置 */
-    padding: var(--space-4);            /* 統一した内側余白 */
-    padding-top: max(var(--space-3), env(safe-area-inset-top));
-    max-width: 1200px;                  /* 最大幅制限 */
-    margin: 0 auto;                     /* 中央揃え */
+  display: flex;
+  /* フレックスボックスレイアウト */
+  align-items: center;
+  /* 垂直中央揃え */
+  justify-content: space-between;
+  /* 水平方向に等間隔配置 */
+  padding: var(--space-4);
+  /* 統一した内側余白 */
+  padding-top: max(var(--space-3), env(safe-area-inset-top));
+  max-width: 1200px;
+  /* 最大幅制限 */
+  margin: 0 auto;
+  /* 中央揃え */
 }
 
 /* ロゴスタイル - ブランドアイデンティティ */
 .logo {
-    font-size: var(--text-2xl);         /* レスポンシブな大きなサイズ */
-    font-weight: 800;                   /* 太字で印象的に */
-    color: var(--primary);              /* ブランドカラーを適用 */
-    margin: 0;                          /* デフォルトマージンを除去 */
+  font-size: var(--text-2xl);
+  /* レスポンシブな大きなサイズ */
+  font-weight: 800;
+  /* 太字で印象的に */
+  color: var(--primary);
+  /* ブランドカラーを適用 */
+  margin: 0;
+  /* デフォルトマージンを除去 */
 }
 
 .nav-menu {
-    display: flex;
-    align-items: center;
-    gap: var(--space-8);
-    list-style: none;
-    margin: 0;
-    z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  list-style: none;
+  margin: 0;
+  z-index: var(--z-modal);
 }
 
 @media (max-width: 767px) {
-    .nav-menu {
-        display: none;
-    }
+  .nav-menu {
+    display: none;
+  }
 }
 
 /* ===== ヒーローセクション - メインビジュアル重要スタイル ===== */
 .hero {
-    height: 100vh;                      /* フルスクリーン高さ */
-    min-height: 600px;                  /* 最低高さを保証 */
-    /* メインビジュアルとオーバーレイを組み合わせ */
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../images/portraits/秀歌-メインビジュアル.webp');
-    background-size: cover;             /* 背景画像を全体にカバー */
-    background-position: center top;    /* 上部中央に配置 */
-    background-attachment: fixed;       /* 背景固定（パララックス効果） */
-    display: flex;                      /* フレックスボックスレイアウト */
-    align-items: center;                /* 垂直中央揃え */
-    justify-content: center;            /* 水平中央揃え */
-    text-align: center;                 /* テキスト中央揃え */
-    color: white;                       /* テキスト色を白に */
-    position: relative;                 /* 相对位置指定 */
+  height: 100vh;
+  /* フルスクリーン高さ */
+  min-height: 600px;
+  /* 最低高さを保証 */
+  /* メインビジュアルとオーバーレイを組み合わせ */
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/portraits/秀歌-メインビジュアル.webp');
+  background-size: cover;
+  /* 背景画像を全体にカバー */
+  background-position: center top;
+  /* 上部中央に配置 */
+  background-attachment: fixed;
+  /* 背景固定（パララックス効果） */
+  display: flex;
+  /* フレックスボックスレイアウト */
+  align-items: center;
+  /* 垂直中央揃え */
+  justify-content: center;
+  /* 水平中央揃え */
+  text-align: center;
+  /* テキスト中央揃え */
+  color: white;
+  /* テキスト色を白に */
+  position: relative;
+  /* 相对位置指定 */
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .hero {
-        background-attachment: scroll;
-    }
+  .hero {
+    background-attachment: scroll;
+  }
 }
 
 @media (max-width: 767px) {
-    .hero {
-        background-attachment: scroll;
-        height: 100dvh;
-    }
+  .hero {
+    background-attachment: scroll;
+    /* スマホ版メインビジュアル - 縦長画面に最適化された画像 */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/portraits/秀歌-メインビジュアル-スマホ版.webp');
+    height: 100dvh;
+  }
 }
 
 .hero-content {
-    max-width: 800px;
-    padding: var(--space-4);
-    padding-top: calc(var(--header-height) + env(safe-area-inset-top));
-    z-index: 2;
-    position: relative;
+  max-width: 800px;
+  padding: var(--space-4);
+  padding-top: calc(var(--header-height) + env(safe-area-inset-top));
+  z-index: 2;
+  position: relative;
 }
 
 .hero-title {
-    font-size: var(--text-5xl);
-    font-weight: 800;
-    margin-bottom: var(--space-6);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  margin-bottom: var(--space-6);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .hero-subtitle {
-    font-size: var(--text-xl);
-    margin-bottom: var(--space-8);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .hero-actions {
-    display: flex;
-    gap: var(--space-4);
-    justify-content: center;
-    flex-wrap: wrap;
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-4);
-    padding: var(--space-4) var(--space-6);
-    border: none;
-    border-radius: var(--radius-lg);
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
 }
 
 .cta-button.primary {
-    background: linear-gradient(135deg, var(--primary), #8b5cf6);
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .cta-button.secondary {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
 }
 
 /* Skip link styles removed (feature not used) */
 
 /* Loading state to prevent FOUC */
 body:not(.loaded) * {
-    transition: none !important;
+  transition: none !important;
 }
 
 /* ===== プロ和紙フッター 2025 ===== */
 .footer {
-    background-image: url('../images/backgrounds/背景_黒和紙.webp');
-    background-size: cover;
-    background-repeat: repeat;
-    border-top: 3px double rgba(0,0,0,0.12);
-    box-shadow: 0 -4px 6px rgba(0,0,0,0.4);
-    color: var(--neutral-300);
-    line-height: 1.8;
+  background-image: url('../images/backgrounds/背景_黒和紙.webp');
+  background-size: cover;
+  background-repeat: repeat;
+  border-top: 3px double rgba(0, 0, 0, 0.12);
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.4);
+  color: var(--neutral-300);
+  line-height: 1.8;
 }
 
 
 .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-12);
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+  justify-content: space-between;
 }
 
 .footer-brand {
-    flex: 1 1 260px;
+  flex: 1 1 260px;
 }
 
 .footer-section {
-    margin-left: auto;
-    text-align: right;
+  margin-left: auto;
+  text-align: right;
 }
 
 .footer-section .social-links {
-    flex-direction: row;
-    justify-content: flex-end;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .footer-links {
-    flex: 1 1 260px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .footer-logo {
-    font-family: var(--ff-mincho);
-    font-size: 1.5rem;
-    letter-spacing: .04em;
-    margin-bottom: var(--space-4);
+  font-family: var(--ff-mincho);
+  font-size: 1.5rem;
+  letter-spacing: .04em;
+  margin-bottom: var(--space-4);
 }
 
 .footer-description {
-    color: inherit;
+  color: inherit;
 }
 
 .footer-section-title {
-    font-family: var(--ff-mincho);
-    font-size: 1.125rem;
-    letter-spacing: .05em;
-    color: currentColor;
-    position: relative;
-    margin-bottom: var(--space-6);
+  font-family: var(--ff-mincho);
+  font-size: 1.125rem;
+  letter-spacing: .05em;
+  color: currentColor;
+  position: relative;
+  margin-bottom: var(--space-6);
 }
 
 .footer-section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent, #8c3d08), transparent);
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent, #8c3d08), transparent);
 }
 
 /* ソーシャルアイコン */
 .footer-social {
-    display: flex;
-    gap: var(--space-4);
+  display: flex;
+  gap: var(--space-4);
 }
 
 .footer-social .social-link {
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    border: none;
-    background: transparent;
-    transition: all 0.2s ease;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  transition: all 0.2s ease;
 }
 
 .footer-social .social-link:hover {
-    transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.06);
-    opacity: 0.8;
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.06);
+  opacity: 0.8;
 }
 
 .footer a {
-    color: currentColor;
-    transition: color 0.2s ease-in-out;
+  color: currentColor;
+  transition: color 0.2s ease-in-out;
 }
 
 .footer a:hover,
 .footer a:focus {
-    color: #8c3d08; /* koge-cha accent */
+  color: #8c3d08;
+  /* koge-cha accent */
 }
 
 .footer-bottom {
-    margin-top: var(--space-12);
-    border-top: 1px solid rgba(0,0,0,0.1);
-    padding-top: var(--space-6);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    font-size: var(--text-sm);
+  margin-top: var(--space-12);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-sm);
 }
 
 /* Mobile responsive - 767px and below */
 @media (max-width: 767px) {
-    .footer {
-        padding: var(--space-12) 0 var(--space-8);
-        position: relative;
-        isolation: isolate;
-    }
+  .footer {
+    padding: var(--space-12) 0 var(--space-8);
+    position: relative;
+    isolation: isolate;
+  }
 
-    .footer::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.35));
-        opacity: 0.9;
-        z-index: 0;
-    }
+  .footer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.35));
+    opacity: 0.9;
+    z-index: 0;
+  }
 
-    .footer .container {
-        position: relative;
-        z-index: 1;
-        padding: var(--space-8) var(--space-6);
-        border-radius: var(--radius-lg);
-        background: rgba(17, 24, 39, 0.82);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(8px);
-    }
+  .footer .container {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-8) var(--space-6);
+    border-radius: var(--radius-lg);
+    background: rgba(17, 24, 39, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+  }
 
-    .footer-content {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: var(--space-6);
-        text-align: center;
-        justify-items: center;
-    }
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    text-align: center;
+    justify-items: center;
+  }
 
-    .footer-brand,
-    .footer-section {
-        margin: 0;
-        width: 100%;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+  .footer-brand,
+  .footer-section {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .footer-logo {
-        margin-bottom: var(--space-3);
-        font-size: 1.6rem;
-    }
+  .footer-logo {
+    margin-bottom: var(--space-3);
+    font-size: 1.6rem;
+  }
 
-    .footer-description {
-        margin: 0;
-        color: var(--neutral-200);
-    }
+  .footer-description {
+    margin: 0;
+    color: var(--neutral-200);
+  }
 
-    .footer-section-title {
-        width: 100%;
-        text-align: center;
-        margin-bottom: var(--space-3);
-    }
+  .footer-section-title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: var(--space-3);
+  }
 
-    .footer-section .social-links,
-    .footer-social {
-        justify-content: center;
-        align-items: center;
-        gap: var(--space-3);
-        width: 100%;
-        margin-top: var(--space-3);
-    }
-    
-    .footer .social-link,
-    .footer-social .social-link {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-    }
+  .footer-section .social-links,
+  .footer-social {
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    margin-top: var(--space-3);
+  }
 
-    .footer-bottom {
-        margin-top: var(--space-8);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: var(--space-5);
-    }
+  .footer .social-link,
+  .footer-social .social-link {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  }
 
-    .footer-bottom-content {
-        justify-content: center;
-        text-align: center;
-        gap: var(--space-2);
-    }
-    
-    .creator-info {
-        justify-content: center !important;
-        text-align: center;
-        flex-direction: row;
-        white-space: nowrap;
-    }
+  .footer-bottom {
+    margin-top: var(--space-8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--space-5);
+  }
 
-    .copyright {
-        width: 100%;
-        color: var(--neutral-200);
-    }
+  .footer-bottom-content {
+    justify-content: center;
+    text-align: center;
+    gap: var(--space-2);
+  }
+
+  .creator-info {
+    justify-content: center !important;
+    text-align: center;
+    flex-direction: row;
+    white-space: nowrap;
+  }
+
+  .copyright {
+    width: 100%;
+    color: var(--neutral-200);
+  }
 }
 
 @media (max-width: 540px) {
-    .footer .container {
-        padding: var(--space-6) var(--space-5);
-        border-radius: calc(var(--radius-lg) - 0.25rem);
-    }
+  .footer .container {
+    padding: var(--space-6) var(--space-5);
+    border-radius: calc(var(--radius-lg) - 0.25rem);
+  }
 
-    .footer-logo {
-        font-size: 1.5rem;
-    }
+  .footer-logo {
+    font-size: 1.5rem;
+  }
 
-    .footer .social-link,
-    .footer-social .social-link {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-    }
+  .footer .social-link,
+  .footer-social .social-link {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
 }
 
 /* Creator section styling */
 .creator-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-start;
 }
 
 .creator-avatar {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .creator-name {
-    font-weight: 500;
-    color: var(--text);
+  font-weight: 500;
+  color: var(--text);
 }
 
 .creator-label {
-    color: var(--text-secondary, var(--text));
+  color: var(--text-secondary, var(--text));
 }
 
 .creator-info .social-link {
-    font-size: 1.8rem;
-    color: var(--accent);
-    transition: opacity .3s;
-    text-decoration: none;
-    margin-left: 0.25rem;
+  font-size: 1.8rem;
+  color: var(--accent);
+  transition: opacity .3s;
+  text-decoration: none;
+  margin-left: 0.25rem;
 }
 
 .creator-info .social-link:hover {
-    opacity: .6;
+  opacity: .6;
 }
 
 .creator-info .social-icon-img {
-    transition: all var(--transition-normal);
+  transition: all var(--transition-normal);
 }
 
 /* ===== レスポンシブ微調整（全体適用） ===== */
@@ -5338,6 +5856,7 @@ body:not(.loaded) * {
 
 /* セクションの余白とグリッドの圧縮 */
 @media (max-width: 768px) {
+
   .about,
   .gallery {
     padding: var(--space-16) 0;
