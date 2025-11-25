@@ -42,71 +42,34 @@ ShukaApp.data.SEASON_LABELS = {
 
 /**
  * アクセシビリティ機能強化
- * 
- * 目的:
- * - キーボードナビゲーションとスクリーンリーダー対応を改善
- * - マウスとキーボードの使用状況を追跡してフォーカス表示を最適化
  */
 function initAccessibilityFeatures() {
-  // マウス使用状況の追跡（フォーカス管理のため）
-  // マウスクリック時は視覚的なフォーカス表示を無効化
   document.addEventListener('mousedown', () => document.body.classList.add('using-mouse'));
-
 }
 
 
 
 /**
  * Navigation Module
- *
- * 役割:
- * - アンカースクロールのスムーズ化
- * - スクロール位置に応じたヘッダー挙動（必要に応じて）
- * - アクティブナビゲーションの更新
- *
- * パフォーマンス配慮:
- * - スクロール/ポインタイベントは `passive: true` を基本にし、
- *   レイアウトスラッシングを避けるため `requestAnimationFrame`/スロットリングの検討余地あり。
  */
-
 class Navigation {
-  /**
-   * コンストラクタ - ナビゲーション要素の初期化
-   */
   constructor() {
-    // DOM要素の取得
-    this.navMenu = document.getElementById('nav-menu'); // メニュー要素
-    this.navLinks = document.querySelectorAll('.nav-menu a[href^="#"]'); // アンカーリンク群
-    this.header = document.getElementById('header'); // ヘッダー要素
-    this.menuToggle = document.getElementById('menu-toggle'); // モバイル用トグル
+    this.navMenu = document.getElementById('nav-menu');
+    this.navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+    this.header = document.getElementById('header');
+    this.menuToggle = document.getElementById('menu-toggle');
     this.toggleMenu = this.toggleMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.handleResize = this.handleResize.bind(this);
-
-    // 初期化処理の実行
     this.init();
   }
 
-  /**
-   * 初期化処理
-   * - イベントバインディング
-   * - スクロール処理の初期実行
-   */
   init() {
     this.bindEvents();
     this.handleScroll();
   }
 
-  /**
-   * イベントリスナーのバインディング
-   * - スムーズスクロール
-   * - 外部クリック検知
-   * - スクロール検知
-   * - キーボード操作
-   */
   bindEvents() {
-
-    // アンカーリンクでのスムーズスクロール
     this.navLinks.forEach(link => {
       link.addEventListener('click', (e) => this.handleSmoothScroll(e));
     });
@@ -135,64 +98,36 @@ class Navigation {
 
     // スクロール時のヘッダースタイル変更
     window.addEventListener('scroll', () => this.handleScroll());
-
   }
 
   isMobileNav() {
     return window.matchMedia('(max-width: 767px)').matches;
   }
 
-
-  /**
-   * スムーズスクロール処理
-   * アンカーリンククリック時の処理
-   * - ページ内の指定セクションにスムーズにスクロール
-   * - URLを更新してブックマーク対応
-   * - アクティブなナビゲーションリンクを更新
-   */
   handleSmoothScroll(e) {
-    e.preventDefault(); // デフォルトのリンク動作を無効化
+    e.preventDefault();
 
-    const targetId = e.target.getAttribute('href').substring(1); // #を除いたIDを取得
+    const targetId = e.target.getAttribute('href').substring(1);
     const targetElement = document.getElementById(targetId);
 
     this.closeMenu();
 
     if (targetElement) {
-
-      // 固定ヘッダーの高さを考慮したオフセット計算
       const headerHeight = this.header.offsetHeight;
       const targetPosition = targetElement.offsetTop - headerHeight;
 
-      // ネイティブのスムーズスクロール（遅延最小化）
       window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-
-      // スクロールをトリガーせずにURLを更新
       history.pushState(null, null, `#${targetId}`);
-
-      // アクティブなナビゲーションリンクを更新
       this.updateActiveNavLink(targetId);
     }
   }
 
-  /**
-   * カスタムスムーズスクロール（イージング付き）
-   * - より細かなアニメーション制御が必要な場合に使用
-   * - ease-in-out-cubic イージング関数を使用
-   */
-  // smoothScrollTo は未使用のため削除しました（ネイティブの window.scrollTo を使用）
-
-  /**
-   * アクティブナビゲーションリンクの更新
-   * - 現在のセクションに対応するナビゲーションリンクにアクティブクラスを付与
-   * - アクセシビリティのためにaria-current属性を設定
-   */
   updateActiveNavLink(activeId) {
     this.navLinks.forEach(link => {
-      const href = link.getAttribute('href').substring(1); // #を除いたリンクのID
+      const href = link.getAttribute('href').substring(1);
       if (href === activeId) {
         link.classList.add('active');
-        link.setAttribute('aria-current', 'page'); // 現在のページを示すARIA属性
+        link.setAttribute('aria-current', 'page');
       } else {
         link.classList.remove('active');
         link.removeAttribute('aria-current');
@@ -233,39 +168,26 @@ class Navigation {
 
 
 
-  /**
-   * スクロールイベント処理
-   * - ヘッダーのスタイル変更（スクロール時の背景変更など）
-   * - スクロール位置に応じたアクティブナビゲーションの更新
-   */
   handleScroll() {
-    const scrolled = window.pageYOffset; // 現在のスクロール位置
-    const threshold = 100; // ヘッダースタイル変更の閾値
+    const scrolled = window.pageYOffset;
+    const threshold = 100;
 
-    // 閾値を超えたらヘッダーにスクロールクラスを追加
     if (scrolled > threshold) {
       this.header.classList.add('scrolled');
     } else {
       this.header.classList.remove('scrolled');
     }
 
-    // スクロール位置に基づくアクティブナビゲーションの更新
     this.updateActiveNavOnScroll();
   }
 
-  /**
-   * スクロール位置に基づくアクティブナビゲーションの更新
-   * - 現在表示されているセクションを判定
-   * - 対応するナビゲーションリンクをアクティブ状態にする
-   */
   updateActiveNavOnScroll() {
-    const sections = ['home', 'about', 'gallery', 'contact']; // チェック対象のセクションID
-    const headerHeight = this.header.offsetHeight; // ヘッダーの高さ
-    const scrollPosition = window.pageYOffset + headerHeight + 100; // 判定位置（オフセット付き）
+    const sections = ['home', 'about', 'gallery', 'contact'];
+    const headerHeight = this.header.offsetHeight;
+    const scrollPosition = window.pageYOffset + headerHeight + 100;
 
-    let activeSection = 'home'; // デフォルトはホームセクション
+    let activeSection = 'home';
 
-    // 各セクションの位置をチェックして現在のセクションを特定
     for (const sectionId of sections) {
       const section = document.getElementById(sectionId);
       if (section && scrollPosition >= section.offsetTop) {
@@ -273,25 +195,19 @@ class Navigation {
       }
     }
 
-    // アクティブナビゲーションリンクを更新
     this.updateActiveNavLink(activeSection);
   }
 }
 
-/**
- * 外部使用用のユーティリティ関数
- * - 外部からセクションにスクロールする際に使用
- * - ヘッダーの高さを考慮したスムーズスクロール
- */
+// ヘッダー高さを考慮したスムーズスクロール
 ShukaApp.utils.scrollToSection = function (sectionId) {
   const targetElement = document.getElementById(sectionId);
   const header = document.getElementById('header');
 
   if (targetElement && header) {
-    const headerHeight = header.offsetHeight; // ヘッダー高さ取得
-    const targetPosition = targetElement.offsetTop - headerHeight; // オフセット計算
+    const headerHeight = header.offsetHeight;
+    const targetPosition = targetElement.offsetTop - headerHeight;
 
-    // スムーズスクロールでターゲット位置に移動
     window.scrollTo({
       top: targetPosition,
       behavior: 'smooth'
@@ -300,24 +216,12 @@ ShukaApp.utils.scrollToSection = function (sectionId) {
 };
 
 
-// モジュールシステム用のエクスポート設定
-// CommonJS環境での利用を可能にする
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = Navigation;
 }
-/**
- * 季節モジュール
- * - YouTubeのMVを季節フィルタで表示する軽量ギャラリー
- * - クリック時にiframeを生成するライト埋め込みでパフォーマンス最適化
- */
 
 /**
- * SeasonsGallery
- *
- * 役割:
- * - 季節ナビ/パネルの生成と切替
- * - YouTube埋め込みの遅延ロード
- * - 背景テーマ・ARIAの同期更新
+ * 季節ギャラリー（YouTube MV表示・フィルタリング）
  */
 class SeasonsGallery {
   constructor(videos = []) {

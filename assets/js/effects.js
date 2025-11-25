@@ -1,15 +1,9 @@
 /**
  * 季節エフェクトモジュール
- * 
- * 機能:
- * - 各季節の降下物エフェクト（雨、桜など）
- * - Canvas を使用した自然なアニメーション
- * - レスポンシブ対応とパフォーマンス最適化
+ * 各季節の降下物エフェクト（雨、桜、雪、紅葉、柳）をCanvas描画で実装
  */
 
-/**
- * 共通: スタイルを一度だけ注入するユーティリティ（夏柳CSSで使用）
- */
+// スタイル注入ユーティリティ
 function injectStyleOnce(id, cssText) {
   if (document.getElementById(id)) return;
   const styleEl = document.createElement('style');
@@ -18,8 +12,7 @@ function injectStyleOnce(id, cssText) {
   document.head.appendChild(styleEl);
 }
 
-// エフェクトのシングルトン管理ヘルパ
-// - 各エフェクトの enable/disable の重複ロジックを共通化
+// エフェクト制御の共通化ヘルパ
 function createEffectController(EffectClass, globalKey) {
   let instance = null;
   return {
@@ -29,7 +22,6 @@ function createEffectController(EffectClass, globalKey) {
         // デバッグ/他モジュール参照用に window にも公開
         window[globalKey] = instance;
       } else if (instance.canvas) {
-        // 既存インスタンスの場合は再表示
         instance.canvas.style.display = '';
       }
     },
@@ -43,28 +35,22 @@ function createEffectController(EffectClass, globalKey) {
   };
 }
 
-/**
- * 共有ユーティリティ（非破壊導入）
- * 現時点では既存クラスからは呼び出さず、フェーズ2以降で段階的に置換することを想定。
- */
-
-// 値のクランプ
+// 共有ユーティリティ関数群
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
-// 線形補間
 function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
-// ビューポート幅に応じた密度算出（例: factor=10 なら width/10 個）
+// ビューポート幅に応じた密度算出
 function computeDensity(viewWidth, factor, min = 0, max = Infinity) {
   const raw = Math.floor(viewWidth / Math.max(1, factor));
   return clamp(raw, min, max);
 }
 
-// deltaTime（秒）を取得するクロックを生成
+// deltaTime クロック生成
 function createDeltaClock() {
   let last = performance.now();
   return function tick() {
@@ -75,7 +61,7 @@ function createDeltaClock() {
   };
 }
 
-// フルスクリーン固定のキャンバス用CSSを生成（重複定義の削減・可読性向上）
+// フルスクリーンキャンバス用CSS生成
 function makeFullScreenCanvasCSS(className, opacity) {
   return `
 .${className} {
@@ -91,9 +77,7 @@ function makeFullScreenCanvasCSS(className, opacity) {
 `;
 }
 
-// 風モデルの更新ヘルパ
-// state: { wind:number, windTarget:number, lastWindChange:number }
-// opts: { interval:number(ms), ease:number(0-1), range:number }
+// 風モデル更新
 function updateWind(state, now, opts = {}) {
   const interval = opts.interval ?? 4000;
   const ease = clamp(opts.ease ?? 0.02, 0, 1);
@@ -107,56 +91,30 @@ function updateWind(state, now, opts = {}) {
   return state.wind;
 }
 
-// （削除済み）未使用の visibility 連動ユーティリティとスタイル注入ユーティリティは保守性向上のため除去
-
 /**
- * 雨エフェクトモジュール（梅雨季専用）
- * 
- * 機能:
- * - リアルな雨粒の降下アニメーション
- * - 風の影響による自然な雨の軌道
- * - 没入感のある密度とエフェクト
- * - 梅雨の季節感を演出する没入感のある密度
+ * 雨エフェクト（梅雨季専用）
  */
 class RainEffect {
-  /**
-   * コンストラクタ - 雨エフェクトの初期化
-   */
   constructor() {
-    // Canvas要素の作成と設定
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'rain-canvas';
     this.ctx = this.canvas.getContext('2d');
     document.body.appendChild(this.canvas);
-    
-    // キャンバスサイズを初期設定（以後リサイズしない）
+
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
 
-    // 雨粒の初期化
-    this.drops = []; // 雨粒オブジェクトの配列
-    // より没入感のある梅雨エフェクトのために雨粒密度を増加
-    this.dropCount = computeDensity(window.innerWidth, 2.5); // 密度の高い雨を生成（共有関数）
+    this.drops = [];
+    this.dropCount = computeDensity(window.innerWidth, 2.5);
     for (let i = 0; i < this.dropCount; i++) {
       this.drops.push(this.createRaindrop(true));
     }
 
-    // フレームレート非依存化のための deltaClock（現状は可視化影響なし）
     this._tick = createDeltaClock();
-
-    // 風モデルの状態（雨では現状使用しないが、将来拡張のため導入）
     this._wind = { wind: 0, windTarget: 0, lastWindChange: performance.now() };
-
-    // アニメーションの開始
     this._running = true;
     this.animate();
   }
-
-  // リサイズ処理は無効化（初期設定のみ）
-
-  /**
-   * 雨粒オブジェクトの生成
-   */
   createRaindrop(randomY = false) {
     return {
       x: Math.random() * this.canvas.width,
@@ -167,22 +125,16 @@ class RainEffect {
     };
   }
 
-  /**
-   * アニメーションループ
-   */
   animate() {
-    if (!this._running || !this.canvas.parentNode) return; // 停止条件
+    if (!this._running || !this.canvas.parentNode) return;
 
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // 共有の風モデル更新（雨では range=0 で無効化し、挙動は従来通り）
     const { now } = this._tick ? this._tick() : { now: performance.now(), deltaSec: 0 };
     updateWind(this._wind, now, { interval: 3500, ease: 0.05, range: 0 });
 
-    // 雨粒の描画と更新
     for (const drop of this.drops) {
-      // 雨粒の描画
       ctx.strokeStyle = `rgba(174, 194, 224, ${drop.opacity})`;
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -190,10 +142,8 @@ class RainEffect {
       ctx.lineTo(drop.x, drop.y + drop.length);
       ctx.stroke();
 
-      // 雨粒の移動
       drop.y += drop.speed;
 
-      // 画面下端に達したら上端にリセット
       if (drop.y > this.canvas.height + 50) {
         drop.x = Math.random() * this.canvas.width;
         drop.y = -drop.length;
@@ -203,10 +153,6 @@ class RainEffect {
 
     if (this._running) requestAnimationFrame(() => this.animate());
   }
-
-  /**
-   * 雨エフェクトの破棄処理
-   */
   destroy() {
     this._running = false;
     if (this._onResize) window.removeEventListener('resize', this._onResize);
@@ -217,160 +163,101 @@ class RainEffect {
 }
 
 /**
- * 桜エフェクトモジュール（春季専用）
- * 
- * 機能:
- * - 舞い散る桜の花びらアニメーション
- * - 風の変化による自然な動き
- * - 春の季節感を演出するエレガントな密度
+ * 桜エフェクト（春季専用）
  */
 class SakuraEffect {
-  /**
-   * コンストラクタ - 桜エフェクトの初期化
-   */
   constructor() {
-    // Canvas要素の作成と設定
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'sakura-canvas';
-    this.ctx = this.canvas.getContext('2d'); // 2D描画コンテキスト
+    this.ctx = this.canvas.getContext('2d');
     document.body.appendChild(this.canvas);
-    
-    // キャンバスサイズを初期設定（以後リサイズしない）
+
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-    // 初期倍率を一度だけ算出
     this.sizeMultiplier = this.getSizeMultiplier();
 
-    // 花びらの初期化
-    this.petals = []; // 花びらオブジェクトの配列
-    // エレガントな春エフェクトのための桜の花びら密度（共有関数に置換）
+    this.petals = [];
     this.petalCount = computeDensity(window.innerWidth, 15);
-    
-    // 春のそよ風のための風変数
     this.wind = 0;
     this.windTarget = 0;
     this.lastWindChange = performance.now();
-    // フレームレート非依存化のための deltaClock（視覚への影響なし）
     this._tick = createDeltaClock();
-    
+
     this.initializePetals();
     this._running = true;
     this.animate();
   }
 
-  // リサイズ処理は無効化（初期設定のみ）
-
-  /**
-   * デバイスサイズ倍率の計算 - 画面サイズに応じた適切なスケーリング
-   * 768pxを基準として画面サイズに応じた花びらのスケール倍率を算出
-   * @returns {number} 0.6から1.2の範囲で制限されたサイズ倍率
-   * @description モバイル端末では小さめの花びら、大画面では大きめの花びらで調整。
-   *              どのデバイスでも美しい桜の演出を提供し、春の美しさを最大化
-   */
   getSizeMultiplier() {
     const ratio = window.innerWidth / 768;
     return Math.max(0.6, Math.min(1.2, ratio));
   }
 
-  /**
-   * 花びらの初期化 - 春の美しい桜の花びらを初期配置
-   * @description 春の訪れとともに桜が満開する美しい情景を再現。
-   */
   initializePetals() {
     for (let i = 0; i < this.petalCount; i++) {
       this.petals.push(this.createPetal(true));
     }
   }
 
-  /**
-   * 桜の花びらオブジェクトの生成 - 繊細で優美な花びらの物理的特性を再現
-   * 春のそよ風に舞う桜の花びらの自然な動きを総合的に表現
-   * @param {boolean} randomY - Y座標をランダムに設定するかどうか（初期化時用）
-   * @returns {Object} 花びらの物理プロパティを含むオブジェクト
-   * @description 日本の春を代表する桜の花びらの美しい動きを再現。風への反応、
-   *              穏やかな回転、優雅な揺れ、変化に富んだ色彩などを統合した美しい演出
-   */
   createPetal(randomY = false) {
-    // 自然な揺らぎを追加するため、位相・ゆらぎ量を持たせる
     return {
       x: Math.random() * this.canvas.width,
       y: randomY ? Math.random() * this.canvas.height : -20,
-      // 少しだけ大きく（+約15〜20%）
-      size: (7 + Math.random() * 13) * this.sizeMultiplier, // レスポンシブな花びらサイズ
-      // 垂直速度をやや広めにして個体差を出す
-      speed: 0.35 + Math.random() * 0.8, // 穏やかな落下速度
-      opacity: 0.7 + Math.random() * 0.3, // 視認性向上のための高い透明度
-      // ドリフトの幅を少し増やして緩やかな蛇行を演出
-      drift: (Math.random() - 0.5) * 0.6, // 水平方向のドリフト
-      rotationSpeed: (Math.random() - 0.5) * 2, // 穏やかな回転
+      size: (7 + Math.random() * 13) * this.sizeMultiplier,
+      speed: 0.35 + Math.random() * 0.8,
+      opacity: 0.7 + Math.random() * 0.3,
+      drift: (Math.random() - 0.5) * 0.6,
+      rotationSpeed: (Math.random() - 0.5) * 2,
       rotation: Math.random() * Math.PI * 2,
-      turbulence: 0.25 + Math.random() * 0.5, // 穏やかな乱気流（0.25〜0.75）
-      phase: Math.random() * Math.PI * 2, // 個体ごとの位相
-      petalType: Math.floor(Math.random() * 3), // 異なる花びらの形
+      turbulence: 0.25 + Math.random() * 0.5,
+      phase: Math.random() * Math.PI * 2,
+      petalType: Math.floor(Math.random() * 3),
       color: this.getSakuraColor()
     };
   }
 
-  /**
-   * 桜の伝統色の取得 - 日本の桜に忠実な美しいカラーパレット
-   * 伝統的な桜の色合いからランダムに選択し、自然な色合いのバラエティを作成
-   * @returns {Object} RGB値を含む色情報オブジェクト
-   * @description 深いピンクから純白まで、桜の花びらが持つ繊細な色合いのグラデーションを再現。
-   *              日本の春の美しさを忠実に表現する精巧な色彩設計
-   */
   getSakuraColor() {
-    // 伝統的な桜の色合い - 柔らかなピンクと白
     const colors = [
-      { r: 255, g: 182, b: 193 }, // 淡いピンク
-      { r: 255, g: 192, b: 203 }, // ピンク
-      { r: 255, g: 228, b: 225 }, // 薄いピンク
-      { r: 255, g: 240, b: 245 }, // ごく薄いピンク
-      { r: 255, g: 255, b: 255 }, // 純白
+      { r: 255, g: 182, b: 193 },
+      { r: 255, g: 192, b: 203 },
+      { r: 255, g: 228, b: 225 },
+      { r: 255, g: 240, b: 245 },
+      { r: 255, g: 255, b: 255 },
     ];
     return colors[Math.floor(Math.random() * colors.length)];
   }
 
-  /**
-   * アニメーションループ
-   */
   animate() {
-    if (!this._running || !this.canvas.parentNode) return; // 停止条件
+    if (!this._running || !this.canvas.parentNode) return;
 
     const ctx = this.ctx;
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    // 共有の風モデル更新（既存と同一パラメータ: interval=4000ms, ease=0.015, range=2.5）
     const { now } = this._tick ? this._tick() : { now: performance.now(), deltaSec: 0 };
     updateWind(this, now, { interval: 4000, ease: 0.015, range: 2.5 });
 
     for (const petal of this.petals) {
       ctx.globalAlpha = petal.opacity;
-      
+
       ctx.save();
       ctx.translate(petal.x, petal.y);
       ctx.rotate(petal.rotation);
-      
-      // 花びらの色を設定
+
       const { r, g, b } = petal.color;
       ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${petal.opacity})`;
-      
-      // Draw sakura petal
+
       this.drawSakuraPetal(ctx, 0, 0, petal.size, petal.petalType);
-      
+
       ctx.restore();
 
-      // 花びらの移動（自然な揺らぎを加える）
-      // ゆっくりとした左右の揺れ + わずかな上下のゆらぎ + 穏やかな回転
       const tSec = now / 1000;
       const sway = Math.sin(tSec * (0.8 + petal.turbulence) + petal.phase) * (0.6 + petal.turbulence * 1.4);
       petal.x += this.wind + petal.drift + sway * 0.6;
       petal.y += petal.speed + Math.cos(tSec * 0.9 + petal.phase) * 0.15;
       petal.rotation += petal.rotationSpeed * 0.015 + Math.sin(tSec * 0.6 + petal.phase) * 0.002;
 
-      // 画面外に出たら上端から再生成
-      if (petal.y > this.canvas.height + 50 || 
+      if (petal.y > this.canvas.height + 50 ||
           petal.x < -50 || petal.x > this.canvas.width + 50) {
-        // 新しい花びらとして再初期化
         const newPetal = this.createPetal(false);
         Object.assign(petal, newPetal);
       }
@@ -380,21 +267,7 @@ class SakuraEffect {
     if (this._running) requestAnimationFrame(() => this.animate());
   }
 
-  /**
-   * リアルな桜の花びらの描画
-   * 
-   * 機能:
-   * - 日本の桜の品種に基づいた3つの花びらタイプを描画
-   * - type 0: ソメイヨシノ風のハート型花びら
-   * - type 1: ヤマザクラ風の深い切れ込みを持つ花びら
-   * - type 2: シダレザクラ風の丸みを帯びた花びら
-   * 
-   * @param {CanvasRenderingContext2D} ctx - 描画コンテキスト
-   * @param {number} cx - 中心X座標
-   * @param {number} cy - 中心Y座標
-   * @param {number} size - 花びらサイズ
-   * @param {number} type - 花びらの種類（0-2）
-   */
+  // 桜の花びら描画（3種類の形状）
   drawSakuraPetal(ctx, cx, cy, size, type) {
     const scale = size / 10;
     
@@ -565,80 +438,48 @@ const rainCSS = makeFullScreenCanvasCSS('rain-canvas', 0.6);
 injectStyleOnce('rain-effect-style', rainCSS);
 
 /**
- * 雪エフェクトモジュール（冬季専用）
- * 
- * 機能:
- * - Canvas上に美しい雪の結晶アニメーションを描画
- * - 穏やかな風の変化による自然な雪の舞い
- * - 日本の冬の静寂で美しい雪景を演出
+ * 雪エフェクト（冬季専用）
  */
 class SnowEffect {
-  /**
-   * コンストラクタ - 雪エフェクトの初期化
-   * 日本の冬の美しい雪景を再現するための設定と初期化
-   */
   constructor() {
-    // Canvas要素の作成と設定
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'snow-canvas';
     this.ctx = this.canvas.getContext('2d');
     document.body.appendChild(this.canvas);
 
-    // キャンバスサイズを初期設定（以後リサイズしない）
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
     this.sizeMultiplier = this.getSizeMultiplier();
 
-    // 雪片の初期化
     this.flakes = [];
-    // 画面幅に基づく雪の密度（共有関数に置換）- 雨よりも稀な密度で静寂な冬を表現
     this.flakeCount = computeDensity(window.innerWidth, 8);
     for (let i = 0; i < this.flakeCount; i++) {
       this.flakes.push(this.createFlake(true));
     }
 
-    // 穏やかな漂いのための風変数
     this.wind = 0;
     this.windTarget = 0;
     this.lastWindChange = performance.now();
-    // フレームレート非依存化のための deltaClock（視覚への影響なし）
     this._tick = createDeltaClock();
     this.animate = this.animate.bind(this);
     this._running = true;
     if (this._running) requestAnimationFrame(this.animate);
   }
 
-  // リサイズ処理は無効化（初期設定のみ）
-
-  /**
-   * デバイスサイズ倍率の計算 - 画面サイズに応じた適切なスケーリング
-   * 768pxを基準として画面サイズに応じた雪片のスケール倍率を算出
-   * @returns {number} 0.6から1.2の範囲で制限されたサイズ倍率
-   * @description モバイル端末では小さめの雪片、大画面では大きめの雪片で調整。
-   *              どのデバイスでも美しい雪の演出を提供し、冬の静寂な美しさを最大化
-   */
   getSizeMultiplier() {
     const ratio = window.innerWidth / 768;
     return Math.min(Math.max(ratio, 0.6), 1.2);
   }
 
-  /**
-   * 雪片オブジェクトの生成 - 本物の雪の結晶の美しさを再現
-   * 日本の冬に特有の繊細で美しい雪片の物理的特性を総合的に表現
-   * @param {boolean} randomY - Y座標をランダムに設定するかどうか（初期化時用）
-   * @returns {Object} 雪片の物理プロパティを含むオブジェクト
-   * @description 雪らしい穏やかな落下速度、繊細な回転動作、横方向への漂いなど、
-   *              真の雪が持つ美しい特性をすべて再現したリアルな雪片オブジェクト
-   */
   createFlake(randomY = false) {
     return {
       x: Math.random() * this.canvas.width,
       y: randomY ? Math.random() * this.canvas.height : -20,
-      size: (2 + Math.random() * 6) * this.sizeMultiplier, // レスポンシブな雪片サイズ
-      speed: 0.5 + Math.random() * 1.5, // 雨よりも遅い穏やかな落下
-      opacity: 0.4 + Math.random() * 0.6, // 雨よりも目立つ透明度
-      drift: Math.random() * 0.5 - 0.25, // 左右への漂い動作
-      rotationSpeed: (Math.random() - 0.5) * 2, // リアルさのための回転
+      size: (2 + Math.random() * 6) * this.sizeMultiplier,
+      speed: 0.5 + Math.random() * 1.5,
+      opacity: 0.4 + Math.random() * 0.6,
+      drift: Math.random() * 0.5 - 0.25,
+      rotationSpeed: (Math.random() - 0.5) * 2,
       rotation: 0
     };
   }
