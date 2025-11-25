@@ -327,6 +327,12 @@ class SeasonsGallery {
     this.navOrder = ['all', 'spring', 'summer', 'autumn', 'winter', 'none'];
     this.currentSeason = 'all';
     this.availableSeasons = this.getAvailableSeasons();
+
+    // ページネーション設定
+    this.itemsPerPage = 6; // 1回に表示する件数
+    this.displayCounts = {}; // 各季節ごとの現在の表示件数を保持
+    this.availableSeasons.forEach(s => this.displayCounts[s] = this.itemsPerPage);
+
     this.render();
     this.bindEvents();
     this.updateSeasonBackground('tsuyu', 'all');
@@ -360,23 +366,96 @@ class SeasonsGallery {
       `;
     }).join('');
 
-    const panels = this.availableSeasons.map((season, index) => `
+    const panels = this.availableSeasons.map((season, index) => {
+      const allVideos = this.getVideosForSeason(season);
+      const count = this.displayCounts[season] || this.itemsPerPage;
+      const visibleVideos = allVideos.slice(0, count);
+      const hasMore = allVideos.length > count;
+
+      return `
       <div class="season-panel ${index === 0 ? 'active' : ''}"
            id="${season}-panel"
            role="tabpanel"
            aria-labelledby="${season}-tab"
            aria-hidden="${index === 0 ? 'false' : 'true'}"
            data-season="${season}">
-        <div class="mv-grid">
-          ${this.getVideosForSeason(season).map(video => this.buildCard(video)).join('')}
+        <div class="mv-grid" id="${season}-grid">
+          ${visibleVideos.map(video => this.buildCard(video)).join('')}
         </div>
+        ${hasMore ? `
+          <div class="load-more-container">
+            <button class="load-more-btn" data-season="${season}">
+              <span>Load More</span>
+              <svg class="icon" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+              <div class="load-more-spinner"></div>
+            </button>
+          </div>
+        ` : ''}
       </div>
-    `).join('');
+    `}).join('');
 
     this.seasonNav.innerHTML = navHTML;
     this.seasonContent.innerHTML = panels;
     this.seasonButtons = this.seasonNav.querySelectorAll('.season-btn');
     this.seasonPanels = this.seasonContent.querySelectorAll('.season-panel');
+
+    // もっと見るボタンのイベントバインド
+    this.bindLoadMoreButtons();
+  }
+
+  bindLoadMoreButtons() {
+    this.seasonContent.querySelectorAll('.load-more-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const season = e.currentTarget.getAttribute('data-season');
+        this.loadMore(season, e.currentTarget);
+      });
+    });
+  }
+
+  loadMore(season, btn) {
+    if (btn) {
+      btn.classList.add('loading');
+      const span = btn.querySelector('span');
+      if (span) span.textContent = 'Loading...';
+    }
+
+    // 擬似的なローディング遅延（UX向上）
+    setTimeout(() => {
+      const currentCount = this.displayCounts[season] || this.itemsPerPage;
+      const allVideos = this.getVideosForSeason(season);
+      const nextVideos = allVideos.slice(currentCount, currentCount + this.itemsPerPage);
+
+      this.displayCounts[season] = currentCount + this.itemsPerPage;
+
+      // グリッドに直接追加（再レンダリングしない）
+      const grid = document.getElementById(`${season}-grid`);
+      if (grid) {
+        const fragment = document.createDocumentFragment();
+        nextVideos.forEach((video, index) => {
+          const temp = document.createElement('div');
+          temp.innerHTML = this.buildCard(video);
+          const card = temp.firstElementChild;
+          card.classList.add('new-item');
+          card.style.animationDelay = `${index * 0.1}s`; // 順番に出現
+          fragment.appendChild(card);
+        });
+        grid.appendChild(fragment);
+      }
+
+      // ボタンの状態更新または削除
+      const hasMore = allVideos.length > this.displayCounts[season];
+      if (!hasMore && btn) {
+        const container = btn.closest('.load-more-container');
+        if (container) {
+          container.style.opacity = '0';
+          setTimeout(() => container.remove(), 500);
+        }
+      } else if (btn) {
+        btn.classList.remove('loading');
+        const span = btn.querySelector('span');
+        if (span) span.textContent = 'Load More';
+      }
+    }, 800); // 800msの遅延
   }
 
   bindEvents() {
@@ -476,7 +555,32 @@ class SeasonsGallery {
     const backgroundSeason = season === 'all' || season === 'none' ? 'tsuyu' : season;
     this.updateSeasonBackground(backgroundSeason, season);
     this.updateAboutImage(season);
+    this.updateAlbumVisibility(season); // アルバムの表示切り替え
     this.announceSeasonChange(season);
+  }
+
+  updateAlbumVisibility(season) {
+    const albumSection = document.getElementById('album');
+    if (!albumSection) return;
+
+    const albums = albumSection.querySelectorAll('.album-card');
+    let visibleCount = 0;
+
+    albums.forEach(album => {
+      const albumSeason = album.getAttribute('data-season');
+      // 'all'の場合は全て表示、それ以外はシーズン一致で表示
+      const isVisible = season === 'all' || albumSeason === season;
+
+      if (isVisible) {
+        album.style.display = ''; // デフォルトのdisplayに戻す（flex）
+        visibleCount++;
+      } else {
+        album.style.display = 'none';
+      }
+    });
+
+    // 表示するアルバムがない場合はセクションごと隠す（オプション）
+    // albumSection.style.display = visibleCount > 0 ? '' : 'none';
   }
 
   updateSeasonButtons() {
