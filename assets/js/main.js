@@ -1112,6 +1112,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (typeof initSeasonSelector === 'function')
       initSeasonSelector(); // 季節セレクターコンポーネントの初期化
+
+    initAlbumPlayers(); // アルバムプレイヤーの初期化
   };
 
   if ('requestIdleCallback' in window) {
@@ -1198,5 +1200,35 @@ function setupImageErrorHandling() {
   document.querySelectorAll('img').forEach(img => {
     // 各画像にエラーイベントリスナーを登録
     img.addEventListener('error', () => handleImageError(img));
+  });
+}
+
+/**
+ * アルバムプレイヤーの初期化
+ * - トラックリストのクリックイベントを処理
+ * - iframeの再生動画を切り替え
+ */
+function initAlbumPlayers() {
+  document.addEventListener('click', (e) => {
+    // .album-track またはその子要素がクリックされたか判定
+    const track = e.target.closest('.album-track');
+    if (!track) return;
+
+    // 必要なデータを取得
+    const videoId = track.dataset.videoId;
+    const playerList = track.closest('.album-tracks');
+    if (!playerList) return;
+
+    const playerId = playerList.dataset.playerId;
+    const iframe = document.getElementById(playerId);
+
+    if (iframe && videoId) {
+      // iframeのsrcを更新して動画を切り替え（自動再生）
+      iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1`;
+
+      // activeクラスの切り替え
+      playerList.querySelectorAll('.album-track').forEach(t => t.classList.remove('active'));
+      track.classList.add('active');
+    }
   });
 }
