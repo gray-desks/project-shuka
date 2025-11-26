@@ -408,6 +408,10 @@ a:focus {
   font-weight: 700;
   color: var(--primary);
   margin: 0;
+  white-space: nowrap;
+  /* Prevent wrapping */
+  flex-shrink: 0;
+  /* Prevent shrinking */
 }
 
 .logo a {
@@ -920,22 +924,98 @@ input:checked+.effect-toggle-slider:before {
     margin-top: auto;
     padding-top: var(--space-6);
   }
+
+  .season-dropdown-trigger {
+    display: none;
+    /* Hide trigger on mobile */
+  }
 }
 
 @media (min-width: 768px) {
   .nav-menu .season-select {
     margin-left: var(--space-4);
+    position: relative;
+    /* For dropdown positioning */
   }
 
+  /* Dropdown Trigger (Desktop Only) */
+  .season-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--ff-mincho);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .season-dropdown-trigger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary);
+  }
+
+  .season-dropdown-trigger .dropdown-arrow {
+    font-size: 0.8em;
+    opacity: 0.7;
+    transition: transform var(--transition-fast);
+  }
+
+  .season-select:hover .season-dropdown-trigger .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown Menu (Desktop) */
   .nav-menu .season-selector-buttons {
     display: flex;
-    flex-direction: row;
-    gap: var(--space-2);
+    flex-direction: column;
+    /* Stack vertically in dropdown */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    /* Align to right */
+    width: 200px;
+    background: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    padding: var(--space-2);
+    margin-top: var(--space-2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-normal);
+    z-index: var(--z-dropdown);
+  }
+
+  .nav-menu .season-select:hover .season-selector-buttons,
+  .nav-menu .season-select:focus-within .season-selector-buttons {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
   }
 
   .nav-menu .season-option {
-    grid-row: auto;
-    grid-column: auto;
+    width: 100%;
+    justify-content: flex-start;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-menu .season-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: none;
+    /* Disable lift effect in dropdown */
+  }
+
+  .nav-menu .season-option.active {
+    background: var(--primary);
+    color: white;
   }
 }
 
@@ -5226,5 +5306,59 @@ body:not(.loaded) * {
 
   .nav-menu .season-icon {
     font-size: 1rem;
+  }
+}
+
+/* Language Switcher */
+.lang-switch-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--ff-heading);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.lang-switch-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  padding: 2px 4px;
+  transition: color var(--transition-fast);
+  font-family: inherit;
+}
+
+.lang-switch-btn:hover,
+.lang-switch-btn.active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.lang-separator {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .lang-switch-item {
+    width: 100%;
+    margin-top: var(--space-4);
+    justify-content: center;
+  }
+
+  .lang-switch {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 24px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }

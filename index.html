@@ -155,47 +155,64 @@
                 </button>
 
                 <ul class="nav-menu" id="nav-menu" role="menubar">
-                    <li role="none"><a href="#home" role="menuitem">Home</a></li>
-                    <li role="none"><a href="#about" role="menuitem">About</a></li>
-                    <li role="none"><a href="#gallery" role="menuitem">Gallery</a></li>
-                    <li role="none"><a href="#album" role="menuitem">Album</a></li>
+                    <li role="none"><a href="#home" role="menuitem" data-i18n="nav.home">Home</a></li>
+                    <li role="none"><a href="#about" role="menuitem" data-i18n="nav.about">About</a></li>
+                    <li role="none"><a href="#gallery" role="menuitem" data-i18n="nav.gallery">Gallery</a></li>
+                    <li role="none"><a href="#album" role="menuitem" data-i18n="nav.album">Album</a></li>
                     <li role="none" class="season-select">
                         <span id="season-selector-label" class="sr-only">季節選択</span>
+
+                        <!-- Trigger Button for Desktop Dropdown -->
+                        <button type="button" class="season-dropdown-trigger" aria-haspopup="true" aria-expanded="false"
+                            aria-label="季節を選択">
+                            <span class="current-season-icon">★</span>
+                            <span class="current-season-text" data-i18n="nav.season.all">All</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+
                         <div id="season-selector" class="season-selector-buttons" role="radiogroup"
                             aria-labelledby="season-selector-label">
                             <button type="button" class="season-option" data-season="all">
                                 <span class="season-icon">★</span>
-                                <span class="season-text">All</span>
+                                <span class="season-text" data-i18n="nav.season.all">All</span>
                             </button>
                             <button type="button" class="season-option" data-season="spring">
                                 <span class="season-icon">🌸</span>
-                                <span class="season-text">春</span>
+                                <span class="season-text" data-i18n="nav.season.spring">春</span>
                             </button>
                             <button type="button" class="season-option" data-season="summer">
                                 <span class="season-icon">🌿</span>
-                                <span class="season-text">夏</span>
+                                <span class="season-text" data-i18n="nav.season.summer">夏</span>
                             </button>
                             <button type="button" class="season-option" data-season="autumn">
                                 <span class="season-icon">🍁</span>
-                                <span class="season-text">秋</span>
+                                <span class="season-text" data-i18n="nav.season.autumn">秋</span>
                             </button>
                             <button type="button" class="season-option" data-season="winter">
                                 <span class="season-icon">❄️</span>
-                                <span class="season-text">冬</span>
+                                <span class="season-text" data-i18n="nav.season.winter">冬</span>
                             </button>
                             <button type="button" class="season-option" data-season="none">
                                 <span class="season-icon">◎</span>
-                                <span class="season-text">その他</span>
+                                <span class="season-text" data-i18n="nav.season.other">その他</span>
                             </button>
                         </div>
                     </li>
                     <li role="none" class="effect-toggle-item">
                         <div class="effect-toggle-container">
-                            <span class="effect-toggle-text">降下物エフェクト</span>
+                            <span class="effect-toggle-text" data-i18n="nav.effects">降下物エフェクト</span>
                             <label class="effect-toggle-switch">
                                 <input type="checkbox" id="effect-toggle-checkbox" checked aria-label="降下物エフェクトのオンオフ">
                                 <span class="effect-toggle-slider"></span>
                             </label>
+                        </div>
+                    </li>
+                    <li role="none" class="lang-switch-item">
+                        <div class="lang-switch">
+                            <button type="button" class="lang-switch-btn" data-lang="ja" aria-label="日本語">JP</button>
+                            <span class="lang-separator">/</span>
+                            <button type="button" class="lang-switch-btn" data-lang="en"
+                                aria-label="English">EN</button>
                         </div>
                     </li>
                 </ul>
@@ -209,14 +226,16 @@
             <div class="hero-content">
                 <h2 id="hero-title" class="hero-title">
                     <span class="artist-name"><span class="jp">秀歌</span> - Shūka</span>
-                    <span class="tagline">四季を奏でる音楽アーティスト</span>
+                    <span class="tagline" data-i18n="hero.tagline">四季を奏でる音楽アーティスト</span>
                 </h2>
-                <p class="hero-subtitle">日本の情緒と現代サウンドが響き合う、新しい音楽体験</p>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">日本の情緒と現代サウンドが響き合う、新しい音楽体験</p>
                 <div class="hero-actions">
-                    <button class="cta-button primary" data-scroll-target="gallery" aria-label="ギャラリーを見る">
+                    <button class="cta-button primary" data-scroll-target="gallery" aria-label="ギャラリーを見る"
+                        data-i18n="hero.cta.gallery">
                         ギャラリーを見る
                     </button>
-                    <button class="cta-button secondary" data-scroll-target="about" aria-label="アーティストについて">
+                    <button class="cta-button secondary" data-scroll-target="about" aria-label="アーティストについて"
+                        data-i18n="hero.cta.about">
                         アーティストについて
                     </button>
                 </div>
@@ -228,8 +247,8 @@
             <div class="container">
                 <div class="about-content">
                     <div class="about-text">
-                        <h2 id="about-title" class="section-title">About Shūka</h2>
-                        <p class="about-intro">
+                        <h2 id="about-title" class="section-title" data-i18n="about.title">About Shūka</h2>
+                        <p class="about-intro" data-i18n="about.intro">
                             時を超え、心に響く「和」の記憶。<br>
                             四季の移ろい、静寂の美、古来の伝統。<br>
                             秀歌 -Shūka- は、それらを現代の感性で織りなし、新たな日本の世界観を紡ぎ出すプロジェクトです。
@@ -237,16 +256,19 @@
 
                         <div class="features">
                             <div class="feature">
-                                <h3 class="feature-title">和を奏でる</h3>
-                                <p>古来より受け継がれた日本の美学。その儚くも力強い息吹を、今、ここに表現します。変わらない「和」の心が、あなたの感性を静かに揺さぶります。</p>
+                                <h3 class="feature-title" data-i18n="about.features.wa.title">和を奏でる</h3>
+                                <p data-i18n="about.features.wa.desc">
+                                    古来より受け継がれた日本の美学。その儚くも力強い息吹を、今、ここに表現します。変わらない「和」の心が、あなたの感性を静かに揺さぶります。</p>
                             </div>
                             <div class="feature">
-                                <h3 class="feature-title">五感で辿る彩り</h3>
-                                <p>桜の舞、雪の静寂、月の光。幻想的な映像と旋律が重なり合い、言葉では伝えきれない情景を描きます。視覚と聴覚を優しく包み込む、没入体験をお楽しみください。</p>
+                                <h3 class="feature-title" data-i18n="about.features.senses.title">五感で辿る彩り</h3>
+                                <p data-i18n="about.features.senses.desc">
+                                    桜の舞、雪の静寂、月の光。幻想的な映像と旋律が重なり合い、言葉では伝えきれない情景を描きます。視覚と聴覚を優しく包み込む、没入体験をお楽しみください。</p>
                             </div>
                             <div class="feature">
-                                <h3 class="feature-title">心に、日本を</h3>
-                                <p>日常の喧騒を離れ、幽玄の世界へ。秀歌が描く景色が、世界中の人々の心に静かな灯をともします。美しい日本を、あなたと共に。</p>
+                                <h3 class="feature-title" data-i18n="about.features.heart.title">心に、日本を</h3>
+                                <p data-i18n="about.features.heart.desc">
+                                    日常の喧騒を離れ、幽玄の世界へ。秀歌が描く景色が、世界中の人々の心に静かな灯をともします。美しい日本を、あなたと共に。</p>
                             </div>
                         </div>
                     </div>
@@ -267,8 +289,8 @@
         <!-- Season Gallery Section -->
         <section class="gallery" id="gallery" aria-labelledby="gallery-title">
             <div class="container">
-                <h2 id="gallery-title" class="section-title">Music Video Gallery</h2>
-                <p class="section-subtitle">YouTubeで公開中のMVを季節とともにお楽しみください</p>
+                <h2 id="gallery-title" class="section-title" data-i18n="gallery.title">Music Video Gallery</h2>
+                <p class="section-subtitle" data-i18n="gallery.subtitle">YouTubeで公開中のMVを季節とともにお楽しみください</p>
 
                 <!-- Season Navigation -->
                 <div class="season-nav" role="tablist" aria-label="季節選択" id="season-nav">
@@ -284,7 +306,7 @@
         <!-- Album Section -->
         <section class="gallery" id="album" aria-labelledby="album-title">
             <div class="container">
-                <h2 id="album-title" class="section-title">Album</h2>
+                <h2 id="album-title" class="section-title" data-i18n="album.title">Album</h2>
                 <div class="album-list">
                     <!-- Album 1: 四季巡礼 -->
                     <div class="album-card" data-season="none">
@@ -396,13 +418,13 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3 class="footer-logo">秀歌 <span class="logo-jp">- Shūka</span></h3>
-                    <p class="footer-description">
+                    <p class="footer-description" data-i18n="footer.description">
                         四季を奏でる音楽アーティスト
                     </p>
                 </div>
 
                 <div class="footer-section">
-                    <h4 class="footer-section-title">秀歌をフォローする</h4>
+                    <h4 class="footer-section-title" data-i18n="footer.follow">秀歌をフォローする</h4>
                     <div class="social-links" id="social-links">
                         <a href="https://www.youtube.com/@project-shuka" rel="noopener noreferrer" target="_blank"
                             class="social-link youtube" aria-label="YouTube">
@@ -441,7 +463,7 @@
 
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
-                    <p class="copyright">
+                    <p class="copyright" data-i18n="footer.copyright">
                         © 2025 秀歌 - Shūka. All rights reserved.
                     </p>
                 </div>
@@ -455,6 +477,23 @@
     <script src="./assets/js/inline.js" defer></script>
     <script src="./assets/js/effects.js" defer></script>
     <script src="./assets/js/main.js" defer></script>
+    <script type="module">
+        import { i18n } from './assets/js/i18n.js';
+
+        // Initialize i18n
+        i18n.init();
+        window.i18n = i18n;
+
+        // Bind language switcher events
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.lang-switch-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const lang = e.target.getAttribute('data-lang');
+                    i18n.setLanguage(lang);
+                });
+            });
+        });
+    </script>
 
     <script defer src="./assets/js/loader.js"></script>
 </body>

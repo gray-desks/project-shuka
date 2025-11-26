@@ -413,9 +413,14 @@ class SeasonsGallery {
     if (!videoId) return;
     this.stopOtherVideos(thumb);
     thumb.dataset.playing = 'true';
+
+    // Check current language for captions
+    const isEnglish = document.documentElement.lang === 'en';
+    const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+
     thumb.innerHTML = `
       <iframe class="mv-iframe"
-              src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&playsinline=1"
+              src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1&playsinline=1${ccParams}"
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen></iframe>
@@ -663,6 +668,29 @@ ShukaApp.utils.initSeasonSelector = function () {
       btn.classList.toggle('active', isActive);
       btn.setAttribute('aria-checked', isActive); // アクセシビリティ対応
     });
+
+    // Update Trigger Button (Desktop)
+    const trigger = document.querySelector('.season-dropdown-trigger');
+    if (trigger) {
+      const selectedBtn = selector.querySelector(`button[data-season="${season}"]`);
+      if (selectedBtn) {
+        const icon = selectedBtn.querySelector('.season-icon').textContent;
+        // Map season to i18n key
+        const i18nKey = season === 'none' ? 'nav.season.other' : `nav.season.${season}`;
+
+        const iconSpan = trigger.querySelector('.current-season-icon');
+        if (iconSpan) iconSpan.textContent = icon;
+
+        const textSpan = trigger.querySelector('.current-season-text');
+        if (textSpan) {
+          textSpan.setAttribute('data-i18n', i18nKey);
+          // If i18n is available, translate immediately
+          if (window.i18n && typeof window.i18n.t === 'function') {
+            textSpan.textContent = window.i18n.t(i18nKey);
+          }
+        }
+      }
+    }
   };
 
   // デフォルト季節（梅雨）で初期状態を設定
@@ -1143,6 +1171,12 @@ document.addEventListener('DOMContentLoaded', () => {
       ShukaApp.utils.initEffectToggle(); // エフェクト切り替えスイッチの初期化
 
     initAlbumPlayers(); // アルバムプレイヤーの初期化
+
+    // Listen for language changes to update players
+    window.addEventListener('languageChanged', (e) => {
+      const lang = e.detail.language;
+      updateAllPlayersLanguage(lang);
+    });
   };
 
   if ('requestIdleCallback' in window) {
@@ -1259,5 +1293,60 @@ function initAlbumPlayers() {
       playerList.querySelectorAll('.album-track').forEach(t => t.classList.remove('active'));
       track.classList.add('active');
     }
+  });
+}
+
+/**
+ * アルバムセクションのプレイヤー初期化
+ * - 既存のiframeに対して言語設定を適用する
+ */
+function initAlbumPlayers() {
+  const isEnglish = document.documentElement.lang === 'en';
+  const iframes = document.querySelectorAll('.album-video-area iframe');
+
+  iframes.forEach(iframe => {
+    let src = iframe.getAttribute('src');
+    if (!src) return;
+
+    // Remove existing params to avoid duplication
+    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=en/, '').replace(/&hl=[a-z]+/, '');
+
+    const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+    iframe.setAttribute('src', src + ccParams);
+  });
+}
+
+/**
+ * 全てのYouTubeプレイヤーの言語設定を更新
+ * - 言語切り替え時に呼び出される
+ */
+function updateAllPlayersLanguage(lang) {
+  const isEnglish = lang === 'en';
+  const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+
+  // Update Album Players
+  const albumIframes = document.querySelectorAll('.album-video-area iframe');
+  albumIframes.forEach(iframe => {
+    let src = iframe.getAttribute('src');
+    if (!src) return;
+
+    // Clean URL
+    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=en/, '').replace(/&hl=[a-z]+/, '');
+
+    // Update URL (will reload video)
+    iframe.setAttribute('src', src + ccParams);
+  });
+
+  // Update Gallery Players (if any are playing)
+  const galleryIframes = document.querySelectorAll('.mv-iframe');
+  galleryIframes.forEach(iframe => {
+    let src = iframe.getAttribute('src');
+    if (!src) return;
+
+    // Clean URL
+    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=en/, '').replace(/&hl=[a-z]+/, '');
+
+    // Update URL
+    iframe.setAttribute('src', src + ccParams);
   });
 }
