@@ -399,31 +399,75 @@ class I18n {
     }
 
     init() {
-        // Check localStorage or browser preference
-        const savedLang = localStorage.getItem('shuka_lang');
-        if (savedLang && this.supportedLangs.includes(savedLang)) {
-            this.currentLang = savedLang;
-        } else {
-            // Detect browser language
-            const browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-
-            // Handle specific cases like zh-TW
-            if (browserLang === 'zh-tw' || browserLang === 'zh-hk') {
-                this.currentLang = 'zh-TW';
-            } else {
-                // For other languages, check the primary language code
-                const primaryLang = browserLang.split('-')[0];
-                if (this.supportedLangs.includes(primaryLang)) {
-                    this.currentLang = primaryLang;
-                } else {
-                    // Default to English for unsupported languages, unless it's Japanese
-                    this.currentLang = primaryLang === 'ja' ? 'ja' : 'en';
-                }
-            }
-        }
-
+        this.currentLang = this.detectLanguage();
         this.updateDOM();
         this.updateLangAttribute();
+    }
+
+    /**
+     * Detect the most appropriate language
+     * Priority:
+     * 1. URL Parameter (lang=) - Useful for testing/sharing
+     * 2. Local Storage (shuka_lang) - User preference
+     * 3. Browser Languages (navigator.languages) - User's system preference list
+     * 4. Default (en)
+     */
+    detectLanguage() {
+        // 1. URL Parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const queryLang = urlParams.get('lang');
+        if (queryLang) {
+            const normalized = this.normalizeLanguageCode(queryLang);
+            if (normalized) return normalized;
+        }
+
+        // 2. Local Storage
+        const savedLang = localStorage.getItem('shuka_lang');
+        if (savedLang && this.supportedLangs.includes(savedLang)) {
+            return savedLang;
+        }
+
+        // 3. Browser Languages
+        // Modern browsers support navigator.languages (array of preferred languages)
+        const browserLangs = navigator.languages || [navigator.language || navigator.userLanguage];
+
+        for (const lang of browserLangs) {
+            if (!lang) continue;
+            const normalized = this.normalizeLanguageCode(lang);
+            if (normalized) return normalized;
+        }
+
+        // 4. Default fallback
+        return 'en';
+    }
+
+    /**
+     * Normalize language code to supported format
+     * Returns null if not supported
+     */
+    normalizeLanguageCode(inputLang) {
+        if (!inputLang) return null;
+        const lang = inputLang.toLowerCase();
+
+        // Special Case: Chinese Traditional
+        // Map zh-TW, zh-HK, zh-MO, zh-Hant to zh-TW
+        if (['zh-tw', 'zh-hk', 'zh-mo', 'zh-hant'].includes(lang)) {
+            return 'zh-TW';
+        }
+
+        // Direct match check (e.g. 'ja', 'en')
+        if (this.supportedLangs.includes(lang)) {
+            // Special handling for zh-TW case sensitivity in supportedLangs
+            return lang === 'zh-tw' ? 'zh-TW' : lang;
+        }
+
+        // Primary code match (e.g. ja-JP -> ja, fr-CA -> fr)
+        const primaryCode = lang.split('-')[0];
+        if (this.supportedLangs.includes(primaryCode)) {
+            return primaryCode;
+        }
+
+        return null;
     }
 
     setLanguage(lang) {

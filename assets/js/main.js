@@ -1404,7 +1404,7 @@ function initAlbumPlayers() {
     if (!src) return;
 
     // 既存のパラメータを削除して重複を防止
-    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=en/, '').replace(/&hl=[a-z]+/, '');
+    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=[a-zA-Z-]+/, '').replace(/&hl=[a-zA-Z-]+/, '');
 
     // パラメータを追加
     iframe.setAttribute('src', src + ccParams);
@@ -1430,7 +1430,7 @@ function updateAllPlayersLanguage(lang) {
     if (!src) return;
 
     // Clean URL
-    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=en/, '').replace(/&hl=[a-z]+/, '');
+    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=[a-zA-Z-]+/, '').replace(/&hl=[a-zA-Z-]+/, '');
 
     // Update URL (will reload video)
     iframe.setAttribute('src', src + ccParams);
@@ -1443,7 +1443,7 @@ function updateAllPlayersLanguage(lang) {
     if (!src) return;
 
     // Clean URL
-    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=en/, '').replace(/&hl=[a-z]+/, '');
+    src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=[a-zA-Z-]+/, '').replace(/&hl=[a-zA-Z-]+/, '');
 
     // Update URL
     iframe.setAttribute('src', src + ccParams);
