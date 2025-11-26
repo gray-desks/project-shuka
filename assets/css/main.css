@@ -2321,7 +2321,7 @@ SURF_END SeasonTextColor */ .season-btn {
 .mv-grid {
   display: grid;
   gap: var(--space-6);
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   justify-items: stretch;
   align-items: stretch;
 }
@@ -2822,7 +2822,7 @@ SURF_END SeasonTextColor */ .season-btn {
 
 @media (min-width: 768px) {
   .mv-grid {
-    grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .mv-card {
