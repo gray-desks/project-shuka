@@ -13,10 +13,38 @@ function injectStyleOnce(id, cssText) {
 }
 
 // エフェクト制御の共通化ヘルパ
+window.isEffectsEnabled = true; // グローバルなエフェクト有効/無効フラグ
+
+window.toggleEffects = function (enabled) {
+  window.isEffectsEnabled = enabled;
+
+  // 現在アクティブな季節を取得して、エフェクトを再適用または停止
+  const currentSeason = document.body.getAttribute('data-season') || 'tsuyu';
+
+  // 一旦全てのエフェクトを停止
+  if (window.disableSakura) window.disableSakura();
+  if (window.disableRain) window.disableRain();
+  if (window.disableSnow) window.disableSnow();
+  if (window.disableAutumnLeaves) window.disableAutumnLeaves();
+  if (window.disableSummerWillow) window.disableSummerWillow();
+
+  // 有効化された場合のみ、現在の季節のエフェクトを再開
+  if (enabled) {
+    if (currentSeason === 'spring' && window.enableSakura) window.enableSakura();
+    else if (currentSeason === 'summer' && window.enableSummerWillow) window.enableSummerWillow();
+    else if (currentSeason === 'autumn' && window.enableAutumnLeaves) window.enableAutumnLeaves();
+    else if (currentSeason === 'winter' && window.enableSnow) window.enableSnow();
+    else if ((currentSeason === 'tsuyu' || currentSeason === 'all' || currentSeason === 'none') && window.enableRain) window.enableRain();
+  }
+};
+
 function createEffectController(EffectClass, globalKey) {
   let instance = null;
   return {
     enable() {
+      // グローバル設定が無効なら何もしない
+      if (!window.isEffectsEnabled) return;
+
       if (!instance) {
         instance = new EffectClass();
         // デバッグ/他モジュール参照用に window にも公開
@@ -257,7 +285,7 @@ class SakuraEffect {
       petal.rotation += petal.rotationSpeed * 0.015 + Math.sin(tSec * 0.6 + petal.phase) * 0.002;
 
       if (petal.y > this.canvas.height + 50 ||
-          petal.x < -50 || petal.x > this.canvas.width + 50) {
+        petal.x < -50 || petal.x > this.canvas.width + 50) {
         const newPetal = this.createPetal(false);
         Object.assign(petal, newPetal);
       }
@@ -270,108 +298,108 @@ class SakuraEffect {
   // 桜の花びら描画（3種類の形状）
   drawSakuraPetal(ctx, cx, cy, size, type) {
     const scale = size / 10;
-    
+
     ctx.beginPath();
-    
+
     if (type === 0) {
       // Type A: Classic heart-shaped sakura petal (ソメイヨシノ風)
       const width = 4 * scale;
       const height = 6 * scale;
-      
+
       // Start from bottom center
       ctx.moveTo(cx, cy + height * 0.4);
-      
+
       // Left side curve - realistic sakura petal curve
       ctx.bezierCurveTo(
         cx - width * 0.3, cy + height * 0.1,
         cx - width * 0.5, cy - height * 0.1,
         cx - width * 0.2, cy - height * 0.4
       );
-      
+
       // Top left notch (characteristic sakura indent)
       ctx.quadraticCurveTo(cx - width * 0.1, cy - height * 0.5, cx, cy - height * 0.3);
-      
+
       // Top right notch
       ctx.quadraticCurveTo(cx + width * 0.1, cy - height * 0.5, cx + width * 0.2, cy - height * 0.4);
-      
+
       // Right side curve
       ctx.bezierCurveTo(
         cx + width * 0.5, cy - height * 0.1,
         cx + width * 0.3, cy + height * 0.1,
         cx, cy + height * 0.4
       );
-      
+
     } else if (type === 1) {
       // Type B: Double-notched sakura petal (ヤマザクラ風)
       const width = 3.5 * scale;
       const height = 5.5 * scale;
-      
+
       ctx.moveTo(cx, cy + height * 0.3);
-      
+
       // Left curve with more pronounced shape
       ctx.bezierCurveTo(
         cx - width * 0.4, cy,
         cx - width * 0.3, cy - height * 0.3,
         cx - width * 0.2, cy - height * 0.4
       );
-      
+
       // Deep notch characteristic of some sakura varieties
       ctx.quadraticCurveTo(cx - width * 0.2, cy - height * 0.4, cx - width * 0.1, cy - height * 0.2);
       ctx.quadraticCurveTo(cx, cy - height * 0.5, cx + width * 0.1, cy - height * 0.2);
       ctx.quadraticCurveTo(cx + width * 0.2, cy - height * 0.4, cx + width * 0.2, cy - height * 0.4);
-      
+
       // Right curve
       ctx.bezierCurveTo(
         cx + width * 0.3, cy - height * 0.3,
         cx + width * 0.4, cy,
         cx, cy + height * 0.3
       );
-      
+
     } else {
       // Type C: Simple rounded sakura petal (シダレザクラ風)
       const width = 3 * scale;
       const height = 5 * scale;
-      
+
       ctx.moveTo(cx, cy + height * 0.4);
-      
+
       // Simple, elegant curves for weeping cherry style
       ctx.bezierCurveTo(
         cx - width * 0.3, cy + height * 0.1,
         cx - width * 0.4, cy - height * 0.2,
         cx - width * 0.1, cy - height * 0.4
       );
-      
+
       // Soft top curve
       ctx.quadraticCurveTo(cx, cy - height * 0.5, cx + width * 0.1, cy - height * 0.4);
-      
+
       ctx.bezierCurveTo(
         cx + width * 0.4, cy - height * 0.2,
         cx + width * 0.3, cy + height * 0.1,
         cx, cy + height * 0.4
       );
     }
-    
+
     ctx.fill();
-    
+
     // Add subtle petal veins for realism
     if (size > 6) { // Only add veins to larger petals
       const width = type === 0 ? 4 * scale : type === 1 ? 3.5 * scale : 3 * scale;
       const height = type === 0 ? 6 * scale : type === 1 ? 5.5 * scale : 5 * scale;
-      
+
       ctx.strokeStyle = `rgba(${255}, ${182}, ${193}, 0.3)`;
       ctx.lineWidth = 0.5;
       ctx.beginPath();
-      
+
       // Central vein
       ctx.moveTo(cx, cy + height * 0.3);
       ctx.lineTo(cx, cy - height * 0.2);
-      
+
       // Side veins
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx - width * 0.15, cy - height * 0.15);
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx + width * 0.15, cy - height * 0.15);
-      
+
       ctx.stroke();
     }
   }
@@ -502,14 +530,14 @@ class SnowEffect {
     // 各雪片の描画と物理シミュレーション
     for (const flake of this.flakes) {
       ctx.globalAlpha = flake.opacity;
-      
+
       // 純白の雪にわずかな青味を加えた自然な雪色
       ctx.fillStyle = `rgba(255, 255, 255, ${flake.opacity})`;
-      
+
       ctx.save();
       ctx.translate(flake.x, flake.y);
       ctx.rotate(flake.rotation);
-      
+
       // 雪の結晶の形状描画 - サイズに応じて形状を変更
       if (flake.size > 4) {
         // 大きな雪片は美しい6角形の星形状で結晶を表現
@@ -520,7 +548,7 @@ class SnowEffect {
         ctx.arc(0, 0, flake.size / 2, 0, Math.PI * 2);
         ctx.fill();
       }
-      
+
       ctx.restore();
 
       // 雪片の位置更新 - 風と自然な漂いによる動き
@@ -685,7 +713,7 @@ class AutumnLeavesEffect {
   createLeaf(randomY = false) {
     const leafTypes = ['maple', 'ginkgo']; // もみじとイチョウ - 日本の代表的な紅葉樹
     const type = leafTypes[Math.floor(Math.random() * leafTypes.length)];
-    
+
     return {
       x: Math.random() * this.canvas.width,
       y: randomY ? Math.random() * this.canvas.height : -50,
@@ -752,25 +780,25 @@ class AutumnLeavesEffect {
     // 各落ち葉の描画と物理シミュレーション
     for (const leaf of this.leaves) {
       ctx.globalAlpha = leaf.opacity;
-      
+
       const time = now * 0.001; // ミリ秒を秒に変換（_tickのnowを使用）
       const swayX = Math.sin(time * leaf.swaySpeed + leaf.swayOffset) * leaf.swayAmplitude;
-      
+
       ctx.save();
       ctx.translate(leaf.x + swayX, leaf.y);
       ctx.rotate(leaf.rotation);
-      
+
       // 葉の季節色設定 - 秋の美しい紅葉色
       const { r, g, b } = leaf.color;
       ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${leaf.opacity})`;
-      
+
       // 葉の種類に応じた形状描画 - もみじとイチョウの特徴的な形状
       if (leaf.type === 'maple') {
         this.drawMapleLeaf(ctx, 0, 0, leaf.size); // もみじの手のひら形状
       } else {
         this.drawGinkgoLeaf(ctx, 0, 0, leaf.size); // イチョウの扇形状
       }
-      
+
       ctx.restore();
 
       // 落ち葉の位置更新 - 風と自然な漂いによる動き
@@ -835,20 +863,20 @@ class AutumnLeavesEffect {
    */
   drawGinkgoLeaf(ctx, cx, cy, size) {
     const s = size / 22; // 扇のスケール基準
-    
+
     // 扇形（外周）: 横幅をさらに広げ、上辺フラット＋わずかなスカラップで扇らしさを明確化
     ctx.beginPath();
     ctx.moveTo(cx, cy + 6.2 * s); // 下端
     // 左側の広がり
-    ctx.quadraticCurveTo(cx - 9 * s,  cy + 4.5 * s, cx - 13 * s, cy + 0.6 * s);
-    ctx.quadraticCurveTo(cx - 14 * s, cy - 1.8 * s, cx - 8 * s,  cy - 5.6 * s);
+    ctx.quadraticCurveTo(cx - 9 * s, cy + 4.5 * s, cx - 13 * s, cy + 0.6 * s);
+    ctx.quadraticCurveTo(cx - 14 * s, cy - 1.8 * s, cx - 8 * s, cy - 5.6 * s);
     // 上辺左の軽いスカラップ → フラット → 右スカラップ
-    ctx.quadraticCurveTo(cx - 4 * s,  cy - 6.6 * s, cx - 2 * s,  cy - 6.6 * s);
-    ctx.lineTo(cx + 2 * s,  cy - 6.6 * s);
-    ctx.quadraticCurveTo(cx + 4 * s,  cy - 6.4 * s, cx + 8 * s,  cy - 5.6 * s);
+    ctx.quadraticCurveTo(cx - 4 * s, cy - 6.6 * s, cx - 2 * s, cy - 6.6 * s);
+    ctx.lineTo(cx + 2 * s, cy - 6.6 * s);
+    ctx.quadraticCurveTo(cx + 4 * s, cy - 6.4 * s, cx + 8 * s, cy - 5.6 * s);
     // 右側の広がり
     ctx.quadraticCurveTo(cx + 14 * s, cy - 1.8 * s, cx + 13 * s, cy + 0.6 * s);
-    ctx.quadraticCurveTo(cx + 9 * s,  cy + 4.5 * s, cx,        cy + 6.2 * s);
+    ctx.quadraticCurveTo(cx + 9 * s, cy + 4.5 * s, cx, cy + 6.2 * s);
     ctx.closePath();
     ctx.fill();
 
@@ -887,7 +915,7 @@ let autumnLeavesEffect;
 /**
  * 紅葉エフェクトを有効化
  */
-window.enableAutumnLeaves = function() {
+window.enableAutumnLeaves = function () {
   if (!autumnLeavesEffect) {
     // 新しい紅葉エフェクトインスタンスを作成
     autumnLeavesEffect = new AutumnLeavesEffect();
@@ -901,7 +929,7 @@ window.enableAutumnLeaves = function() {
 /**
  * 紅葉エフェクトを無効化してリソースを解放
  */
-window.disableAutumnLeaves = function() {
+window.disableAutumnLeaves = function () {
   if (autumnLeavesEffect) {
     autumnLeavesEffect.destroy(); // インスタンスの破棄
     autumnLeavesEffect = null; // インスタンスを破棄
@@ -1052,33 +1080,33 @@ class SummerWillowEffect {
     // 各柳葉の描画と物理シミュレーション
     for (const leaf of this.willowLeaves) {
       ctx.globalAlpha = leaf.opacity;
-      
+
       const time = now * 0.001; // ミリ秒を秒に変換
       const swayX = Math.sin(time * leaf.swaySpeed + leaf.swayOffset) * leaf.swayAmplitude;
-      
+
       ctx.save();
       ctx.translate(leaf.x + swayX, leaf.y);
-      
+
       // 風の影響を受けた回転 - 葉が風の方向に傾く
       const windTilt = this.wind * 0.1;
       ctx.rotate(leaf.rotation + windTilt);
-      
+
       // 柳葉の夏色設定 - 涼しげのある青緑色
       const { r, g, b } = leaf.color;
       ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${leaf.opacity})`;
       ctx.strokeStyle = `rgba(${r - 20}, ${g - 20}, ${b - 10}, ${leaf.opacity * 0.8})`;
       ctx.lineWidth = 0.5;
-      
+
       // 柳葉の描画 - 長く、細く、わずかに曲がった特徴的な形状
       this.drawWillowLeaf(ctx, 0, 0, leaf.length, leaf.width, leaf.curvature);
-      
+
       ctx.restore();
 
       // 柳葉の位置更新 - 風に吹かれる動き
       const windForce = this.wind * leaf.windResistance;
       const turbulenceX = Math.sin(now * 0.001 * leaf.turbulence) * 0.5;
       const turbulenceY = Math.cos(now * 0.0015 * leaf.turbulence) * 0.3;
-      
+
       leaf.x += windForce + leaf.drift + turbulenceX;
       leaf.y += leaf.speed + Math.abs(windForce) * 0.1 + turbulenceY; // 風は垂直方向の動きにも影響
       leaf.rotation += leaf.rotationSpeed * 0.02 + Math.abs(windForce) * 0.01; // 風は回転にも影響
@@ -1110,14 +1138,14 @@ class SummerWillowEffect {
    */
   drawWillowLeaf(ctx, cx, cy, length, width, curvature) {
     ctx.beginPath();
-    
+
     // 曲線的で細長い葉の形状を作成
     const halfLength = length / 2;
     const halfWidth = width / 2;
-    
+
     // 曲線的な柳葉の制御点
     ctx.moveTo(cx, cy - halfLength);
-    
+
     // 右側の曲線 - 柳葉の自然な曲がりを表現
     ctx.quadraticCurveTo(
       cx + halfWidth + curvature * 10, cy - halfLength * 0.3,
@@ -1127,7 +1155,7 @@ class SummerWillowEffect {
       cx + halfWidth - curvature * 5, cy + halfLength * 0.3,
       cx, cy + halfLength
     );
-    
+
     // 左側の曲線 - 対称的で美しい柳葉の形状
     ctx.quadraticCurveTo(
       cx - halfWidth + curvature * 5, cy + halfLength * 0.3,
@@ -1137,10 +1165,10 @@ class SummerWillowEffect {
       cx - halfWidth - curvature * 10, cy - halfLength * 0.3,
       cx, cy - halfLength
     );
-    
+
     ctx.closePath();
     ctx.fill();
-    
+
     // リアルさのための微細な中央線描画
     ctx.beginPath();
     ctx.moveTo(cx, cy - halfLength * 0.8);
@@ -1175,7 +1203,7 @@ let summerWillowEffect;
 /**
  * 夏の柳エフェクトを有効化
  */
-window.enableSummerWillow = function() {
+window.enableSummerWillow = function () {
   if (!summerWillowEffect) {
     // 新しい夏柳エフェクトインスタンスを作成
     summerWillowEffect = new SummerWillowEffect();
@@ -1189,7 +1217,7 @@ window.enableSummerWillow = function() {
 /**
  * 夏の柳エフェクトを無効化してリソースを解放
  */
-window.disableSummerWillow = function() {
+window.disableSummerWillow = function () {
   if (summerWillowEffect) {
     summerWillowEffect.destroy(); // インスタンスの破棄
     summerWillowEffect = null; // インスタンスを破棄

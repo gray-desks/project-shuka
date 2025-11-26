@@ -10,6 +10,7 @@
   z-index: -1;
   pointer-events: none;
 }
+
 body[data-season="tsuyu"] {
   --background: #1a2332;
   --surface: #253142;
@@ -35,15 +36,16 @@ body[data-season="tsuyu"] .hero::before {
   background: linear-gradient(to bottom,
       rgba(123, 167, 212, 0.1) 0%,
       rgba(74, 144, 184, 0.15) 50%,
-      rgba(123, 167, 212, 0.2) 100%
-    );
+      rgba(123, 167, 212, 0.2) 100%);
   pointer-events: none;
   z-index: 1;
 }
+
 body[data-season="tsuyu"] .hero-content {
   z-index: 2;
   position: relative;
 }
+
 body[data-season="tsuyu"] .cta-button.primary {
   background: linear-gradient(120deg, #4A90B8 0%, #7BA7D4 100%);
   box-shadow: 0 4px 15px rgba(74, 144, 184, 0.3);
@@ -52,6 +54,7 @@ body[data-season="tsuyu"] .cta-button.primary {
 body[data-season="tsuyu"] .cta-button.primary:hover {
   box-shadow: 0 8px 25px rgba(74, 144, 184, 0.4);
 }
+
 body[data-season="tsuyu"] .hero-title {
   text-shadow:
     2px 2px 4px rgba(0, 0, 0, 0.7),
@@ -80,6 +83,7 @@ body[data-season="tsuyu"] .section-title::after {
   background: linear-gradient(90deg, var(--primary-tsuyu), var(--accent-tsuyu));
   box-shadow: 0 2px 8px rgba(74, 144, 184, 0.3);
 }
+
 :root {
   --primary: #6366f1;
   --primary-light: #8b5cf6;
@@ -149,6 +153,7 @@ body[data-season="tsuyu"] .section-title::after {
   --z-tooltip: 1060;
   --header-height: 72px;
 }
+
 *,
 *::before,
 *::after {
@@ -156,14 +161,17 @@ body[data-season="tsuyu"] .section-title::after {
   margin: 0;
   padding: 0;
 }
+
 html {
   font-size: 100%;
   scroll-behavior: smooth;
 }
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+
   *,
   *::before,
   *::after {
@@ -172,6 +180,7 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+
 body {
   font-family: var(--ff-body);
   font-size: var(--text-base);
@@ -186,9 +195,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 body.menu-open {
   overflow: auto;
 }
+
 body::before {
   content: '';
   position: fixed;
@@ -209,6 +220,7 @@ body::before {
   z-index: -1;
   mix-blend-mode: normal;
 }
+
 body[data-season="spring"]::before {
   background-image: url('../images/backgrounds/背景_春模様.webp');
 }
@@ -229,23 +241,27 @@ body[data-season="tsuyu"]::before {
   background-image: url('../images/backgrounds/和紙-梅雨.webp');
   opacity: 1;
 }
+
 body[data-season="all"]::before,
 body[data-season="none"]::before {
   background-image: url('../images/backgrounds/和紙-梅雨.webp');
   opacity: 1;
 }
+
 @media (max-width: 768px) {
   body::before {
     background-attachment: scroll;
     background-size: cover;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   body::before {
     transition: none;
     background-attachment: scroll;
   }
 }
+
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
   body::before {
@@ -253,6 +269,7 @@ body[data-season="none"]::before {
     image-rendering: crisp-edges;
   }
 }
+
 h1,
 h2,
 h3,
@@ -307,6 +324,7 @@ a:focus {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -360,6 +378,7 @@ a:focus {
     0 0 12px rgba(0, 0, 0, 0.35);
   -webkit-text-stroke: 0.6px rgba(0, 0, 0, 0.25);
 }
+
 .header {
   position: fixed;
   top: 0;
@@ -426,6 +445,7 @@ a:focus {
   transform: scaleX(1);
   transform-origin: left;
 }
+
 .logo-jp {
   font-family: var(--ff-mincho);
   color: var(--text);
@@ -503,6 +523,101 @@ a:focus {
 .nav-menu a:focus {
   color: var(--primary);
   background-color: var(--neutral-800);
+}
+
+/* エフェクト切り替えスイッチ */
+.effect-toggle-item {
+  display: none;
+  /* PCヘッダーでは非表示 */
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) 0;
+}
+
+.effect-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.effect-toggle-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.effect-toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.effect-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.effect-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--neutral-600);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.effect-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.effect-toggle-slider {
+  background-color: var(--primary);
+}
+
+input:focus+.effect-toggle-slider {
+  box-shadow: 0 0 1px var(--primary);
+}
+
+input:checked+.effect-toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* モバイルメニュー内での調整 */
+@media (max-width: 767px) {
+  .effect-toggle-item {
+    display: flex;
+    /* ハンバーガーメニュー内では表示 */
+    width: 100%;
+    margin-top: var(--space-4);
+  }
+
+  .effect-toggle-container {
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .effect-toggle-text {
+    font-size: var(--text-base);
+  }
 }
 
 
@@ -605,6 +720,7 @@ a:focus {
   backdrop-filter: blur(6px);
   position: relative;
 }
+
 .social-links a::after {
   content: attr(aria-label);
   position: absolute;
@@ -624,6 +740,7 @@ a:focus {
   z-index: 1000;
   margin-bottom: 8px;
 }
+
 .social-links a::before {
   content: '';
   position: absolute;
@@ -639,11 +756,13 @@ a:focus {
   z-index: 1000;
   margin-bottom: 4px;
 }
+
 .social-links a:hover::after,
 .social-links a:hover::before {
   opacity: 1;
   visibility: visible;
 }
+
 .social-links a:hover {
   opacity: 1;
   transform: translateY(-2px);
@@ -656,18 +775,21 @@ a:focus {
     0 0 0 1px rgba(255, 255, 255, 0.2),
     0 0 30px rgba(255, 255, 255, 0.15);
 }
+
 .social-links a:focus-visible {
   outline: 3px solid color-mix(in oklab, var(--primary) 70%, white 30%);
   outline-offset: 2px;
   box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.2),
     0 10px 24px rgba(0, 0, 0, 0.5);
 }
+
 .social-links a:active {
   transform: translateY(0);
   background: rgba(255, 255, 255, 0.06);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35),
     0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
 .social-links a svg,
 .social-links a img,
 .footer-section .social-links a svg,
@@ -691,6 +813,7 @@ a:focus {
   filter: grayscale(100%);
   opacity: 0.5;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .social-links a {
     transition: none;
@@ -708,12 +831,15 @@ a:focus {
 .social-link.instagram {
   color: #E4405F;
 }
+
 .social-link.spotify {
   color: #1DB954;
 }
+
 .social-link.tiktok {
   color: #000000;
 }
+
 [data-theme="dark"] .social-link.tiktok {
   color: #ffffff;
 }
@@ -795,6 +921,7 @@ a:focus {
     padding-top: var(--space-6);
   }
 }
+
 @media (min-width: 768px) {
   .nav-menu .season-select {
     margin-left: var(--space-4);
@@ -884,6 +1011,7 @@ a:focus {
   border-color: var(--primary);
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
 }
+
 .season-option[data-season="all"].active {
   background: var(--neutral-800);
   color: var(--primary);
@@ -899,6 +1027,7 @@ a:focus {
   color: var(--primary);
   border-color: var(--neutral-600);
 }
+
 .season-option[data-season="none"].active {
   background: linear-gradient(135deg, #cbd5e1, #94a3b8);
   color: #1e293b;
@@ -914,6 +1043,7 @@ a:focus {
   background: rgba(148, 163, 184, 0.15);
   border-color: #94a3b8;
 }
+
 .season-option[data-season="spring"].active {
   background: #f472b6;
   color: #fff;
@@ -925,6 +1055,7 @@ a:focus {
   background: rgba(244, 114, 182, 0.15);
   border-color: #f472b6;
 }
+
 .season-option[data-season="summer"].active {
   background: #22d3ee;
   color: #fff;
@@ -936,6 +1067,7 @@ a:focus {
   background: rgba(34, 211, 238, 0.15);
   border-color: #22d3ee;
 }
+
 .season-option[data-season="autumn"].active {
   background: #fb923c;
   color: #fff;
@@ -947,6 +1079,7 @@ a:focus {
   background: rgba(251, 146, 60, 0.15);
   border-color: #fb923c;
 }
+
 .season-option[data-season="winter"].active {
   background: #a5b4fc;
   color: #fff;
@@ -970,6 +1103,7 @@ a:focus {
     text-align: center;
   }
 }
+
 /* 
  * ヒーローセクション - サイトの第一印象を決定する核心エリア
  * 
@@ -1039,10 +1173,12 @@ a:focus {
         rgba(0, 0, 0, 0.4)), url('../images/portraits/秀歌-メインビジュアル-スマホ版.webp');
     justify-content: flex-end !important;
   }
+
   .hero-content {
     padding-top: 0 !important;
     padding-bottom: var(--space-8) !important;
   }
+
   .hero-actions {
     display: none !important;
   }
@@ -1140,6 +1276,7 @@ a:focus {
   line-height: 1.3;
   white-space: nowrap;
 }
+
 @media (max-width: 767px) {
   .tagline {
     font-size: clamp(0.9rem, 4vw, 1.25rem);
@@ -1188,6 +1325,7 @@ a:focus {
   flex-wrap: wrap;
 
 }
+
 /* 
  * CTA（Call-to-Action）ボタンシステム - ユーザー行動促進の核心要素
  * 
@@ -1223,6 +1361,7 @@ a:focus {
   position: relative;
   overflow: hidden;
 }
+
 /* 
  * プライマリボタン - 最重要アクション用スタイル
  * 
@@ -1243,6 +1382,7 @@ a:focus {
   box-shadow: 0 4px 15px var(--shadow-lg);
   transition: background-position .4s ease;
 }
+
 .cta-button.primary:hover {
   background-position: 100% 0;
 }
@@ -1304,6 +1444,7 @@ a:focus {
   color: var(--primary);
   transform: translateY(-2px);
 }
+
 /* 
  * Aboutセクション - アーティスト紹介とブランドストーリー
  * 
@@ -1505,11 +1646,13 @@ a:focus {
   border-radius: var(--radius-xl);
   box-shadow: 0 10px 30px var(--shadow-lg);
 }
+
 @media (max-width: 767px) {
   .about-visual {
     display: none;
   }
 }
+
 /* 
  * ギャラリーセクション - Shūkaの楽曲とビジュアル作品の展示スペース
  * 
@@ -1770,6 +1913,7 @@ a:focus {
     0 12px 32px rgba(0, 0, 0, 0.3),
     0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
 .season-btn[data-season="all"].active {
   border-color: #d1d5db;
   border-width: 4px;
@@ -1785,6 +1929,7 @@ a:focus {
       rgba(229, 231, 235, 0.35),
       rgba(209, 213, 217, 0.25));
 }
+
 .season-btn[data-season="none"].active {
   border-color: #94a3b8;
   border-width: 4px;
@@ -1800,6 +1945,7 @@ a:focus {
       rgba(203, 213, 225, 0.35),
       rgba(148, 163, 184, 0.25));
 }
+
 .season-btn[data-season="spring"].active {
   border-color: #f472b6;
   box-shadow:
@@ -1813,6 +1959,7 @@ a:focus {
       rgba(244, 114, 182, 0.25),
       rgba(236, 72, 153, 0.15));
 }
+
 .season-btn[data-season="summer"].active {
   border-color: #22d3ee;
   box-shadow:
@@ -1826,6 +1973,7 @@ a:focus {
       rgba(34, 211, 238, 0.25),
       rgba(6, 182, 212, 0.15));
 }
+
 .season-btn[data-season="autumn"].active {
   border-color: #fb923c;
   box-shadow:
@@ -1839,6 +1987,7 @@ a:focus {
       rgba(251, 146, 60, 0.25),
       rgba(249, 115, 22, 0.15));
 }
+
 .season-btn[data-season="winter"].active {
   border-color: #a5b4fc;
   box-shadow:
@@ -1876,12 +2025,15 @@ a:focus {
 .season-btn[data-season="spring"] {
   background-image: url('../images/buttons/秀歌-春-btn.webp');
 }
+
 .season-btn[data-season="summer"] {
   background-image: url('../images/buttons/秀歌-夏-btn.webp');
 }
+
 .season-btn[data-season="autumn"] {
   background-image: url('../images/buttons/秀歌-秋-btn.webp');
 }
+
 .season-btn[data-season="winter"] {
   background-image: url('../images/buttons/秀歌-冬-btn.webp');
 }
@@ -1895,8 +2047,7 @@ a:focus {
   opacity: 0.35;
 }
 
-SURF_END SeasonTextColor */
-.season-btn {
+SURF_END SeasonTextColor */ .season-btn {
   border-color: rgba(150, 150, 150, 0.6);
 }
 
@@ -1906,6 +2057,7 @@ SURF_END SeasonTextColor */
       rgba(0, 0, 0, 0.4) 60%,
       transparent 100%);
 }
+
 @media (max-width: 1024px) {
   .season-nav {
     display: flex;
@@ -1923,6 +2075,7 @@ SURF_END SeasonTextColor */
     flex-shrink: 0;
   }
 }
+
 @media (max-width: 768px) {
   .season-btn {
     width: 170px;
@@ -1930,6 +2083,7 @@ SURF_END SeasonTextColor */
     padding: var(--space-3);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
+
   .season-btn:active {
     transform: scale(0.98);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -1958,6 +2112,7 @@ SURF_END SeasonTextColor */
     gap: var(--space-3);
     padding: var(--space-3);
   }
+
   .season-btn[data-season="all"] {
     grid-row: 1;
     grid-column: 1;
@@ -1967,6 +2122,7 @@ SURF_END SeasonTextColor */
     grid-row: 1;
     grid-column: 2;
   }
+
   .season-btn[data-season="spring"] {
     grid-row: 2;
     grid-column: 1;
@@ -1976,6 +2132,7 @@ SURF_END SeasonTextColor */
     grid-row: 2;
     grid-column: 2;
   }
+
   .season-btn[data-season="autumn"] {
     grid-row: 3;
     grid-column: 1;
@@ -1993,6 +2150,7 @@ SURF_END SeasonTextColor */
     padding: var(--space-2);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
+
   .season-btn:active {
     transform: scale(0.98);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -2004,6 +2162,7 @@ SURF_END SeasonTextColor */
     font-weight: 800;
   }
 }
+
 @media (max-width: 360px) {
   .hero-title {
     font-size: clamp(1rem, 6vw, 1.5rem);
@@ -2024,6 +2183,7 @@ SURF_END SeasonTextColor */
   .hero-content {
     padding: var(--space-1);
   }
+
   .season-btn {
     width: 100%;
     height: 90px;
@@ -2073,6 +2233,7 @@ SURF_END SeasonTextColor */
   display: none;
   padding: var(--space-4) 0;
 }
+
 .season-panel.active {
   display: block;
 }
@@ -2201,12 +2362,14 @@ SURF_END SeasonTextColor */
   border: 0;
   border-radius: 0;
 }
+
 .album-wrapper {
   position: relative;
   width: 100%;
   margin: 0 auto;
   padding-right: 20px;
 }
+
 .album-disc {
   position: absolute;
   top: 10px;
@@ -2227,6 +2390,7 @@ SURF_END SeasonTextColor */
   align-items: center;
   justify-content: center;
 }
+
 .album-disc::after {
   content: '';
   width: 35%;
@@ -2235,9 +2399,11 @@ SURF_END SeasonTextColor */
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.2);
 }
+
 .album-wrapper:hover .album-disc {
   right: -20px;
 }
+
 @keyframes spin-record {
   from {
     transform: rotate(0deg);
@@ -2247,6 +2413,7 @@ SURF_END SeasonTextColor */
     transform: rotate(360deg);
   }
 }
+
 .album-embed {
   position: relative;
   z-index: 1;
@@ -2263,6 +2430,7 @@ SURF_END SeasonTextColor */
 .album-wrapper:hover .album-embed {
   transform: translateX(-5px);
 }
+
 .album-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -2276,6 +2444,7 @@ SURF_END SeasonTextColor */
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 .album-card {
   display: flex;
   flex-direction: column;
@@ -2293,12 +2462,14 @@ SURF_END SeasonTextColor */
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
 }
+
 @media (min-width: 768px) {
   .album-card {
     flex-direction: row;
     height: 300px;
   }
 }
+
 .album-video-area {
   width: 100%;
   aspect-ratio: 16/9;
@@ -2319,6 +2490,7 @@ SURF_END SeasonTextColor */
   height: 100%;
   border: 0;
 }
+
 .album-tracklist-area {
   flex: 1;
   width: 100%;
@@ -2338,6 +2510,7 @@ SURF_END SeasonTextColor */
     border-left: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
+
 .album-tracklist-area::-webkit-scrollbar {
   width: 6px;
 }
@@ -2363,12 +2536,14 @@ SURF_END SeasonTextColor */
   transition: all 0.3s ease;
   backdrop-filter: blur(4px);
 }
+
 .load-more-container {
   display: flex;
   justify-content: center;
   margin-top: var(--space-12);
   width: 100%;
 }
+
 .load-more-btn {
   position: relative;
   background: rgba(0, 0, 0, 0.6);
@@ -2428,6 +2603,7 @@ SURF_END SeasonTextColor */
 .load-more-btn:hover .icon {
   transform: translateY(3px);
 }
+
 .load-more-btn.loading {
   pointer-events: none;
   opacity: 0.8;
@@ -2450,6 +2626,7 @@ SURF_END SeasonTextColor */
 .load-more-btn.loading .load-more-spinner {
   display: block;
 }
+
 @keyframes fadeUpItem {
   from {
     opacity: 0;
@@ -2615,6 +2792,7 @@ SURF_END SeasonTextColor */
 .social-icon {
   font-size: var(--text-xl);
 }
+
 /* 
  * フッターセクション - サイトの総括情報とナビゲーションを提供する最終エリア
  * 
@@ -2798,6 +2976,7 @@ SURF_END SeasonTextColor */
   font-size: var(--text-sm);
   color: var(--neutral-600);
 }
+
 /* 
  * 雨演出キャンバス - 季節的な雨の演出を描画するスペシャルエフェクト
  * 
@@ -2820,6 +2999,7 @@ SURF_END SeasonTextColor */
   pointer-events: none;
   z-index: var(--z-sticky);
 }
+
 /* 
  * アニメーションシステム - サイト全体の動的な体験を統括管理
  * 
@@ -2903,6 +3083,7 @@ SURF_END SeasonTextColor */
 .animate-slide-in-right {
   animation: slideInRight 0.6s ease-out forwards;
 }
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -2958,6 +3139,7 @@ SURF_END SeasonTextColor */
 .mt-8 {
   margin-top: var(--space-8);
 }
+
 @media print {
 
   .header,
@@ -3142,8 +3324,7 @@ SURF_END SeasonTextColor */
       rgba(255, 235, 59, 0.95) 15%,
       rgba(255, 193, 7, 0.8) 35%,
       rgba(255, 175, 0, 0.4) 60%,
-      transparent 85%
-    );
+      transparent 85%);
   border-radius: 50%;
   transform: scale(0) rotate(0deg);
   animation: goldSparkleIntense 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
@@ -3176,8 +3357,7 @@ SURF_END SeasonTextColor */
       rgba(255, 235, 59, 0.95) 25%,
       rgba(255, 193, 7, 0.8) 50%,
       rgba(255, 175, 0, 0.4) 75%,
-      transparent 100%
-    );
+      transparent 100%);
   border-radius: 2px;
   transform: scale(0) rotate(0deg);
   animation: goldParticleFloatIntense ease-out forwards;
@@ -3342,6 +3522,7 @@ SURF_END SeasonTextColor */
     opacity: 0;
   }
 }
+
 .refined-particle {
   position: absolute;
   pointer-events: none;
@@ -3399,6 +3580,7 @@ SURF_END SeasonTextColor */
     opacity: 0;
   }
 }
+
 .play-note {
   position: absolute;
   pointer-events: none;
@@ -3510,6 +3692,7 @@ SURF_END SeasonTextColor */
     opacity: 0;
   }
 }
+
 @media (prefers-contrast: high) {
   :root {
     --shadow: rgba(0, 0, 0, 0.5);
@@ -3531,9 +3714,11 @@ SURF_END SeasonTextColor */
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
+
 :focus:not(:focus-visible) {
   outline: none;
 }
+
 .cta-button:focus-visible,
 .season-btn:focus-visible {
   outline: 3px solid var(--accent);
@@ -3547,11 +3732,13 @@ SURF_END SeasonTextColor */
   background-color: var(--primary);
   color: white;
 }
+
 audio:focus-visible {
   outline: 3px solid var(--secondary);
   outline-offset: 2px;
   border-radius: var(--radius);
 }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -3563,6 +3750,7 @@ audio:focus-visible {
   white-space: nowrap;
   border: 0;
 }
+
 [role="tablist"] {
   display: flex;
   gap: var(--space-2);
@@ -3582,6 +3770,7 @@ audio:focus-visible {
   background: var(--primary);
   border-radius: var(--radius-full);
 }
+
 @media (prefers-contrast: high) {
   :root {
     --shadow: rgba(0, 0, 0, 0.8);
@@ -3611,7 +3800,9 @@ audio:focus-visible {
     border-color: currentColor;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -3620,14 +3811,17 @@ audio:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
   :focus,
   :focus-visible {
     transition: outline 0.15s ease-in-out !important;
   }
+
   .hero {
     background-attachment: scroll !important;
   }
 }
+
 @media (max-width: 768px) {
 
   .season-btn,
@@ -3641,6 +3835,7 @@ audio:focus-visible {
     padding: var(--space-3) var(--space-6);
   }
 }
+
 .loading {
   position: relative;
   pointer-events: none;
@@ -3669,6 +3864,7 @@ audio:focus-visible {
     transform: rotate(360deg);
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .loading::after {
     animation: none;
@@ -3679,29 +3875,35 @@ audio:focus-visible {
     margin: -8px 0 0 -8px;
   }
 }
+
 body:not(.using-mouse) :focus {
   outline: 3px solid var(--primary);
   outline-offset: 2px;
 }
+
 body.using-mouse :focus {
   outline: none;
 }
+
 @media print {
   * {
     background: transparent !important;
     color: black !important;
     box-shadow: none !important;
   }
+
   a[href]:after {
     content: " (" attr(href) ")";
     font-size: smaller;
     color: #666;
   }
+
   .nav-menu,
   .season-nav,
   .hero-actions {
     display: none;
   }
+
   h1,
   h2,
   h3,
@@ -3711,12 +3913,14 @@ body.using-mouse :focus {
     page-break-after: avoid;
     font-weight: bold;
   }
+
   .feature,
   .track,
   .season-panel {
     page-break-inside: avoid;
   }
 }
+
 [aria-live] {
   position: absolute;
   left: -10000px;
@@ -3724,6 +3928,7 @@ body.using-mouse :focus {
   height: 1px;
   overflow: hidden;
 }
+
 /**
  * Responsive Enhancement Styles
  * Additional responsive adjustments for optimal display across all devices
@@ -3765,6 +3970,7 @@ body.using-mouse :focus {
     min-height: 48px;
   }
 }
+
 @media (max-width: 767px) {
   .nav-container {
     padding: var(--space-3) var(--space-4);
@@ -3818,6 +4024,7 @@ body.using-mouse :focus {
   }
 
 }
+
 @media (max-width: 768px) {
 
   .about,
@@ -3851,6 +4058,7 @@ body.using-mouse :focus {
     margin-bottom: var(--space-8);
   }
 }
+
 @media (max-width: 1024px) {
   .season-nav {
     gap: var(--space-3);
@@ -3910,12 +4118,14 @@ body.using-mouse :focus {
   }
 
 }
+
 @media (max-width: 767px) {
   .social-links {
     justify-content: center;
     gap: var(--space-3);
   }
 }
+
 @media (max-width: 480px) {
   .social-links {
     flex-direction: row;
@@ -3931,6 +4141,7 @@ body.using-mouse :focus {
     flex-shrink: 0;
   }
 }
+
 @media (max-width: 768px) {
   .footer-content {
     grid-template-columns: 1fr;
@@ -3976,6 +4187,7 @@ body.using-mouse :focus {
 
 
 }
+
 @media (max-width: 768px) {
   .features {
     grid-template-columns: 1fr;
@@ -3987,6 +4199,7 @@ body.using-mouse :focus {
     text-align: center;
   }
 }
+
 @media (min-width: 1200px) {
   .container {
     max-width: 1400px;
@@ -4020,6 +4233,7 @@ body.using-mouse :focus {
     font-size: clamp(1.25rem, 1.5vw, 2rem);
   }
 }
+
 @media (min-width: 1920px) {
   .hero {
     background-size: cover;
@@ -4030,6 +4244,7 @@ body.using-mouse :focus {
     max-width: 1800px;
   }
 }
+
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .hero {
     height: 80vh;
@@ -4052,6 +4267,7 @@ body.using-mouse :focus {
     margin: 0 auto var(--space-12);
   }
 }
+
 @media (max-width: 896px) and (orientation: landscape) and (max-height: 500px) {
   .hero {
     height: 100vh;
@@ -4095,6 +4311,7 @@ body.using-mouse :focus {
     font-size: var(--text-lg);
   }
 }
+
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 
@@ -4104,6 +4321,7 @@ body.using-mouse :focus {
     image-rendering: crisp-edges;
   }
 }
+
 @media (max-width: 280px) {
   .container {
     padding: 0 var(--space-2);
@@ -4158,6 +4376,7 @@ body.using-mouse :focus {
     font-size: 0.75rem;
   }
 }
+
 @media print {
   .hero {
     height: auto;
@@ -4180,6 +4399,7 @@ body.using-mouse :focus {
     margin-bottom: var(--space-8);
   }
 }
+
 @media (max-width: 768px) {
   .feature {
     will-change: auto;
@@ -4189,6 +4409,7 @@ body.using-mouse :focus {
     transform: translateZ(0);
   }
 }
+
 @media (hover: none) and (pointer: coarse) {
 
   .cta-button:hover,
@@ -4205,6 +4426,7 @@ body.using-mouse :focus {
   .season-btn:active {
     transform: none;
   }
+
   .nav-menu a,
   .season-btn,
   .social-link {
@@ -4212,17 +4434,20 @@ body.using-mouse :focus {
     min-width: 48px;
   }
 }
+
 @media (prefers-reduced-data: reduce) {
   .hero {
     background-image: none;
     background-color: var(--primary);
   }
 }
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
   --primary: #6366f1;
   --secondary: #f59e0b;
@@ -4240,6 +4465,7 @@ body.using-mouse :focus {
   --radius-lg: 1rem;
   --transition-normal: 300ms ease-in-out;
 }
+
 body {
   font-family: var(--ff-mincho);
   line-height: 1.6;
@@ -4250,6 +4476,7 @@ body {
   position: relative;
   z-index: 0;
 }
+
 .header {
   position: fixed;
   top: 0;
@@ -4267,6 +4494,7 @@ body {
   transition: all var(--transition-normal);
   isolation: isolate;
 }
+
 .nav-container {
   display: flex;
   align-items: center;
@@ -4276,6 +4504,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .logo {
   font-size: var(--text-2xl);
   font-weight: 800;
@@ -4297,6 +4526,7 @@ body {
     display: none;
   }
 }
+
 .hero {
   height: 100vh;
   min-height: 600px;
@@ -4325,10 +4555,12 @@ body {
     height: 100dvh;
     justify-content: flex-end !important;
   }
+
   .hero-content {
     padding-top: 0 !important;
     padding-bottom: var(--space-8) !important;
   }
+
   .hero-actions {
     display: none !important;
   }
@@ -4386,9 +4618,11 @@ body {
   color: white;
   border: 2px solid white;
 }
+
 body:not(.loaded) * {
   transition: none !important;
 }
+
 .footer {
   background-image: url('../images/backgrounds/背景_黒和紙.webp');
   background-size: cover;
@@ -4457,6 +4691,7 @@ body:not(.loaded) * {
   height: 2px;
   background: linear-gradient(90deg, var(--accent, #8c3d08), transparent);
 }
+
 .footer-social {
   display: flex;
   gap: var(--space-4);
@@ -4500,6 +4735,7 @@ body:not(.loaded) * {
   align-items: center;
   font-size: var(--text-sm);
 }
+
 @media (max-width: 767px) {
   .footer {
     padding: var(--space-12) 0 var(--space-8);
@@ -4623,6 +4859,7 @@ body:not(.loaded) * {
     border-radius: 12px;
   }
 }
+
 .creator-info {
   display: flex;
   align-items: center;
@@ -4658,6 +4895,7 @@ body:not(.loaded) * {
 .creator-info .social-icon-img {
   transition: all var(--transition-normal);
 }
+
 @media (max-width: 1024px) {
   .hero-content {
     text-align: center;
@@ -4723,6 +4961,7 @@ body:not(.loaded) * {
     transform: translateY(0);
   }
 }
+
 @media (max-width: 768px) {
 
   .about,
@@ -4746,6 +4985,7 @@ body:not(.loaded) * {
     margin-bottom: var(--space-8);
   }
 }
+
 @media (max-width: 1024px) {
   .season-nav {
     justify-content: flex-start;
@@ -4782,6 +5022,7 @@ body:not(.loaded) * {
     flex-basis: 150px;
   }
 }
+
 @media (max-width: 640px) {
   .mv-grid {
     grid-template-columns: 1fr;
@@ -4919,6 +5160,7 @@ body:not(.loaded) * {
     margin: 0 auto;
     gap: var(--space-2);
   }
+
   .nav-menu .season-option[data-season="all"] {
     grid-row: 1;
     grid-column: 1;
@@ -4928,6 +5170,7 @@ body:not(.loaded) * {
     grid-row: 1;
     grid-column: 2;
   }
+
   .nav-menu .season-option[data-season="spring"] {
     grid-row: 2;
     grid-column: 1;
@@ -4937,6 +5180,7 @@ body:not(.loaded) * {
     grid-row: 2;
     grid-column: 2;
   }
+
   .nav-menu .season-option[data-season="autumn"] {
     grid-row: 3;
     grid-column: 1;

@@ -688,6 +688,24 @@ ShukaApp.utils.initSeasonSelector = function () {
 window.initSeasonSelector = ShukaApp.utils.initSeasonSelector;
 
 /**
+ * エフェクト切り替えスイッチの初期化
+ */
+ShukaApp.utils.initEffectToggle = function () {
+  const toggleCheckbox = document.getElementById('effect-toggle-checkbox');
+  if (!toggleCheckbox) return;
+
+  // 初期状態の設定（グローバル設定に合わせる）
+  toggleCheckbox.checked = window.isEffectsEnabled;
+
+  // 切り替えイベント
+  toggleCheckbox.addEventListener('change', (e) => {
+    if (typeof window.toggleEffects === 'function') {
+      window.toggleEffects(e.target.checked);
+    }
+  });
+};
+
+/**
  * モジュールシステム対応のエクスポート処理
  * 
  * 機能:
@@ -1120,6 +1138,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (typeof initSeasonSelector === 'function')
       initSeasonSelector(); // 季節セレクターコンポーネントの初期化
+
+    if (ShukaApp.utils.initEffectToggle)
+      ShukaApp.utils.initEffectToggle(); // エフェクト切り替えスイッチの初期化
 
     initAlbumPlayers(); // アルバムプレイヤーの初期化
   };
