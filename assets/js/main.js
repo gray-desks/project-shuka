@@ -1270,8 +1270,10 @@ function setupImageErrorHandling() {
  * アルバムプレイヤーの初期化
  * - トラックリストのクリックイベントを処理
  * - iframeの再生動画を切り替え
+ * - 初期ロード時の言語設定適用
  */
 function initAlbumPlayers() {
+  // 1. トラック切り替えイベントの設定
   document.addEventListener('click', (e) => {
     // .album-track またはその子要素がクリックされたか判定
     const track = e.target.closest('.album-track');
@@ -1286,35 +1288,37 @@ function initAlbumPlayers() {
     const iframe = document.getElementById(playerId);
 
     if (iframe && videoId) {
-      // iframeのsrcを更新して動画を切り替え（自動再生）
-      iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1`;
+      // 現在の言語設定を確認
+      const isEnglish = document.documentElement.lang === 'en';
+      const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+
+      // iframeのsrcを更新して動画を切り替え（自動再生 + 言語設定）
+      iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1${ccParams}`;
 
       // activeクラスの切り替え
       playerList.querySelectorAll('.album-track').forEach(t => t.classList.remove('active'));
       track.classList.add('active');
     }
   });
-}
 
-/**
- * アルバムセクションのプレイヤー初期化
- * - 既存のiframeに対して言語設定を適用する
- */
-function initAlbumPlayers() {
+  // 2. 既存のiframeに対して初期言語設定を適用
   const isEnglish = document.documentElement.lang === 'en';
+  const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
   const iframes = document.querySelectorAll('.album-video-area iframe');
 
   iframes.forEach(iframe => {
     let src = iframe.getAttribute('src');
     if (!src) return;
 
-    // Remove existing params to avoid duplication
+    // 既存のパラメータを削除して重複を防止
     src = src.replace(/&cc_load_policy=1/, '').replace(/&cc_lang_pref=en/, '').replace(/&hl=[a-z]+/, '');
 
-    const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+    // パラメータを追加
     iframe.setAttribute('src', src + ccParams);
   });
 }
+
+
 
 /**
  * 全てのYouTubeプレイヤーの言語設定を更新
