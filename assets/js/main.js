@@ -333,7 +333,7 @@ class SeasonsGallery {
                 aria-controls="${season}-panel"
                 ${bg}>
           <span class="season-icon" aria-hidden="true">${meta.icon}</span>
-          <span class="season-name">${meta.name}</span>
+          <span class="season-name" data-i18n="gallery.season.${season}">${meta.name}</span>
         </button>
       `;
     }).join('');
@@ -373,6 +373,11 @@ class SeasonsGallery {
 
     // もっと見るボタンのイベントバインド
     this.bindLoadMoreButtons();
+
+    // 動的に生成した要素の翻訳を適用
+    if (window.i18n && typeof window.i18n.updateDOM === 'function') {
+      window.i18n.updateDOM();
+    }
   }
 
   bindLoadMoreButtons() {

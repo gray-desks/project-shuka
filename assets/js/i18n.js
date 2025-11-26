@@ -48,7 +48,15 @@ const translations = {
         },
         gallery: {
             title: "Music Video Gallery",
-            subtitle: "YouTubeで公開中のMVを季節とともにお楽しみください"
+            subtitle: "YouTubeで公開中のMVを季節とともにお楽しみください",
+            season: {
+                all: "すべて",
+                spring: "春",
+                summer: "夏",
+                autumn: "秋",
+                winter: "冬",
+                none: "その他"
+            }
         },
         album: {
             title: "Album"
@@ -103,7 +111,15 @@ const translations = {
         },
         gallery: {
             title: "Music Video Gallery",
-            subtitle: "Enjoy MVs available on YouTube along with the seasons."
+            subtitle: "Enjoy music videos released on YouTube along with the seasons.",
+            season: {
+                all: "All",
+                spring: "Spring",
+                summer: "Summer",
+                autumn: "Autumn",
+                winter: "Winter",
+                none: "Other"
+            }
         },
         album: {
             title: "Album"
@@ -157,8 +173,16 @@ const translations = {
             }
         },
         gallery: {
-            title: "Galerie de clips musicaux",
-            subtitle: "Découvrez les clips sur YouTube au rythme des saisons."
+            title: "Galerie de Vidéos Musicales",
+            subtitle: "Profitez des clips musicaux sur YouTube au fil des saisons.",
+            season: {
+                all: "Tout",
+                spring: "Printemps",
+                summer: "Été",
+                autumn: "Automne",
+                winter: "Hiver",
+                none: "Autre"
+            }
         },
         album: {
             title: "Album"
@@ -212,8 +236,16 @@ const translations = {
             }
         },
         gallery: {
-            title: "音樂影片畫廊",
-            subtitle: "隨著季節欣賞 YouTube 上公開的 MV。"
+            title: "音樂影片庫",
+            subtitle: "隨著季節欣賞 YouTube 上發布的音樂影片。",
+            season: {
+                all: "全部",
+                spring: "春",
+                summer: "夏",
+                autumn: "秋",
+                winter: "冬",
+                none: "其他"
+            }
         },
         album: {
             title: "專輯"
@@ -267,8 +299,16 @@ const translations = {
             }
         },
         gallery: {
-            title: "Galería de videos musicales",
-            subtitle: "Disfruta de los MV disponibles en YouTube junto con las estaciones."
+            title: "Galería de Videos Musicales",
+            subtitle: "Disfruta de los videos musicales en YouTube junto con las estaciones.",
+            season: {
+                all: "Todo",
+                spring: "Primavera",
+                summer: "Verano",
+                autumn: "Otoño",
+                winter: "Invierno",
+                none: "Otro"
+            }
         },
         album: {
             title: "Álbum"
@@ -322,8 +362,16 @@ const translations = {
             }
         },
         gallery: {
-            title: "Galeria de vídeos musicais",
-            subtitle: "Aproveite os MVs disponíveis no YouTube junto com as estações."
+            title: "Galeria de Vídeos Musicais",
+            subtitle: "Aproveite os vídeos musicais no YouTube junto com as estações.",
+            season: {
+                all: "Tudo",
+                spring: "Primavera",
+                summer: "Verão",
+                autumn: "Outono",
+                winter: "Inverno",
+                none: "Outro"
+            }
         },
         album: {
             title: "Álbum"
@@ -378,7 +426,15 @@ const translations = {
         },
         gallery: {
             title: "Galeri Video Musik",
-            subtitle: "Nikmati MV yang tersedia di YouTube seiring dengan musim."
+            subtitle: "Nikmati video musik yang dirilis di YouTube seiring dengan musim.",
+            season: {
+                all: "Semua",
+                spring: "Musim Semi",
+                summer: "Musim Panas",
+                autumn: "Musim Gugur",
+                winter: "Musim Dingin",
+                none: "Lainnya"
+            }
         },
         album: {
             title: "Album"
