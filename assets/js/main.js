@@ -215,6 +215,74 @@ ShukaApp.utils.scrollToSection = function (sectionId) {
   }
 };
 
+/**
+ * 全てのYouTube動画を停止（一時停止）する
+ * 
+ * 機能:
+ * - ページ内の全てのYouTube iframeに対して一時停止コマンドを送信
+ * - 新しい動画を再生する際に、他の動画を止めるために使用
+ * 
+ * @param {HTMLIFrameElement} excludeIframe - 停止対象から除外するiframe（現在再生しようとしているもの）
+ */
+ShukaApp.utils.stopAllVideos = function (excludeIframe = null) {
+  const iframes = document.querySelectorAll('iframe[src*="youtube.com"]');
+  const pauseMessage = JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] });
+
+  iframes.forEach(iframe => {
+    if (iframe === excludeIframe) return;
+
+    // postMessageで一時停止コマンド送信
+    try {
+      iframe.contentWindow?.postMessage(pauseMessage, '*');
+    } catch (e) {
+      // クロスオリジンエラー等は無視
+    }
+
+    // ギャラリーの場合、再生状態フラグをリセット
+    const thumb = iframe.closest('.mv-thumb');
+    if (thumb) {
+      thumb.dataset.playing = 'false';
+    }
+  });
+};
+
+/**
+ * YouTubeプレーヤーの状態変更を監視するグローバルリスナー
+ * - iframe内の再生ボタンが直接クリックされた場合に対応
+ * - 再生開始(playerState: 1)を検知して、他の動画を停止
+ */
+ShukaApp.utils.setupYouTubeGlobalListener = function () {
+  window.addEventListener('message', (e) => {
+    // YouTubeからのメッセージか確認
+    if (e.origin !== "https://www.youtube.com") return;
+
+    try {
+      const data = JSON.parse(e.data);
+
+      // 再生開始イベント (info.playerState === 1: Playing)
+      if (data.event === 'infoDelivery' && data.info && data.info.playerState === 1) {
+        // メッセージ送信元のiframeを特定
+        const iframes = document.querySelectorAll('iframe[src*="youtube.com"]');
+        let sourceIframe = null;
+
+        for (const iframe of iframes) {
+          if (iframe.contentWindow === e.source) {
+            sourceIframe = iframe;
+            break;
+          }
+        }
+
+        // 送信元以外の動画を停止
+        if (sourceIframe) {
+          ShukaApp.utils.stopAllVideos(sourceIframe);
+        }
+      }
+    } catch (err) {
+      // JSON parse error or other structure mismatch (ignore)
+    }
+  });
+};
+
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = Navigation;
@@ -411,6 +479,10 @@ class SeasonsGallery {
     if (!thumb || thumb.dataset.playing === 'true') return;
     const videoId = thumb.dataset.videoId;
     if (!videoId) return;
+
+    // 他の全ての動画を停止
+    ShukaApp.utils.stopAllVideos();
+
     this.stopOtherVideos(thumb);
     thumb.dataset.playing = 'true';
 
@@ -1172,6 +1244,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initAlbumPlayers(); // アルバムプレイヤーの初期化
 
+    if (ShukaApp.utils.setupYouTubeGlobalListener)
+      ShukaApp.utils.setupYouTubeGlobalListener(); // YouTubeグローバルリスナーの初期化
+
     // Listen for language changes to update players
     window.addEventListener('languageChanged', (e) => {
       const lang = e.detail.language;
@@ -1288,6 +1363,9 @@ function initAlbumPlayers() {
     const iframe = document.getElementById(playerId);
 
     if (iframe && videoId) {
+      // 他の動画を停止（このiframeは除外）
+      ShukaApp.utils.stopAllVideos(iframe);
+
       // 現在の言語設定を確認
       const isEnglish = document.documentElement.lang === 'en';
       const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
