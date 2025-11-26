@@ -11,7 +11,7 @@ const translations = {
             gallery: "Gallery",
             album: "Album",
             season: {
-                all: "All",
+                all: "季節",
                 spring: "春",
                 summer: "夏",
                 autumn: "秋",
@@ -66,7 +66,7 @@ const translations = {
             gallery: "Gallery",
             album: "Album",
             season: {
-                all: "All",
+                all: "Season",
                 spring: "Spring",
                 summer: "Summer",
                 autumn: "Autumn",
@@ -121,7 +121,7 @@ const translations = {
             gallery: "Galerie",
             album: "Album",
             season: {
-                all: "Tout",
+                all: "Saison",
                 spring: "Printemps",
                 summer: "Été",
                 autumn: "Automne",
@@ -131,8 +131,8 @@ const translations = {
             effects: "Effets de chute"
         },
         hero: {
-            tagline: "Artiste musical tissant les quatre saisons",
-            subtitle: "Une nouvelle expérience musicale où l'émotion japonaise rencontre la modernité sonore.",
+            tagline: "L'artiste qui tisse les quatre saisons en musique",
+            subtitle: "Une expérience musicale inédite, rencontre entre l'émotion japonaise et les sonorités modernes.",
             cta: {
                 gallery: "Voir la galerie",
                 about: "À propos de l'artiste"
@@ -140,31 +140,31 @@ const translations = {
         },
         about: {
             title: "À propos de Shūka",
-            intro: "Des souvenirs de « Wa » (Harmonie) qui transcendent le temps et résonnent dans le cœur.<br>Les saisons changeantes, la beauté du silence, les traditions anciennes.<br>Shūka est un projet qui tisse ces éléments avec une sensibilité moderne pour créer une nouvelle vision du Japon.",
+            intro: "La mémoire du « Wa » (Harmonie), intemporelle, résonne au fond du cœur.<br>La valse des saisons, la beauté du silence, les traditions ancestrales.<br>Shūka tisse ces éléments avec une sensibilité moderne pour révéler une nouvelle vision du Japon.",
             features: {
                 wa: {
-                    title: "Jouer l'Harmonie",
-                    desc: "L'esthétique japonaise héritée des temps anciens. Nous exprimons ce souffle fragile mais puissant, ici et maintenant. Le cœur immuable du « Wa » ébranlera doucement votre sensibilité."
+                    title: "La Résonance du Wa",
+                    desc: "L'esthétique japonaise héritée des temps anciens. Nous exprimons ce souffle fragile mais puissant, ici et maintenant. L'esprit immuable du « Wa » éveillera doucement votre sensibilité."
                 },
                 senses: {
-                    title: "Couleurs tracées par les cinq sens",
-                    desc: "Fleurs de cerisier dansantes, silence de la neige, clair de lune. Des images et des mélodies fantastiques se superposent pour peindre des scènes que les mots seuls ne peuvent transmettre. Profitez d'une expérience immersive qui enveloppe doucement votre vue et votre ouïe."
+                    title: "Une symphonie pour les cinq sens",
+                    desc: "Danse des fleurs de cerisier, silence de la neige, clarté de la lune. Images et mélodies se superposent pour peindre des scènes au-delà des mots. Laissez-vous envelopper par une expérience immersive qui caresse le regard et l'ouïe."
                 },
                 heart: {
-                    title: "Le Japon dans votre cœur",
-                    desc: "Quittez l'agitation du quotidien pour le monde de Yūgen (grâce subtile). Le paysage dessiné par Shūka allume une lampe silencieuse dans le cœur des gens du monde entier. Le beau Japon, avec vous."
+                    title: "L'âme du Japon en vous",
+                    desc: "Éloignez-vous du tumulte quotidien pour plonger dans le monde du Yūgen, cette beauté profonde et mystérieuse. Les paysages dessinés par Shūka allument une lueur paisible dans le cœur de chacun. Le beau Japon, toujours avec vous."
                 }
             }
         },
         gallery: {
             title: "Galerie de clips musicaux",
-            subtitle: "Profitez des clips disponibles sur YouTube au fil des saisons."
+            subtitle: "Découvrez les clips sur YouTube au rythme des saisons."
         },
         album: {
             title: "Album"
         },
         footer: {
-            description: "Artiste musical tissant les quatre saisons",
+            description: "L'artiste qui tisse les quatre saisons en musique",
             follow: "Suivre Shūka",
             copyright: "© 2025 Shūka. Tous droits réservés."
         }
@@ -176,7 +176,7 @@ const translations = {
             gallery: "畫廊",
             album: "專輯",
             season: {
-                all: "全部",
+                all: "季節",
                 spring: "春",
                 summer: "夏",
                 autumn: "秋",
@@ -186,7 +186,7 @@ const translations = {
             effects: "飄落特效"
         },
         hero: {
-            tagline: "編織四季的音樂藝術家",
+            tagline: "編織四季的音樂詩人",
             subtitle: "日本情感與現代聲音共鳴的全新音樂體驗。",
             cta: {
                 gallery: "查看畫廊",
@@ -195,19 +195,19 @@ const translations = {
         },
         about: {
             title: "關於 Shūka",
-            intro: "超越時空，在心中迴響的「和」之記憶。<br>四季的變遷，寂靜之美，古老的傳統。<br>Shūka 是一個以現代感性編織這些元素，紡織出全新日本世界觀的企劃。",
+            intro: "穿越時空，在心中迴響的「和」之記憶。<br>四季的流轉，寂靜之美，古老的傳統。<br>Shūka 以現代感性編織這些元素，紡織出全新日本世界觀。",
             features: {
                 wa: {
-                    title: "演奏和諧",
-                    desc: "自古傳承的日本美學。我們在此刻表現那脆弱而強大的氣息。不變的「和」之心將靜靜地撼動您的感性。"
+                    title: "奏響「和」韻",
+                    desc: "自古傳承的日本美學。我們在此刻表現那脆弱而強大的氣息。恆久不變的「和」之心，將靜謐地觸動您的感性。"
                 },
                 senses: {
-                    title: "五感描繪的色彩",
+                    title: "五感交織的色彩",
                     desc: "飛舞的櫻花，雪的寂靜，月光。夢幻般的影像與旋律重疊，描繪出單靠言語無法傳達的情景。請享受溫柔包圍視覺與聽覺的沉浸式體驗。"
                 },
                 heart: {
-                    title: "心中的日本",
-                    desc: "遠離日常的喧囂，前往幽玄的世界。Shūka 描繪的景色在世界各地人們的心中點亮一盞靜謐的燈。美麗的日本，與您同在。"
+                    title: "心之所向，日本之美",
+                    desc: "遠離日常的喧囂，步入幽玄之境。Shūka 描繪的景色，將在世界各地人們的心中點亮一盞靜謐的燈。美麗的日本，與您同在。"
                 }
             }
         },
@@ -219,7 +219,7 @@ const translations = {
             title: "專輯"
         },
         footer: {
-            description: "編織四季的音樂藝術家",
+            description: "編織四季的音樂詩人",
             follow: "追蹤 Shūka",
             copyright: "© 2025 Shūka. All rights reserved."
         }
@@ -231,7 +231,7 @@ const translations = {
             gallery: "Galería",
             album: "Álbum",
             season: {
-                all: "Todo",
+                all: "Estación",
                 spring: "Primavera",
                 summer: "Verano",
                 autumn: "Otoño",
@@ -241,7 +241,7 @@ const translations = {
             effects: "Efectos de caída"
         },
         hero: {
-            tagline: "Artista musical que teje las cuatro estaciones",
+            tagline: "El artista que teje las cuatro estaciones en música",
             subtitle: "Una nueva experiencia musical donde la emoción japonesa se encuentra con el sonido moderno.",
             cta: {
                 gallery: "Ver galería",
@@ -250,19 +250,19 @@ const translations = {
         },
         about: {
             title: "Acerca de Shūka",
-            intro: "Recuerdos de \"Wa\" (Armonía) que trascienden el tiempo y resuenan en el corazón.<br>Las estaciones cambiantes, la belleza del silencio, las tradiciones antiguas.<br>Shūka es un proyecto que teje estos elementos con sensibilidad moderna para crear una nueva visión del mundo de Japón.",
+            intro: "Recuerdos de \"Wa\" (Armonía) que trascienden el tiempo y resuenan en el corazón.<br>Las estaciones cambiantes, la belleza del silencio, las tradiciones antiguas.<br>Shūka teje estos elementos con sensibilidad moderna para crear una nueva visión del mundo de Japón.",
             features: {
                 wa: {
-                    title: "Tocando la Armonía",
-                    desc: "Estética japonesa heredada de tiempos antiguos. Expresamos ese aliento frágil pero poderoso aquí y ahora. El corazón inmutable de \"Wa\" sacudirá silenciosamente tu sensibilidad."
+                    title: "La Resonancia del Wa",
+                    desc: "Estética japonesa heredada de tiempos antiguos. Expresamos ese aliento frágil pero poderoso aquí y ahora. El corazón inmutable de \"Wa\" conmoverá silenciosamente tu sensibilidad."
                 },
                 senses: {
-                    title: "Colores trazados por los cinco sentidos",
+                    title: "Una sinfonía para los cinco sentidos",
                     desc: "Cerezos danzantes, silencio de la nieve, luz de luna. Imágenes y melodías fantásticas se superponen para pintar escenas que no se pueden transmitir solo con palabras. Disfruta de una experiencia inmersiva que envuelve suavemente tu visión y oído."
                 },
                 heart: {
-                    title: "Japón en tu corazón",
-                    desc: "Deja el ajetreo de la vida cotidiana y ve al mundo de Yūgen (gracia sutil). El paisaje dibujado por Shūka enciende una lámpara tranquila en los corazones de las personas de todo el mundo. Hermoso Japón, contigo."
+                    title: "La esencia de Japón en ti",
+                    desc: "Deja el ajetreo de la vida cotidiana y entra al mundo del Yūgen, la belleza sutil y profunda. El paisaje dibujado por Shūka enciende una luz tranquila en los corazones de todo el mundo. El hermoso Japón, contigo."
                 }
             }
         },
@@ -274,7 +274,7 @@ const translations = {
             title: "Álbum"
         },
         footer: {
-            description: "Artista musical que teje las cuatro estaciones",
+            description: "El artista que teje las cuatro estaciones en música",
             follow: "Seguir a Shūka",
             copyright: "© 2025 Shūka. Todos los derechos reservados."
         }
@@ -286,7 +286,7 @@ const translations = {
             gallery: "Galeria",
             album: "Álbum",
             season: {
-                all: "Tudo",
+                all: "Estação",
                 spring: "Primavera",
                 summer: "Verão",
                 autumn: "Outono",
@@ -296,7 +296,7 @@ const translations = {
             effects: "Efeitos de queda"
         },
         hero: {
-            tagline: "Artista musical tecendo as quatro estações",
+            tagline: "O artista que tece as quatro estações em música",
             subtitle: "Uma nova experiência musical onde a emoção japonesa encontra o som moderno.",
             cta: {
                 gallery: "Ver galeria",
@@ -305,19 +305,19 @@ const translations = {
         },
         about: {
             title: "Sobre Shūka",
-            intro: "Memórias de \"Wa\" (Harmonia) que transcendem o tempo e ressoam no coração.<br>As estações em mudança, a beleza do silêncio, tradições antigas.<br>Shūka é um projeto que tece esses elementos com sensibilidade moderna para criar uma nova visão de mundo do Japão.",
+            intro: "Memórias de \"Wa\" (Harmonia) que transcendem o tempo e ressoam no coração.<br>As estações em mudança, a beleza do silêncio, tradições antigas.<br>Shūka tece esses elementos com sensibilidade moderna para criar uma nova visão de mundo do Japão.",
             features: {
                 wa: {
-                    title: "Tocando Harmonia",
-                    desc: "Estética japonesa herdada de tempos antigos. Expressamos esse fôlego frágil, mas poderoso, aqui e agora. O coração imutável de \"Wa\" agitará silenciosamente sua sensibilidade."
+                    title: "A Ressonância do Wa",
+                    desc: "Estética japonesa herdada de tempos antigos. Expressamos esse fôlego frágil, mas poderoso, aqui e agora. O coração imutável de \"Wa\" tocará silenciosamente a sua sensibilidade."
                 },
                 senses: {
-                    title: "Cores traçadas pelos cinco sentidos",
+                    title: "Uma sinfonia para os cinco sentidos",
                     desc: "Flores de cerejeira dançantes, silêncio da neve, luar. Imagens e melodias fantásticas se sobrepõem para pintar cenas que não podem ser transmitidas apenas por palavras. Desfrute de uma experiência imersiva que envolve suavemente sua visão e audição."
                 },
                 heart: {
-                    title: "Japão em seu coração",
-                    desc: "Deixe a agitação da vida cotidiana e vá para o mundo de Yūgen (graça sutil). A paisagem desenhada por Shūka acende uma lâmpada tranquila nos corações das pessoas em todo o mundo. Lindo Japão, com você."
+                    title: "A essência do Japão em você",
+                    desc: "Deixe a agitação da vida cotidiana e entre no mundo do Yūgen, a beleza sutil e profunda. A paisagem desenhada por Shūka acende uma luz tranquila nos corações das pessoas em todo o mundo. O belo Japão, com você."
                 }
             }
         },
@@ -329,7 +329,7 @@ const translations = {
             title: "Álbum"
         },
         footer: {
-            description: "Artista musical tecendo as quatro estações",
+            description: "O artista que tece as quatro estações em música",
             follow: "Siga Shūka",
             copyright: "© 2025 Shūka. Todos os direitos reservados."
         }
@@ -341,7 +341,7 @@ const translations = {
             gallery: "Galeri",
             album: "Album",
             season: {
-                all: "Semua",
+                all: "Musim",
                 spring: "Musim Semi",
                 summer: "Musim Panas",
                 autumn: "Musim Gugur",
@@ -351,7 +351,7 @@ const translations = {
             effects: "Efek Jatuh"
         },
         hero: {
-            tagline: "Artis Musik yang Menenun Empat Musim",
+            tagline: "Seniman Musik Perajut Empat Musim",
             subtitle: "Pengalaman musik baru di mana emosi Jepang bertemu dengan suara modern.",
             cta: {
                 gallery: "Lihat Galeri",
@@ -360,19 +360,19 @@ const translations = {
         },
         about: {
             title: "Tentang Shūka",
-            intro: "Kenangan akan \"Wa\" (Harmoni) yang melampaui waktu dan bergema di hati.<br>Pergantian musim, keindahan keheningan, tradisi kuno.<br>Shūka adalah proyek yang menenun semua ini dengan sensibilitas modern untuk memutar pandangan dunia baru tentang Jepang.",
+            intro: "Kenangan akan \"Wa\" (Harmoni) yang melampaui waktu dan bergema di hati.<br>Pergantian musim, keindahan keheningan, tradisi kuno.<br>Shūka menenun semua ini dengan sensibilitas modern untuk memutar pandangan dunia baru tentang Jepang.",
             features: {
                 wa: {
-                    title: "Memainkan Harmoni",
-                    desc: "Estetika Jepang yang diwarisi dari zaman kuno. Kami mengekspresikan nafas yang rapuh namun kuat itu di sini dan saat ini. Hati \"Wa\" yang tidak berubah akan diam-diam menggetarkan kepekaan Anda."
+                    title: "Alunan Harmoni (Wa)",
+                    desc: "Estetika Jepang yang diwarisi dari zaman kuno. Kami mengekspresikan nafas yang rapuh namun kuat itu di sini dan saat ini. Hati \"Wa\" yang tidak berubah akan diam-diam menyentuh relung hati Anda."
                 },
                 senses: {
-                    title: "Warna yang Ditelusuri oleh Lima Indra",
+                    title: "Warna yang Menggugah Panca Indra",
                     desc: "Bunga sakura yang menari, keheningan salju, cahaya bulan. Gambar dan melodi yang fantastis tumpang tindih untuk melukis pemandangan yang tidak dapat disampaikan dengan kata-kata saja. Nikmati pengalaman mendalam yang dengan lembut membungkus penglihatan dan pendengaran Anda."
                 },
                 heart: {
-                    title: "Jepang di Hati Anda",
-                    desc: "Tinggalkan hiruk-pikuk kehidupan sehari-hari dan pergi ke dunia Yūgen (keanggunan halus). Pemandangan yang digambar oleh Shūka menyalakan lampu yang tenang di hati orang-orang di seluruh dunia. Jepang yang indah, bersama Anda."
+                    title: "Jepang dalam Sanubari",
+                    desc: "Tinggalkan hiruk-pikuk kehidupan sehari-hari dan masuklah ke dunia Yūgen, keindahan yang tersirat dan mendalam. Pemandangan yang digambar oleh Shūka menyalakan cahaya tenang di hati orang-orang di seluruh dunia. Jepang yang indah, bersama Anda."
                 }
             }
         },
@@ -384,11 +384,11 @@ const translations = {
             title: "Album"
         },
         footer: {
-            description: "Artis Musik yang Menenun Empat Musim",
+            description: "Seniman Musik Perajut Empat Musim",
             follow: "Ikuti Shūka",
             copyright: "© 2025 Shūka. Hak cipta dilindungi undang-undang."
         }
-    }
+    },
 };
 
 class I18n {

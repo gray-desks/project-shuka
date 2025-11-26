@@ -1378,8 +1378,10 @@ function initAlbumPlayers() {
       ShukaApp.utils.stopAllVideos(iframe);
 
       // 現在の言語設定を確認
-      const isEnglish = document.documentElement.lang === 'en';
-      const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+      const currentLang = document.documentElement.lang || 'ja';
+      let ytLang = currentLang;
+      if (currentLang === 'zh-TW') ytLang = 'zh-Hant';
+      const ccParams = currentLang !== 'ja' ? `&cc_load_policy=1&cc_lang_pref=${ytLang}&hl=${ytLang}` : '&hl=ja';
 
       // iframeのsrcを更新して動画を切り替え（自動再生 + 言語設定）
       iframe.src = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&autoplay=1${ccParams}`;
@@ -1391,8 +1393,10 @@ function initAlbumPlayers() {
   });
 
   // 2. 既存のiframeに対して初期言語設定を適用
-  const isEnglish = document.documentElement.lang === 'en';
-  const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+  const currentLang = document.documentElement.lang || 'ja';
+  let ytLang = currentLang;
+  if (currentLang === 'zh-TW') ytLang = 'zh-Hant';
+  const ccParams = currentLang !== 'ja' ? `&cc_load_policy=1&cc_lang_pref=${ytLang}&hl=${ytLang}` : '&hl=ja';
   const iframes = document.querySelectorAll('.album-video-area iframe');
 
   iframes.forEach(iframe => {
@@ -1414,8 +1418,10 @@ function initAlbumPlayers() {
  * - 言語切り替え時に呼び出される
  */
 function updateAllPlayersLanguage(lang) {
-  const isEnglish = lang === 'en';
-  const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+  const currentLang = lang || 'ja';
+  let ytLang = currentLang;
+  if (currentLang === 'zh-TW') ytLang = 'zh-Hant';
+  const ccParams = currentLang !== 'ja' ? `&cc_load_policy=1&cc_lang_pref=${ytLang}&hl=${ytLang}` : '&hl=ja';
 
   // Update Album Players
   const albumIframes = document.querySelectorAll('.album-video-area iframe');
