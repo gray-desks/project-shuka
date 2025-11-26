@@ -5362,3 +5362,132 @@ body:not(.loaded) * {
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
+/* 
+ * 言語セレクター - 多言語対応のためのドロップダウンメニュー
+ */
+.lang-selector-container {
+  position: relative;
+}
+
+.lang-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--ff-mincho);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.lang-dropdown-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary);
+}
+
+.lang-dropdown-trigger .dropdown-arrow {
+  font-size: 0.8em;
+  opacity: 0.7;
+  transition: transform var(--transition-fast);
+}
+
+.lang-dropdown-trigger[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* デスクトップではホバーでも矢印回転 */
+@media (min-width: 768px) {
+  .lang-selector-container:hover .lang-dropdown-trigger .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+}
+
+.lang-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 180px;
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  margin-top: var(--space-2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-normal);
+  z-index: var(--z-dropdown);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* アクティブ状態またはホバー時（デスクトップ）に表示 */
+.lang-dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .lang-selector-container:hover .lang-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.lang-option {
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--ff-mincho);
+  display: flex;
+  align-items: center;
+}
+
+.lang-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+
+.lang-option.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* モバイル用調整 */
+@media (max-width: 767px) {
+  .lang-switch-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-8); /* 下部にスペース追加 */
+  }
+  
+  .lang-dropdown-menu {
+    left: 50%;
+    right: auto;
+    bottom: 100%; /* 上に開く */
+    top: auto;
+    margin-top: 0;
+    margin-bottom: var(--space-2);
+    transform: translateX(-50%) translateY(10px);
+  }
+
+  .lang-dropdown-menu.active {
+    transform: translateX(-50%) translateY(0);
+  }
+}

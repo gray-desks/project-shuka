@@ -487,8 +487,19 @@ class SeasonsGallery {
     thumb.dataset.playing = 'true';
 
     // Check current language for captions
-    const isEnglish = document.documentElement.lang === 'en';
-    const ccParams = isEnglish ? '&cc_load_policy=1&cc_lang_pref=en&hl=en' : '&hl=ja';
+    const currentLang = document.documentElement.lang || 'ja';
+    let ccParams = '';
+
+    if (currentLang !== 'ja') {
+      // For non-Japanese languages, force captions on and set language preference
+      let ytLang = currentLang;
+      // Map internal language codes to YouTube supported codes if necessary
+      if (currentLang === 'zh-TW') ytLang = 'zh-Hant';
+
+      ccParams = `&cc_load_policy=1&cc_lang_pref=${ytLang}&hl=${ytLang}`;
+    } else {
+      ccParams = '&hl=ja';
+    }
 
     thumb.innerHTML = `
       <iframe class="mv-iframe"
