@@ -798,6 +798,8 @@ ShukaApp.utils.initSeasonSelector = function () {
 // 後方互換性のための従来のグローバル参照を維持
 window.initSeasonSelector = ShukaApp.utils.initSeasonSelector;
 
+
+
 /**
  * エフェクト切り替えスイッチの初期化
  */

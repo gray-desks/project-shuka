@@ -916,6 +916,7 @@ let autumnLeavesEffect;
  * 紅葉エフェクトを有効化
  */
 window.enableAutumnLeaves = function () {
+  if (!window.isEffectsEnabled) return;
   if (!autumnLeavesEffect) {
     // 新しい紅葉エフェクトインスタンスを作成
     autumnLeavesEffect = new AutumnLeavesEffect();
@@ -1204,6 +1205,7 @@ let summerWillowEffect;
  * 夏の柳エフェクトを有効化
  */
 window.enableSummerWillow = function () {
+  if (!window.isEffectsEnabled) return;
   if (!summerWillowEffect) {
     // 新しい夏柳エフェクトインスタンスを作成
     summerWillowEffect = new SummerWillowEffect();
