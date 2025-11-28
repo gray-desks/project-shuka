@@ -11,6 +11,7 @@
   pointer-events: none;
 }
 
+
 body[data-season="tsuyu"] {
   --background: #1a2332;
   --surface: #253142;
